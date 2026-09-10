@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
 public class BeaverController : MonoBehaviour
 {
+    private enum JumpKey { None, Enter, Backspace }
+
     [Header("Movement Settings")]
     [SerializeField] private float moveSpeed = 4f;
     [SerializeField] private LayerMask groundLayer;
@@ -12,14 +14,15 @@ public class BeaverController : MonoBehaviour
     [SerializeField] private float groundCheckRadius = 0.2f;
 
     [Header("Jump Velocities (X = Horizontal, Y = Vertical)")]
-    [SerializeField] private Vector2 forwardJump = new Vector2(3f, 6f);
+    [SerializeField] private Vector2 forwardJump = new Vector2(4f, 6f);
     [SerializeField] private Vector2 backwardJump = new Vector2(5f, 7f);
     [SerializeField] private Vector2 verticalJump = new Vector2(0f, 9f);
-    [SerializeField] private Vector2 backflip = new Vector2(4f, 10f);
-    [SerializeField] private Vector2 smallBackflip = new Vector2(2f, 4f);
+    [SerializeField] private Vector2 backflip = new Vector2(1.5f, 10f);
+    [SerializeField] private Vector2 smallBackflip = new Vector2(1.5f, 5f);
 
-    [Header("Input Combo Window")]
-    [SerializeField] private float comboWindow = 0.25f;
+    [Header("Input Buffer Settings")]
+    [Tooltip("Time window (in seconds) to detect a second keypress before executing a single jump.")]
+    [SerializeField] private float comboWindow = 0.15f;
 
     private Rigidbody2D rb;
     private BeaverInputActions inputActions;
@@ -28,10 +31,12 @@ public class BeaverController : MonoBehaviour
     private bool isLockingDirection;
     private bool isGrounded;
     private float facingDirection = 1f; // 1 = Right, -1 = Left
+    private float groundCheckCooldown;
 
-    private float lastEnterTime = -10f;
-    private float lastBackspaceTime = -10f;
-    private Coroutine comboCoroutine;
+    // Buffer state variables
+    private bool isBuffering = false;
+    private JumpKey firstKey = JumpKey.None;
+    private Coroutine bufferCoroutine;
 
     private void Awake()
     {
@@ -53,21 +58,28 @@ public class BeaverController : MonoBehaviour
 
     private void Update()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-
-        if (isGrounded && moveInput != 0)
+        // Prevent ground check instantly re-triggering during takeoff
+        if (groundCheckCooldown > 0f)
         {
-            if (!isLockingDirection)
-            {
-                facingDirection = Mathf.Sign(moveInput);
-                transform.localScale = new Vector3(facingDirection, 1, 1);
-            }
+            groundCheckCooldown -= Time.deltaTime;
+            isGrounded = false;
+        }
+        else
+        {
+            isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        }
+
+        // Turning / direction locking is only evaluated on the ground
+        if (isGrounded && moveInput != 0 && !isLockingDirection)
+        {
+            facingDirection = Mathf.Sign(moveInput);
+            transform.localScale = new Vector3(facingDirection, 1, 1);
         }
     }
 
     private void FixedUpdate()
     {
-        // Grounded movement only; midair velocity is fully physics-driven
+        // Grounded horizontal walking only. Mid-air trajectory is strictly physical momentum.
         if (isGrounded)
         {
             rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
@@ -76,80 +88,88 @@ public class BeaverController : MonoBehaviour
 
     private void OnEnterPressed()
     {
+        // Ignore all jump inputs if in mid-air
         if (!isGrounded) return;
 
-        float currentTime = Time.time;
-
-        // Check Backspace -> Enter combo (Small Backflip)
-        if (currentTime - lastBackspaceTime <= comboWindow)
+        if (!isBuffering)
         {
-            if (comboCoroutine != null) StopCoroutine(comboCoroutine);
-            ExecuteJump(smallBackflip, backward: true);
-            ResetInputTimers();
-            return;
+            // First input received: open the window to listen for a potential combo
+            firstKey = JumpKey.Enter;
+            bufferCoroutine = StartCoroutine(BufferRoutine());
         }
-
-        // Check Enter -> Enter combo (Backward Jump)
-        if (currentTime - lastEnterTime <= comboWindow)
+        else if (firstKey == JumpKey.Enter)
         {
-            if (comboCoroutine != null) StopCoroutine(comboCoroutine);
+            // Enter -> Enter combo (Backward Jump)
+            StopCoroutine(bufferCoroutine);
             ExecuteJump(backwardJump, backward: true);
-            ResetInputTimers();
-            return;
         }
-
-        lastEnterTime = currentTime;
-        comboCoroutine = StartCoroutine(WaitAndExecuteSingleJump(ForwardJumpExecution));
+        else if (firstKey == JumpKey.Backspace)
+        {
+            // Backspace -> Enter combo (Small Backflip)
+            StopCoroutine(bufferCoroutine);
+            ExecuteJump(smallBackflip, backward: true);
+        }
     }
 
     private void OnBackspacePressed()
     {
+        // Ignore all jump inputs if in mid-air
         if (!isGrounded) return;
 
-        float currentTime = Time.time;
-
-        // Check Backspace -> Backspace combo (Backflip)
-        if (currentTime - lastBackspaceTime <= comboWindow)
+        if (!isBuffering)
         {
-            if (comboCoroutine != null) StopCoroutine(comboCoroutine);
-            ExecuteJump(backflip, backward: true);
-            ResetInputTimers();
-            return;
+            // First input received: open the window to listen for a potential combo
+            firstKey = JumpKey.Backspace;
+            bufferCoroutine = StartCoroutine(BufferRoutine());
         }
-
-        lastBackspaceTime = currentTime;
-        comboCoroutine = StartCoroutine(WaitAndExecuteSingleJump(VerticalJumpExecution));
+        else if (firstKey == JumpKey.Backspace)
+        {
+            // Backspace -> Backspace combo (Backflip)
+            StopCoroutine(bufferCoroutine);
+            ExecuteJump(backflip, backward: true);
+        }
+        else if (firstKey == JumpKey.Enter)
+        {
+            // Enter -> Backspace (Undefined combo, defaults to completing single Forward Jump immediately)
+            StopCoroutine(bufferCoroutine);
+            ExecuteJump(forwardJump, backward: false);
+        }
     }
 
-    private IEnumerator WaitAndExecuteSingleJump(System.Action executeAction)
+    private IEnumerator BufferRoutine()
     {
+        isBuffering = true;
         yield return new WaitForSeconds(comboWindow);
-        executeAction.Invoke();
+
+        // Window expired with no second input: trigger corresponding single jump
+        if (firstKey == JumpKey.Enter)
+        {
+            ExecuteJump(forwardJump, backward: false);
+        }
+        else if (firstKey == JumpKey.Backspace)
+        {
+            ExecuteJump(verticalJump, backward: false);
+        }
     }
 
-    private void ForwardJumpExecution()
+    private void ExecuteJump(Vector2 jumpVelocity, bool backward)
     {
-        ExecuteJump(forwardJump, backward: false);
-        ResetInputTimers();
-    }
+        ResetBuffer();
 
-    private void VerticalJumpExecution()
-    {
-        ExecuteJump(verticalJump, backward: false);
-        ResetInputTimers();
-    }
-
-    private void ExecuteJump(Vector2 jumpImpulse, bool backward)
-    {
+        // Calculate jump direction according to current facing side
         float xDirection = backward ? -facingDirection : facingDirection;
-        rb.linearVelocity = new Vector2(xDirection * jumpImpulse.x, jumpImpulse.y);
+        rb.linearVelocity = new Vector2(xDirection * jumpVelocity.x, jumpVelocity.y);
+
+        // Lock out grounded checks and inputs while airborne
+        isGrounded = false;
+        groundCheckCooldown = 0.15f;
     }
 
-    private void ResetInputTimers()
+    private void ResetBuffer()
     {
-        lastEnterTime = -10f;
-        lastBackspaceTime = -10f;
-        comboCoroutine = null;
+        isBuffering = false;
+        firstKey = JumpKey.None;
+        bufferCoroutine = null;
     }
 
     private void OnDrawGizmosSelected()
