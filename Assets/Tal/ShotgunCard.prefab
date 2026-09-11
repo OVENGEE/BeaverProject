@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 2806607365485077474}
   - component: {fileID: 3477344589821968427}
   m_Layer: 5
-  m_Name: Card
+  m_Name: ShotgunCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1549202474392192793, guid: 9bf3cf04d4db7e344ba7a2efd780c2f4, type: 3}
+  m_Sprite: {fileID: -2348493001287196787, guid: f4eefa87852c47f4a89c01738016de9f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

@@ -4,7 +4,8 @@ using UnityEngine;
 public class CardHandManager : MonoBehaviour
 {
     [Header("Card Setup")]
-    [SerializeField] private GameObject cardPrefab;
+    // Replaced the single prefab with a List of prefabs
+    [SerializeField] private List<GameObject> cardPrefabs;
 
     [Header("Curve Points (RectTransforms)")]
     [SerializeField] private RectTransform startPoint;
@@ -19,7 +20,19 @@ public class CardHandManager : MonoBehaviour
     // Called by your UI Button
     public void AddCard()
     {
-        GameObject newCard = Instantiate(cardPrefab, transform);
+        // Safety check to ensure the list isn't empty
+        if (cardPrefabs == null || cardPrefabs.Count == 0)
+        {
+            Debug.LogWarning("No card prefabs assigned in the inspector!");
+            return;
+        }
+
+        // Pick a random index between 0 and the number of prefabs
+        int randomIndex = Random.Range(0, cardPrefabs.Count);
+        GameObject selectedPrefab = cardPrefabs[randomIndex];
+
+        // Instantiate the randomly selected card
+        GameObject newCard = Instantiate(selectedPrefab, transform);
         cardsInHand.Add(newCard);
         ArrangeCards();
     }
