@@ -127,6 +127,24 @@ public partial class @BeaverInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Aim"",
+                    ""type"": ""Value"",
+                    ""id"": ""3e75bf8b-cb30-43d8-ba19-6ff0238a0af8"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Fire"",
+                    ""type"": ""Button"",
+                    ""id"": ""9ecdd7d3-0a4f-497e-920b-15971613f5f9"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -206,6 +224,50 @@ public partial class @BeaverInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""BackspaceJump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""6259834e-c0e9-455c-8a94-37bf9bbf596e"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""c4495340-69ae-4179-839b-b387c965a6ab"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""ee16a2c1-df3c-47b6-b752-c84addb19693"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""64e39f0f-01fa-4cf5-af3b-26fcc04e4fae"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -218,6 +280,8 @@ public partial class @BeaverInputActions: IInputActionCollection2, IDisposable
         m_Player_LockDirection = m_Player.FindAction("LockDirection", throwIfNotFound: true);
         m_Player_EnterJump = m_Player.FindAction("EnterJump", throwIfNotFound: true);
         m_Player_BackspaceJump = m_Player.FindAction("BackspaceJump", throwIfNotFound: true);
+        m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
+        m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
     }
 
     ~@BeaverInputActions()
@@ -302,6 +366,8 @@ public partial class @BeaverInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_LockDirection;
     private readonly InputAction m_Player_EnterJump;
     private readonly InputAction m_Player_BackspaceJump;
+    private readonly InputAction m_Player_Aim;
+    private readonly InputAction m_Player_Fire;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -329,6 +395,14 @@ public partial class @BeaverInputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/BackspaceJump".
         /// </summary>
         public InputAction @BackspaceJump => m_Wrapper.m_Player_BackspaceJump;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Aim".
+        /// </summary>
+        public InputAction @Aim => m_Wrapper.m_Player_Aim;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Fire".
+        /// </summary>
+        public InputAction @Fire => m_Wrapper.m_Player_Fire;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -367,6 +441,12 @@ public partial class @BeaverInputActions: IInputActionCollection2, IDisposable
             @BackspaceJump.started += instance.OnBackspaceJump;
             @BackspaceJump.performed += instance.OnBackspaceJump;
             @BackspaceJump.canceled += instance.OnBackspaceJump;
+            @Aim.started += instance.OnAim;
+            @Aim.performed += instance.OnAim;
+            @Aim.canceled += instance.OnAim;
+            @Fire.started += instance.OnFire;
+            @Fire.performed += instance.OnFire;
+            @Fire.canceled += instance.OnFire;
         }
 
         /// <summary>
@@ -390,6 +470,12 @@ public partial class @BeaverInputActions: IInputActionCollection2, IDisposable
             @BackspaceJump.started -= instance.OnBackspaceJump;
             @BackspaceJump.performed -= instance.OnBackspaceJump;
             @BackspaceJump.canceled -= instance.OnBackspaceJump;
+            @Aim.started -= instance.OnAim;
+            @Aim.performed -= instance.OnAim;
+            @Aim.canceled -= instance.OnAim;
+            @Fire.started -= instance.OnFire;
+            @Fire.performed -= instance.OnFire;
+            @Fire.canceled -= instance.OnFire;
         }
 
         /// <summary>
@@ -458,5 +544,19 @@ public partial class @BeaverInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnBackspaceJump(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Aim" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnAim(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Fire" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnFire(InputAction.CallbackContext context);
     }
 }
