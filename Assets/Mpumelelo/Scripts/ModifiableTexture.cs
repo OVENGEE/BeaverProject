@@ -10,6 +10,8 @@ public class ModifiableTexture
     public Texture2D Texture => m_texture;
     public Sprite Sprite => m_sprite;
 
+    public Vector2 Pivot => m_pivot;
+
     public static ModifiableTexture CreateFromSprite(Sprite sprite)
     {
         if (sprite == null)
@@ -92,5 +94,23 @@ public class ModifiableTexture
     public void ApplyChanges()
     {
         m_texture.Apply();
+    }
+
+    public bool[][] GetPixelsState()
+    {
+        int width = m_texture.width;
+        int height = m_texture.height;
+        Color[] data = m_texture.GetPixels();
+        bool[][] pixels = new bool[height][];
+        for (int i = 0; i < height; i++)
+        {
+            pixels[i] = new bool[width];
+            int row = i * width;
+            for (int j = 0; j < width; j++)
+            {
+                pixels[i][j] = data[row + j].a > 0.5f;
+            }
+        }
+        return pixels;
     }
 }

@@ -9,9 +9,17 @@ public class DestructibleTerrain : MonoBehaviour
 
     private ModifiableTexture m_modifiableTexture;
 
+    [SerializeField]
+    private TilemapColliderGenerator m_colliderGenerator;
+    private TilemapColliderGenerator m_nonChunkedCollider;
+
+    [SerializeField]
+    private Grid m_grid;
+
     private void Reset()
     {
         m_spriteRenderer = GetComponent<SpriteRenderer>();
+        m_grid = GetComponent<Grid>();
     }
 
     private void Awake()
@@ -35,6 +43,15 @@ public class DestructibleTerrain : MonoBehaviour
 
         m_modifiableTexture = ModifiableTexture.CreateFromSprite(m_spriteRenderer.sprite);
         m_spriteRenderer.sprite = m_modifiableTexture.Sprite;
+        float pixelSize = 1f / m_modifiableTexture.Sprite.pixelsPerUnit;
+        m_grid.cellSize = new Vector2(pixelSize, pixelSize);
+
+        Vector2 size = m_modifiableTexture.Sprite.bounds.size;
+        Vector2 bottomLeftLocal = -size * m_modifiableTexture.Pivot;
+        Vector2 bottomLeftWorld = m_spriteRenderer.transform.TransformPoint(bottomLeftLocal);
+
+        m_nonChunkedCollider = Instantiate(m_colliderGenerator, bottomLeftWorld, Quaternion.identity, m_grid.transform);
+        m_nonChunkedCollider.PrepareCollider(m_modifiableTexture.GetPixelsState());
     }
 
     public void RemoveTerrainAt(Vector2 worldPosition, float radius)
@@ -48,6 +65,8 @@ public class DestructibleTerrain : MonoBehaviour
 
         Vector2Int circleCenterInPixelSpace = m_modifiableTexture.WorldToTexturePosition(worldPosition, m_spriteRenderer.transform);
         ModifyTextureAt(circleCenterInPixelSpace, Color.clear, affectedPixelAsOffset);
+
+        m_nonChunkedCollider.DestroyCollider(worldPosition, affectedPixelAsOffset);
     }
 
     private void ModifyTextureAt(Vector2Int circleCenterInPixelSpace, Color color, List<Vector2Int> affectedPixelAsOffset)
