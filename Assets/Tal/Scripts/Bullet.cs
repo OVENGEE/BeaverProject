@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class PistolBullet : MonoBehaviour
+public class Bullet : MonoBehaviour
 {
     [SerializeField] private float lifetime = 3f;
 
