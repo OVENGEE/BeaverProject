@@ -60,22 +60,21 @@ public class PistolWeapon : MonoBehaviour
         currentAngle += aimInput * aimSpeed * Time.deltaTime;
         currentAngle = Mathf.Clamp(currentAngle, minAngle, maxAngle);
 
+        // 1. Rotate the pistol using LOCAL rotation. 
+        // Because the parent beaver flips its X scale, this automatically aims correctly on both sides without going upside down.
+        transform.localRotation = Quaternion.Euler(0, 0, currentAngle);
+
         // Determine facing direction from beaver scale (1 = Right, -1 = Left)
         float facingDirection = beaverTransform != null ? Mathf.Sign(beaverTransform.localScale.x) : 1f;
 
-        // Convert angle to horizontal/vertical offsets
+        // 2. Position the reticle in world space
         float rad = currentAngle * Mathf.Deg2Rad;
         Vector2 dir = new Vector2(Mathf.Cos(rad) * facingDirection, Mathf.Sin(rad));
 
-        // Position the reticle along the semi-circle orbit
         if (reticle != null)
         {
             reticle.position = (Vector2)transform.position + (dir * orbitRadius);
         }
-
-        // Rotate pistol toward aiming direction
-        float rotationAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, rotationAngle);
     }
 
     private void Shoot()

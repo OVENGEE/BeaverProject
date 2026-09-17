@@ -38,6 +38,9 @@ public class BeaverController : MonoBehaviour
     private JumpKey firstKey = JumpKey.None;
     private Coroutine bufferCoroutine;
 
+    public bool IsGrounded => isGrounded;
+    public float MoveInput => moveInput;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -161,6 +164,15 @@ public class BeaverController : MonoBehaviour
         rb.linearVelocity = new Vector2(xDirection * jumpVelocity.x, jumpVelocity.y);
 
         // Lock out grounded checks and inputs while airborne
+        isGrounded = false;
+        groundCheckCooldown = 0.15f;
+    }
+
+    public void ExecuteMidAirJump(Vector2 newVelocity)
+    {
+        rb.linearVelocity = newVelocity;
+
+        // Ensure ground check doesn't accidentally trigger immediately
         isGrounded = false;
         groundCheckCooldown = 0.15f;
     }
