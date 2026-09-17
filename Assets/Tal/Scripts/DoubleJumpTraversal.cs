@@ -19,8 +19,8 @@ public class DoubleJumpTraversal : MonoBehaviour
 
         inputActions = new BeaverInputActions();
 
-        // Bind Space bar (Player.Fire action)
-        inputActions.Player.Fire.started += _ => TryDoubleJump();
+        // Bind Space bar (Player.Action action)
+        inputActions.Player.Action.started += _ => TryDoubleJump();
     }
 
     private void OnEnable() => inputActions.Enable();

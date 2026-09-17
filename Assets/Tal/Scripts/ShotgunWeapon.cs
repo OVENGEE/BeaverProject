@@ -32,7 +32,7 @@ public class ShotgunWeapon : MonoBehaviour
         inputActions.Player.Aim.performed += ctx => aimInput = ctx.ReadValue<float>();
         inputActions.Player.Aim.canceled += _ => aimInput = 0f;
 
-        inputActions.Player.Fire.started += _ => Shoot();
+        inputActions.Player.Action.started += _ => Shoot();
     }
 
     private void Start()

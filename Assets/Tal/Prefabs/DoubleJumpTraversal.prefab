@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6577152156173407420}
   - component: {fileID: 3216909928480127128}
   m_Layer: 0
-  m_Name: DoubleJump
+  m_Name: DoubleJumpTraversal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
