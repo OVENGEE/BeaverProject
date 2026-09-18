@@ -33,6 +33,8 @@ public class BeaverController : MonoBehaviour
     private float facingDirection = 1f; // 1 = Right, -1 = Left
     private float groundCheckCooldown;
 
+    private bool isMyTurn = false;
+
     // Buffer state variables
     private bool isBuffering = false;
     private JumpKey firstKey = JumpKey.None;
@@ -61,6 +63,7 @@ public class BeaverController : MonoBehaviour
 
     private void Update()
     {
+        if (!isMyTurn) return;
         // Prevent ground check instantly re-triggering during takeoff
         if (groundCheckCooldown > 0f)
         {
@@ -83,7 +86,7 @@ public class BeaverController : MonoBehaviour
     private void FixedUpdate()
     {
         // Grounded horizontal walking only. Mid-air trajectory is strictly physical momentum.
-        if (isGrounded)
+        if (isGrounded && isMyTurn)
         {
             rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
         }
@@ -92,7 +95,7 @@ public class BeaverController : MonoBehaviour
     private void OnEnterPressed()
     {
         // Ignore all jump inputs if in mid-air
-        if (!isGrounded) return;
+        if (!isMyTurn || !isGrounded) return;
 
         if (!isBuffering)
         {
@@ -117,7 +120,7 @@ public class BeaverController : MonoBehaviour
     private void OnBackspacePressed()
     {
         // Ignore all jump inputs if in mid-air
-        if (!isGrounded) return;
+        if (!isMyTurn || !isGrounded) return;
 
         if (!isBuffering)
         {
@@ -175,6 +178,17 @@ public class BeaverController : MonoBehaviour
         // Ensure ground check doesn't accidentally trigger immediately
         isGrounded = false;
         groundCheckCooldown = 0.15f;
+    }
+
+    public void SetTurnActive(bool active)
+    {
+        isMyTurn = active;
+
+        // Stop residual horizontal movement when turn ends
+        if (!active)
+        {
+            rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+        }
     }
 
     private void ResetBuffer()

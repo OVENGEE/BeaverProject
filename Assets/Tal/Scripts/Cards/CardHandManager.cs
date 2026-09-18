@@ -4,7 +4,6 @@ using UnityEngine;
 public class CardHandManager : MonoBehaviour
 {
     [Header("Player Setup")]
-    [SerializeField] private Transform beaverTransform; // Drag the Beaver GameObject here
 
     [Header("Card Setup")]
     [SerializeField] private List<GameObject> cardPrefabs;
@@ -50,17 +49,17 @@ public class CardHandManager : MonoBehaviour
     // Called by the CardData script when clicked
     public void PlayCard(GameObject playedCard, GameObject prefabToSpawn)
     {
-        if (prefabToSpawn != null && beaverTransform != null)
+        BeaverController activeBeaver = TurnManager.Instance.ActiveBeaver;
+
+        if (prefabToSpawn != null && activeBeaver != null)
         {
-            // Spawn the weapon or traversal as a child of the beaver
-            Instantiate(prefabToSpawn, beaverTransform);
-        }
-        else
-        {
-            Debug.LogWarning("Missing prefab to spawn or Beaver transform is not assigned!");
+            // Spawn the weapon or traversal as a child of the active beaver
+            GameObject spawnedEquipment = Instantiate(prefabToSpawn, activeBeaver.transform);
+
+            // Tell TurnManager to auto-end turn when this item is destroyed
+            TurnManager.Instance.RegisterEquipment(spawnedEquipment);
         }
 
-        // Remove from list, destroy the UI card, and re-center the hand
         cardsInHand.Remove(playedCard);
         Destroy(playedCard);
         ArrangeCards();
@@ -81,6 +80,15 @@ public class CardHandManager : MonoBehaviour
             float angle = Mathf.Lerp(maxRotationAngle, -maxRotationAngle, t);
             cardsInHand[i].transform.rotation = Quaternion.Euler(0, 0, angle);
         }
+    }
+
+    public void ClearHand()
+    {
+        foreach (GameObject card in new List<GameObject>(cardsInHand))
+        {
+            Destroy(card);
+        }
+        cardsInHand.Clear();
     }
 
     private Vector3 CalculateQuadraticBezierPoint(float t, Vector3 p0, Vector3 p1, Vector3 p2)
