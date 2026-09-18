@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 7284314603806638136, guid: 545543fe128e0334f801994343cb6f80, type: 3}
+  m_Sprite: {fileID: 1922482053206025203, guid: 12c43088c7a8de2478d8ae201f9c8e56, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -87,8 +87,9 @@ GameObject:
   - component: {fileID: 8779010912065301716}
   - component: {fileID: 2806607365485077474}
   - component: {fileID: 3477344589821968427}
+  - component: {fileID: 9094939227958489735}
   m_Layer: 5
-  m_Name: PistolCard
+  m_Name: GrenadeCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -142,7 +143,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 9108983392350303105, guid: 48109b770c4fb1a41974549b66abc876, type: 3}
+  m_Sprite: {fileID: -122286939573313123, guid: 108675c51c6123e4d98a6a4605121dfd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -167,3 +168,17 @@ MonoBehaviour:
   hoverScale: 1.2
   transitionSpeed: 10
   backglowObject: {fileID: 3687968948486425868}
+--- !u!114 &9094939227958489735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6634262982985079541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 694f3e84b2d26464fa92e14c3a116c34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  weaponPrefab: {fileID: 3290385163984357553, guid: bb3d3cc27a68fec46834a0a3231de35b, type: 3}
+  traversalPrefab: {fileID: 3528829108847130550, guid: 45edae7465cda044abfb054a87bd015a, type: 3}
