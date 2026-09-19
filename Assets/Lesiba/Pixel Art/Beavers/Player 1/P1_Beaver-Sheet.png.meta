@@ -1,0 +1,871 @@
+fileFormatVersion: 2
+guid: c051e1bfbfc8c58458d5c7dde794d912
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4940992438986541093
+    second: P1_Beaver-Sheet_0
+  - first:
+      213: 718504651673390331
+    second: P1_Beaver-Sheet_1
+  - first:
+      213: -2310938967630756575
+    second: P1_Beaver-Sheet_2
+  - first:
+      213: -514221563246098117
+    second: P1_Beaver-Sheet_3
+  - first:
+      213: -8264327886677803101
+    second: P1_Beaver-Sheet_4
+  - first:
+      213: 676535491027801495
+    second: P1_Beaver-Sheet_5
+  - first:
+      213: 2048565912733170642
+    second: P1_Beaver-Sheet_6
+  - first:
+      213: 6427392299200658096
+    second: P1_Beaver-Sheet_7
+  - first:
+      213: -9186794005325827484
+    second: P1_Beaver-Sheet_8
+  - first:
+      213: -7643430721125893047
+    second: P1_Beaver-Sheet_9
+  - first:
+      213: 2443122950329623410
+    second: P1_Beaver-Sheet_10
+  - first:
+      213: 5349159392297845116
+    second: P1_Beaver-Sheet_11
+  - first:
+      213: 2136717049882203108
+    second: P1_Beaver-Sheet_12
+  - first:
+      213: -2418238846008716343
+    second: P1_Beaver-Sheet_13
+  - first:
+      213: -4424684197193918195
+    second: P1_Beaver-Sheet_14
+  - first:
+      213: -3756559333287033702
+    second: P1_Beaver-Sheet_15
+  - first:
+      213: -13244889403698989
+    second: P1_Beaver-Sheet_16
+  - first:
+      213: 2493496211840076678
+    second: P1_Beaver-Sheet_17
+  - first:
+      213: -7521670525536644141
+    second: P1_Beaver-Sheet_18
+  - first:
+      213: 4599506171383619961
+    second: P1_Beaver-Sheet_19
+  - first:
+      213: 5632380380232154258
+    second: P1_Beaver-Sheet_20
+  - first:
+      213: -1051134070858206233
+    second: P1_Beaver-Sheet_21
+  - first:
+      213: -119805082456813055
+    second: P1_Beaver-Sheet_22
+  - first:
+      213: 1506594053608460883
+    second: P1_Beaver-Sheet_23
+  - first:
+      213: 8506854017237734093
+    second: P1_Beaver-Sheet_24
+  - first:
+      213: -4764023088262361670
+    second: P1_Beaver-Sheet_25
+  - first:
+      213: -8501415627068016212
+    second: P1_Beaver-Sheet_26
+  - first:
+      213: -1145530126974070130
+    second: P1_Beaver-Sheet_27
+  - first:
+      213: 2488380387090573659
+    second: P1_Beaver-Sheet_28
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: P1_Beaver-Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 395
+        width: 47
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5280fabd17ee19440800000000000000
+      internalID: 4940992438986541093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P1_Beaver-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 395
+        width: 47
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bfc45748c24a8f900800000000000000
+      internalID: 718504651673390331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P1_Beaver-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 331
+        width: 47
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 125c2c8b045edefd0800000000000000
+      internalID: -2310938967630756575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P1_Beaver-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 331
+        width: 45
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b39ced2763e1dd8f0800000000000000
+      internalID: -514221563246098117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P1_Beaver-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 331
+        width: 42
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3aff637c2953f4d80800000000000000
+      internalID: -8264327886677803101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P1_Beaver-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 331
+        width: 37
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79518a4d179836900800000000000000
+      internalID: 676535491027801495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P1_Beaver-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 331
+        width: 41
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2db3f6708d7fd6c10800000000000000
+      internalID: 2048565912733170642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P1_Beaver-Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 331
+        width: 43
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0babfe90e3fa23950800000000000000
+      internalID: 6427392299200658096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P1_Beaver-Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 267
+        width: 47
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 462bddf9683f18080800000000000000
+      internalID: -9186794005325827484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P1_Beaver-Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 267
+        width: 43
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94cbbf971441de590800000000000000
+      internalID: -7643430721125893047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P1_Beaver-Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 259
+        width: 35
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 273600d0167b7e120800000000000000
+      internalID: 2443122950329623410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P1_Beaver-Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 267
+        width: 43
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c718bd050280c3a40800000000000000
+      internalID: 5349159392297845116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P1_Beaver-Sheet_12
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 195
+        width: 41
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e3dfb706d427ad10800000000000000
+      internalID: 2136717049882203108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P1_Beaver-Sheet_13
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 195
+        width: 35
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c39999f490b07ed0800000000000000
+      internalID: -2418238846008716343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P1_Beaver-Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 139
+        width: 47
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d09d8f66a2d5892c0800000000000000
+      internalID: -4424684197193918195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P1_Beaver-Sheet_15
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 139
+        width: 42
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a948fb180350edbc0800000000000000
+      internalID: -3756559333287033702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P1_Beaver-Sheet_16
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 139
+        width: 44
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d0d000e7d1f0dff0800000000000000
+      internalID: -13244889403698989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P1_Beaver-Sheet_17
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 134
+        width: 33
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68b8283f79daa9220800000000000000
+      internalID: 2493496211840076678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P1_Beaver-Sheet_18
+      rect:
+        serializedVersion: 2
+        x: 269
+        y: 133
+        width: 37
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d3dcdf2288ad9790800000000000000
+      internalID: -7521670525536644141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P1_Beaver-Sheet_19
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 139
+        width: 43
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 971a98f5e7ab4df30800000000000000
+      internalID: 4599506171383619961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P1_Beaver-Sheet_20
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 141
+        width: 47
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29cfd9b3d1c3a2e40800000000000000
+      internalID: 5632380380232154258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P1_Beaver-Sheet_21
+      rect:
+        serializedVersion: 2
+        x: 451
+        y: 139
+        width: 47
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e3bf27b12f9961f0800000000000000
+      internalID: -1051134070858206233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P1_Beaver-Sheet_22
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 75
+        width: 47
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10210e989ed565ef0800000000000000
+      internalID: -119805082456813055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P1_Beaver-Sheet_23
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 75
+        width: 47
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3525c0a3f4f78e410800000000000000
+      internalID: 1506594053608460883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P1_Beaver-Sheet_24
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 75
+        width: 47
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc25f8d48aa6e0670800000000000000
+      internalID: 8506854017237734093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P1_Beaver-Sheet_25
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 75
+        width: 47
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abdcc5afd3ac2edb0800000000000000
+      internalID: -4764023088262361670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P1_Beaver-Sheet_26
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 78
+        width: 26
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca9f7a49787e40a80800000000000000
+      internalID: -8501415627068016212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P1_Beaver-Sheet_27
+      rect:
+        serializedVersion: 2
+        x: 401
+        y: 75
+        width: 30
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e82d3363b624a10f0800000000000000
+      internalID: -1145530126974070130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P1_Beaver-Sheet_28
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 11
+        width: 44
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b59259e27c0888220800000000000000
+      internalID: 2488380387090573659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      P1_Beaver-Sheet_0: 4940992438986541093
+      P1_Beaver-Sheet_1: 718504651673390331
+      P1_Beaver-Sheet_10: 2443122950329623410
+      P1_Beaver-Sheet_11: 5349159392297845116
+      P1_Beaver-Sheet_12: 2136717049882203108
+      P1_Beaver-Sheet_13: -2418238846008716343
+      P1_Beaver-Sheet_14: -4424684197193918195
+      P1_Beaver-Sheet_15: -3756559333287033702
+      P1_Beaver-Sheet_16: -13244889403698989
+      P1_Beaver-Sheet_17: 2493496211840076678
+      P1_Beaver-Sheet_18: -7521670525536644141
+      P1_Beaver-Sheet_19: 4599506171383619961
+      P1_Beaver-Sheet_2: -2310938967630756575
+      P1_Beaver-Sheet_20: 5632380380232154258
+      P1_Beaver-Sheet_21: -1051134070858206233
+      P1_Beaver-Sheet_22: -119805082456813055
+      P1_Beaver-Sheet_23: 1506594053608460883
+      P1_Beaver-Sheet_24: 8506854017237734093
+      P1_Beaver-Sheet_25: -4764023088262361670
+      P1_Beaver-Sheet_26: -8501415627068016212
+      P1_Beaver-Sheet_27: -1145530126974070130
+      P1_Beaver-Sheet_28: 2488380387090573659
+      P1_Beaver-Sheet_3: -514221563246098117
+      P1_Beaver-Sheet_4: -8264327886677803101
+      P1_Beaver-Sheet_5: 676535491027801495
+      P1_Beaver-Sheet_6: 2048565912733170642
+      P1_Beaver-Sheet_7: 6427392299200658096
+      P1_Beaver-Sheet_8: -9186794005325827484
+      P1_Beaver-Sheet_9: -7643430721125893047
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
