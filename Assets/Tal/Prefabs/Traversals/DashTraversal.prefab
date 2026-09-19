@@ -47,3 +47,5 @@ MonoBehaviour:
   dashSpeed: 20
   dashDuration: 0.05
   dashEffectPrefab: {fileID: 0}
+  dashDamage: 25
+  hitRadius: 1.5

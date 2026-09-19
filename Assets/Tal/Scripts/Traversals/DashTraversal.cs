@@ -52,8 +52,6 @@ public class DashTraversal : MonoBehaviour
             float originalGravity = rb.gravityScale;
 
             rb.gravityScale = 0f;
-            rb.linearVelocity = new Vector2(direction * dashSpeed, 0f);
-
             inputActions.Disable();
 
             if (dashEffectPrefab != null)
@@ -62,11 +60,17 @@ public class DashTraversal : MonoBehaviour
             }
 
             float elapsed = 0f;
+
+            // Switch to fixed time since we are manipulating physics
             while (elapsed < dashDuration)
             {
-                elapsed += Time.deltaTime;
+                // Constantly enforce velocity so hitting another beaver doesn't stop the dash dead in its tracks
+                rb.linearVelocity = new Vector2(direction * dashSpeed, 0f);
+
                 CheckForHits();
-                yield return null;
+
+                elapsed += Time.fixedDeltaTime;
+                yield return new WaitForFixedUpdate();
             }
 
             rb.gravityScale = originalGravity;
@@ -80,8 +84,11 @@ public class DashTraversal : MonoBehaviour
         Collider2D[] hits = Physics2D.OverlapCircleAll(beaver.transform.position, hitRadius);
         foreach (var hit in hits)
         {
-            // Ignore the beaver performing the dash
-            if (hit.gameObject != beaver.gameObject && hit.TryGetComponent<BeaverHealth>(out var targetHealth))
+            // Use GetComponentInParent in case the collider is on a child object
+            BeaverHealth targetHealth = hit.GetComponentInParent<BeaverHealth>();
+
+            // Ensure we hit a beaver, and ensure it is NOT the one performing the dash
+            if (targetHealth != null && targetHealth.gameObject != beaver.gameObject)
             {
                 if (!hitBeavers.Contains(targetHealth))
                 {
