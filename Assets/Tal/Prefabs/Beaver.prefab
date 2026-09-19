@@ -248,7 +248,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &5898523465919600655
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -333,7 +333,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BeaverHealth
   maxHealth: 100
   healthText: {fileID: 8928686550570387741}
-  logPrefab: {fileID: 0}
+  logPrefab: {fileID: 3081273515572071885, guid: 4a9670160685e3c4db931c5d07228590, type: 3}
 --- !u!1 &8505378513716723686
 GameObject:
   m_ObjectHideFlags: 0
@@ -474,7 +474,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
