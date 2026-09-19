@@ -59,10 +59,18 @@ public class CardHandManager : MonoBehaviour
             // Tell TurnManager to auto-end turn when this item is destroyed
             TurnManager.Instance.RegisterEquipment(spawnedEquipment);
         }
+        else
+        {
+            Debug.LogWarning("Missing prefab to spawn or Beaver transform is not assigned!");
+        }
 
+        // Remove from list and destroy the UI card
         cardsInHand.Remove(playedCard);
         Destroy(playedCard);
         ArrangeCards();
+
+        // HIDE THE HAND so the player cannot click any more cards this turn
+        gameObject.SetActive(false);
     }
 
     private void ArrangeCards()
