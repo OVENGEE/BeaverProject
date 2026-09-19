@@ -8,6 +8,8 @@ public class TilemapColliderGenerator : MonoBehaviour
     private Tilemap m_tilemap;
     private Tile m_tile;
 
+    public Vector3 Center { get; private set; }
+
     private void Awake()
     {
         m_tile = ScriptableObject.CreateInstance<Tile>();
@@ -23,6 +25,9 @@ public class TilemapColliderGenerator : MonoBehaviour
                 m_tilemap.SetTile(new Vector3Int(x, y, 0),pixelState[y][x] ? m_tile : null);               
             }
         }
+
+        Vector3Int centerTile = new (pixelState[0].Length / 2, pixelState.Length / 2);
+        Center = m_tilemap.CellToWorld(centerTile);
     }
 
     public void DestroyCollider(Vector2 originWorldSpace, List<Vector2Int> affectedTilesAsOffset)
