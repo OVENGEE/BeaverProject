@@ -4,24 +4,38 @@ using UnityEngine;
 public class GrenadeProjectile : MonoBehaviour
 {
     [SerializeField] private float fuseTime = 3f;
+    [SerializeField] private float explosionRadius = 2.5f;
+    [SerializeField] private int damage = 45;
     [SerializeField] private GameObject explosionEffectPrefab;
 
     private void Start()
     {
-        // Start the fuse countdown as soon as it is spawned
         Invoke(nameof(Explode), fuseTime);
     }
 
     private void Explode()
     {
-        // Spawn visual/damage hitbox
         if (explosionEffectPrefab != null)
         {
             Instantiate(explosionEffectPrefab, transform.position, Quaternion.identity);
         }
 
-        // Apply explosion physics to nearby beavers/objects here later
+        // Detect all colliders within explosion range
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
+        foreach (var hit in hitColliders)
+        {
+            if (hit.TryGetComponent<BeaverHealth>(out var beaverHealth))
+            {
+                beaverHealth.TakeDamage(damage);
+            }
+        }
 
         Destroy(gameObject);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, explosionRadius);
     }
 }

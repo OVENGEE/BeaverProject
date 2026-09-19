@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f4eefa87852c47f4a89c01738016de9f
+guid: 6dbd31055e6ed704fa054c952d1f0891
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2348493001287196787
-    second: CardEG3_0
+      213: 8108341523606369736
+    second: P1_Pistol_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CardEG3_0
+      name: P1_Pistol_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1067
-        height: 1483
+        x: 5
+        y: 9
+        width: 22
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d8f19c4ee0a786fd0800000000000000
-      internalID: -2348493001287196787
+      spriteID: 8c57b18e7ad968070800000000000000
+      internalID: 8108341523606369736
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      CardEG3_0: -2348493001287196787
+      P1_Pistol_0: 8108341523606369736
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

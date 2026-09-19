@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 9bf3cf04d4db7e344ba7a2efd780c2f4
+guid: be69801068ac725478178aa082b1d51a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1549202474392192793
-    second: CardEG_0
+      213: 874343242196921964
+    second: Bullets_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CardEG_0
+      name: Bullets_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1067
-        height: 1484
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7e872bcbe80208ae0800000000000000
-      internalID: -1549202474392192793
+      spriteID: c6e29eadb8a422c00800000000000000
+      internalID: 874343242196921964
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      CardEG_0: -1549202474392192793
+      Bullets_0: 874343242196921964
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

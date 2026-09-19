@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,9 +10,14 @@ public class DashTraversal : MonoBehaviour
     [SerializeField] private float dashDuration = 0.15f;
     [SerializeField] private GameObject dashEffectPrefab;
 
+    [Header("Damage Settings")]
+    [SerializeField] private int dashDamage = 25;
+    [SerializeField] private float hitRadius = 0.8f;
+
     private BeaverController beaver;
     private BeaverInputActions inputActions;
     private bool isDashing = false;
+    private HashSet<BeaverHealth> hitBeavers = new HashSet<BeaverHealth>();
 
     private void Awake()
     {
@@ -30,7 +36,6 @@ public class DashTraversal : MonoBehaviour
 
         float horizontalInput = beaver.MoveInput;
 
-        // Player MUST be holding either Left Arrow (-1) or Right Arrow (+1)
         if (horizontalInput != 0f)
         {
             float direction = Mathf.Sign(horizontalInput);
@@ -46,11 +51,9 @@ public class DashTraversal : MonoBehaviour
         {
             float originalGravity = rb.gravityScale;
 
-            // Zero out gravity and force direct horizontal velocity
             rb.gravityScale = 0f;
             rb.linearVelocity = new Vector2(direction * dashSpeed, 0f);
 
-            // Turn off input detection while dashing
             inputActions.Disable();
 
             if (dashEffectPrefab != null)
@@ -58,13 +61,34 @@ public class DashTraversal : MonoBehaviour
                 Instantiate(dashEffectPrefab, beaver.transform.position, Quaternion.identity);
             }
 
-            yield return new WaitForSeconds(dashDuration);
+            float elapsed = 0f;
+            while (elapsed < dashDuration)
+            {
+                elapsed += Time.deltaTime;
+                CheckForHits();
+                yield return null;
+            }
 
-            // Restore normal gravity
             rb.gravityScale = originalGravity;
         }
 
-        // Destroy the traversal object after the dash completes
         Destroy(gameObject);
+    }
+
+    private void CheckForHits()
+    {
+        Collider2D[] hits = Physics2D.OverlapCircleAll(beaver.transform.position, hitRadius);
+        foreach (var hit in hits)
+        {
+            // Ignore the beaver performing the dash
+            if (hit.gameObject != beaver.gameObject && hit.TryGetComponent<BeaverHealth>(out var targetHealth))
+            {
+                if (!hitBeavers.Contains(targetHealth))
+                {
+                    hitBeavers.Add(targetHealth);
+                    targetHealth.TakeDamage(dashDamage);
+                }
+            }
+        }
     }
 }

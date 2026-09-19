@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 12c43088c7a8de2478d8ae201f9c8e56
+guid: 6c8ea929d97392445b6248bb31de4750
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1922482053206025203
-    second: Card2Glow_0
+      213: -6457704322150086716
+    second: P2_Shotgun_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Card2Glow_0
+      name: P2_Shotgun_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1252
-        height: 1665
+        x: 7
+        y: 10
+        width: 50
+        height: 12
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3f3a86cdd370eaa10800000000000000
-      internalID: 1922482053206025203
+      spriteID: 4c74db52220a166a0800000000000000
+      internalID: -6457704322150086716
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Card2Glow_0: 1922482053206025203
+      P2_Shotgun_0: -6457704322150086716
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

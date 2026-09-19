@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: eaaa286658cbcf149ac52c7680a7f5e4
+guid: 9df6599398fd50a4c9996315ec7b329d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3597463134871626510
-    second: Card3Glow_0
+      213: 3017928325585996731
+    second: Shotgun+Stomp_CardGlow_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Card3Glow_0
+      name: Shotgun+Stomp_CardGlow_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 2
-        width: 1249
-        height: 1663
+        x: 4
+        y: 6
+        width: 120
+        height: 168
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e03269639a1cce130800000000000000
-      internalID: 3597463134871626510
+      spriteID: bbb842c82d5d1e920800000000000000
+      internalID: 3017928325585996731
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Card3Glow_0: 3597463134871626510
+      Shotgun+Stomp_CardGlow_0: 3017928325585996731
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

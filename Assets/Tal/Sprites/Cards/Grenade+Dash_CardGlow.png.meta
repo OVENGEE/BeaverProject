@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 59b3a283830c9d24388e01b130e1390f
+guid: b9f73c7ade68f714583a2a5aef5bf809
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5804082548965409109
-    second: Card1Glow_0
+      213: 4545418310786206079
+    second: Grenade+Dash_CardGlow_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Card1Glow_0
+      name: Grenade+Dash_CardGlow_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 2
-        width: 1249
-        height: 1663
+        x: 4
+        y: 6
+        width: 120
+        height: 168
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bae7fdd4ca1c37fa0800000000000000
-      internalID: -5804082548965409109
+      spriteID: f79c7f9fed1941f30800000000000000
+      internalID: 4545418310786206079
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Card1Glow_0: -5804082548965409109
+      Grenade+Dash_CardGlow_0: 4545418310786206079
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
