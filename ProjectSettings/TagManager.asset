@@ -11,8 +11,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Ground
+  - Bullet
   - 
   - 
   - 
@@ -40,12 +40,6 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Behind
-    uniqueID: 4078843005
-    locked: 0
-  - name: Infront
-    uniqueID: 3788672125
     locked: 0
   m_RenderingLayers:
   - Default
