@@ -18,6 +18,9 @@ public class DestructionTest : MonoBehaviour
     [SerializeField, Min(0.1f)]
     private float m_radius = 1f;
 
+    [SerializeField, Min(0.1f)]
+    private float m_squareRadius = 1f;
+
     private void Reset()
     {
         m_destructibleTerrain = GetComponent<DestructibleTerrain>();
@@ -43,16 +46,22 @@ public class DestructionTest : MonoBehaviour
 
     private void Update()
     {
-        if (m_clickInput == null && Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
-            TryDestroyAtMouse();
+        if (Mouse.current == null)
+            return;
+
+        if (m_clickInput == null && Mouse.current.leftButton.wasPressedThisFrame)
+            TryDestroyAtMouse(false);
+
+        if (Mouse.current.rightButton.wasPressedThisFrame)
+            TryDestroyAtMouse(true);
     }
 
     private void HandleClick(InputAction.CallbackContext obj)
     {
-        TryDestroyAtMouse();
+        TryDestroyAtMouse(false);
     }
 
-    private void TryDestroyAtMouse()
+    private void TryDestroyAtMouse(bool useRectangle)
     {
         if (m_destructibleTerrain == null)
         {
@@ -71,7 +80,8 @@ public class DestructionTest : MonoBehaviour
         }
 
         Vector2 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-        m_destructibleTerrain.RemoveTerrainAt(worldPosition, m_radius);
+        float destructionRadius = useRectangle ? m_squareRadius : m_radius;
+        m_destructibleTerrain.RemoveTerrainAt(worldPosition, destructionRadius, useRectangle);
 
         if (m_explosionEffect != null)
             Instantiate(m_explosionEffect, worldPosition, Quaternion.identity);

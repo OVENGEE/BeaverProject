@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -92,11 +93,17 @@ public class DestructibleTerrain : MonoBehaviour
 
     private bool[][] SliceArray(bool[][] pixels, int startRow, int startCol, int numRows, int numCols)
     {
-        int sourceWidth = pixels.Length;
-        int sourceHeight = pixels[0].Length;
+        if (pixels == null || pixels.Length == 0 || pixels[0] == null)
+            return Array.Empty<bool[]>();
 
-        int actualWidth = Mathf.Min(numCols, sourceWidth - startRow);
-        int actualHeight = Mathf.Min(numRows, sourceHeight - startCol);
+        int sourceHeight = pixels.Length;
+        int sourceWidth = pixels[0].Length;
+
+        int safeStartRow = Mathf.Clamp(startRow, 0, Mathf.Max(0, sourceHeight - 1));
+        int safeStartCol = Mathf.Clamp(startCol, 0, Mathf.Max(0, sourceWidth - 1));
+
+        int actualHeight = Mathf.Min(numRows, sourceHeight - safeStartRow);
+        int actualWidth = Mathf.Min(numCols, sourceWidth - safeStartCol);
 
         actualWidth = Mathf.Max(0, actualWidth);
         actualHeight = Mathf.Max(0, actualHeight);
@@ -107,7 +114,7 @@ public class DestructibleTerrain : MonoBehaviour
             result[row] = new bool[actualWidth];
             for (int col = 0; col < actualWidth; col++)
             {
-                result[row][col] = pixels[startRow + row][startCol + col];
+                result[row][col] = pixels[safeStartRow + row][safeStartCol + col];
             }
         }
 
@@ -122,22 +129,22 @@ public class DestructibleTerrain : MonoBehaviour
         return new Vector2Int(chunkCountRight, chunkCountUp);
     }
 
-    public void RemoveTerrainAt(Vector2 worldPosition, float radius)
+    public void RemoveTerrainAt(Vector2 worldPosition, float radius, bool useRectangle = false)
     {
         if (m_modifiableTexture == null || m_spriteRenderer == null || radius <= 0f)
             return;
 
         float pixelSize = 1f / m_modifiableTexture.Sprite.pixelsPerUnit;
         int radiusInPixels = Mathf.RoundToInt(radius / pixelSize);
-        List<Vector2Int> affectedPixelAsOffset = GetCircleOffsets(radiusInPixels);
+        List<Vector2Int> affectedPixelAsOffset = useRectangle
+            ? GetRectangleOffsets(radiusInPixels)
+            : GetCircleOffsets(radiusInPixels);
 
         Vector2Int circleCenterInPixelSpace = m_modifiableTexture.WorldToTexturePosition(worldPosition, m_spriteRenderer.transform);
         ModifyTextureAt(circleCenterInPixelSpace, Color.clear, affectedPixelAsOffset);
 
-        //m_nonChunkedCollider.DestroyCollider(worldPosition, affectedPixelAsOffset);
-
         List<TilemapColliderGenerator> chunksToModify = m_chunkManager.GetClosestChunks(worldPosition);
-        foreach(var chunk in chunksToModify)
+        foreach (var chunk in chunksToModify)
         {
             chunk.DestroyCollider(worldPosition, affectedPixelAsOffset);
         }
@@ -178,6 +185,20 @@ public class DestructibleTerrain : MonoBehaviour
                 {
                     affectedPixelAsOffset.Add(new Vector2Int(x, y));
                 }
+            }
+        }
+
+        return affectedPixelAsOffset;
+    }
+
+    private List<Vector2Int> GetRectangleOffsets(int radiusInPixels)
+    {
+        List<Vector2Int> affectedPixelAsOffset = new List<Vector2Int>();
+        for (int x = -radiusInPixels; x <= radiusInPixels; x++)
+        {
+            for (int y = -radiusInPixels; y <= radiusInPixels; y++)
+            {
+                affectedPixelAsOffset.Add(new Vector2Int(x, y));
             }
         }
 
