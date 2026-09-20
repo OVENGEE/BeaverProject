@@ -24,12 +24,14 @@ public class DestructibleTerrain : MonoBehaviour
     [SerializeField]
     private Vector2Int m_chunkSize = new (300, 300);
 
+    // Assigns the sprite renderer and grid references when the component is reset.
     private void Reset()
     {
         m_spriteRenderer = GetComponent<SpriteRenderer>();
         m_grid = GetComponent<Grid>();
     }
 
+    // Builds the editable texture and prepares the terrain collider chunks.
     private void Awake()
     {
         if (m_spriteRenderer == null)
@@ -69,6 +71,7 @@ public class DestructibleTerrain : MonoBehaviour
 
     }
 
+    // Creates one collider chunk for each section of the terrain texture.
     private void PrepareColliderChunks(Vector2Int chunkGridSize, Vector2Int mChunkSize, Vector2 bottomLeftLocal, bool[][] pixels)
     {
         for (int x = 0; x < chunkGridSize.x; x++)
@@ -91,6 +94,7 @@ public class DestructibleTerrain : MonoBehaviour
         }
     }
 
+    // Extracts a rectangular subsection from the full pixel array for one chunk.
     private bool[][] SliceArray(bool[][] pixels, int startRow, int startCol, int numRows, int numCols)
     {
         if (pixels == null || pixels.Length == 0 || pixels[0] == null)
@@ -121,6 +125,7 @@ public class DestructibleTerrain : MonoBehaviour
         return result;
     }
 
+    // Divides the terrain texture into a grid of chunk counts.
     private Vector2Int SplitTextureIntoChunks(int width, int height, Vector2Int mChunkSize)
     {
         int chunkCountRight = Mathf.CeilToInt((float)width / mChunkSize.x);
@@ -129,6 +134,7 @@ public class DestructibleTerrain : MonoBehaviour
         return new Vector2Int(chunkCountRight, chunkCountUp);
     }
 
+    // Removes terrain at a world position using either a circle or rectangle mask.
     public void RemoveTerrainAt(Vector2 worldPosition, float radius, bool useRectangle = false)
     {
         if (m_modifiableTexture == null || m_spriteRenderer == null || radius <= 0f)
@@ -150,6 +156,7 @@ public class DestructibleTerrain : MonoBehaviour
         }
     }
 
+    // Draws chunk outlines in the editor so terrain sections are easier to inspect.
     private void OnDrawGizmosSelected()
     {
         if (Application.isPlaying)
@@ -163,6 +170,7 @@ public class DestructibleTerrain : MonoBehaviour
         }
     }
 
+    // Clears the pixels in the destruction area and applies the change to the texture.
     private void ModifyTextureAt(Vector2Int circleCenterInPixelSpace, Color color, List<Vector2Int> affectedPixelAsOffset)
     {
         foreach (Vector2Int offset in affectedPixelAsOffset)
@@ -174,6 +182,7 @@ public class DestructibleTerrain : MonoBehaviour
         m_modifiableTexture.ApplyChanges();
     }
 
+    // Generates a circular set of offsets for terrain destruction.
     private List<Vector2Int> GetCircleOffsets(int radiusInPixels)
     {
         List<Vector2Int> affectedPixelAsOffset = new List<Vector2Int>();
@@ -191,6 +200,7 @@ public class DestructibleTerrain : MonoBehaviour
         return affectedPixelAsOffset;
     }
 
+    // Generates a square set of offsets for terrain destruction.
     private List<Vector2Int> GetRectangleOffsets(int radiusInPixels)
     {
         List<Vector2Int> affectedPixelAsOffset = new List<Vector2Int>();

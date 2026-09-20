@@ -21,6 +21,7 @@ public class DestructionTest : MonoBehaviour
     [SerializeField, Min(0.1f)]
     private float m_squareRadius = 1f;
 
+    // Looks for a terrain component when this object is reset in the inspector.
     private void Reset()
     {
         m_destructibleTerrain = GetComponent<DestructibleTerrain>();
@@ -29,6 +30,7 @@ public class DestructionTest : MonoBehaviour
             m_destructibleTerrain = GetComponentInChildren<DestructibleTerrain>();
     }
 
+    // Finds the terrain reference early so it is ready before gameplay begins.
     private void Awake()
     {
         if (m_destructibleTerrain == null)
@@ -38,12 +40,14 @@ public class DestructionTest : MonoBehaviour
             m_destructibleTerrain = GetComponentInChildren<DestructibleTerrain>();
     }
 
+    // Subscribes to the input action when the script is enabled.
     private void OnEnable()
     {
         if (m_clickInput != null)
             m_clickInput.action.performed += HandleClick;
     }
 
+    // Checks for mouse clicks and destroys terrain at the pointer position.
     private void Update()
     {
         if (Mouse.current == null)
@@ -56,11 +60,13 @@ public class DestructionTest : MonoBehaviour
             TryDestroyAtMouse(true);
     }
 
+    // Handles the input action callback for left-click destruction.
     private void HandleClick(InputAction.CallbackContext obj)
     {
         TryDestroyAtMouse(false);
     }
 
+    // Converts the pointer position to world space and removes terrain there.
     private void TryDestroyAtMouse(bool useRectangle)
     {
         if (m_destructibleTerrain == null)
@@ -87,6 +93,7 @@ public class DestructionTest : MonoBehaviour
             Instantiate(m_explosionEffect, worldPosition, Quaternion.identity);
     }
 
+    // Unsubscribes from the click action when the script is disabled.
     private void OnDisable()
     {
         if (m_clickInput != null)

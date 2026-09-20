@@ -10,12 +10,14 @@ public class TilemapColliderGenerator : MonoBehaviour
 
     public Vector3 Center { get; private set; }
 
+    // Creates the tile used for generated collider blocks.
     private void Awake()
     {
         m_tile = ScriptableObject.CreateInstance<Tile>();
         m_tile.colliderType = Tile.ColliderType.Grid;
     }
 
+    // Fills the chunk with solid tiles based on the provided pixel map.
     public void PrepareCollider(bool[][] pixelState)
     {
         for (int y= 0; y < pixelState.Length; y++)
@@ -30,6 +32,7 @@ public class TilemapColliderGenerator : MonoBehaviour
         Center = m_tilemap.CellToWorld(centerTile);
     }
 
+    // Removes terrain tiles inside the destruction radius for this chunk.
     public void DestroyCollider(Vector2 originWorldSpace, List<Vector2Int> affectedTilesAsOffset)
     {
         Vector3Int originCell = m_tilemap.WorldToCell(originWorldSpace);

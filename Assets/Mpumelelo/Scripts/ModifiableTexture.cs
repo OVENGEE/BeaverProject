@@ -12,6 +12,7 @@ public class ModifiableTexture
 
     public Vector2 Pivot => m_pivot;
 
+    // Creates a writable copy of a sprite so pixel changes can be applied safely.
     public static ModifiableTexture CreateFromSprite(Sprite sprite)
     {
         if (sprite == null)
@@ -47,6 +48,7 @@ public class ModifiableTexture
         return new ModifiableTexture(texture, normalizedPivot, sprite.pixelsPerUnit);
     }
 
+    // Stores the texture and recreates the sprite used for rendering.
     private ModifiableTexture(Texture2D texture, Vector2 pivot, float pixelsPerUnit)
     {
         m_texture = texture;
@@ -55,6 +57,7 @@ public class ModifiableTexture
         RecreateSprite();
     }
 
+    // Rebuilds the sprite after the underlying texture changes.
     private void RecreateSprite()
     {
         m_sprite = Sprite.Create(
@@ -68,6 +71,7 @@ public class ModifiableTexture
             false);
     }
 
+    // Converts a world point into the matching pixel coordinate on the texture.
     public Vector2Int WorldToTexturePosition(Vector2 worldPosition, Transform spriteTransform)
     {
         Vector2 localPosition = spriteTransform.InverseTransformPoint(worldPosition);
@@ -76,12 +80,14 @@ public class ModifiableTexture
         return new Vector2Int(x, y);
     }
 
+    // Checks whether a pixel coordinate is within the texture bounds.
     public bool IsValidTexturePosition(Vector2Int texturePosition)
     {
         return texturePosition.x >= 0 && texturePosition.x < m_texture.width &&
                texturePosition.y >= 0 && texturePosition.y < m_texture.height;
     }
 
+    // Sets one texture pixel and returns whether the position was valid.
     public bool SetPixel(Vector2Int texturePosition, Color color)
     {
         if (!IsValidTexturePosition(texturePosition))
@@ -91,11 +97,13 @@ public class ModifiableTexture
         return true;
     }
 
+    // Applies pending texture edits so they can be read immediately.
     public void ApplyChanges()
     {
         m_texture.Apply();
     }
 
+    // Reads the alpha state into a grid of solid and empty cells.
     public bool[][] GetPixelsState()
     {
         int width = m_texture.width;
