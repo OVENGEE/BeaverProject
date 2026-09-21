@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class TurnManager : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class TurnManager : MonoBehaviour
     [SerializeField] private int cardsPerRound = 3;
     [SerializeField] private TextMeshProUGUI timerText; // Optional timer UI display
     [SerializeField] private TextMeshProUGUI winText;   // Assign a UI Text element for "Player X Wins!"
+    [SerializeField] private GameObject restartButton;
     [SerializeField] private TextMeshProUGUI currentPlayerText; // NEW: Text to display whose turn it is
 
     [Header("Turn Settings")]
@@ -44,6 +46,7 @@ public class TurnManager : MonoBehaviour
     private void Start()
     {
         if (winText != null) winText.gameObject.SetActive(false);
+        if (restartButton != null) restartButton.SetActive(false);
         if (currentPlayerText != null) currentPlayerText.gameObject.SetActive(true);
 
         // Randomize who goes first at game start
@@ -239,6 +242,8 @@ public class TurnManager : MonoBehaviour
                 else if (p1Alive == 0) winText.text = "Player 2 Wins!";
                 else winText.text = "Player 1 Wins!";
             }
+
+            if (restartButton != null) restartButton.SetActive(true);
 
             // Freeze the game
             Time.timeScale = 0f;
