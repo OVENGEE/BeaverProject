@@ -19,6 +19,7 @@ public class TurnManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI timerText; // Optional timer UI display
     [SerializeField] private TextMeshProUGUI winText;   // Assign a UI Text element for "Player X Wins!"
     [SerializeField] private GameObject restartButton;
+    [SerializeField] private GameObject menuButton;
     [SerializeField] private TextMeshProUGUI currentPlayerText; // NEW: Text to display whose turn it is
 
     [Header("Turn Settings")]
@@ -47,6 +48,7 @@ public class TurnManager : MonoBehaviour
     {
         if (winText != null) winText.gameObject.SetActive(false);
         if (restartButton != null) restartButton.SetActive(false);
+        if (menuButton != null) menuButton.SetActive(false);
         if (currentPlayerText != null) currentPlayerText.gameObject.SetActive(true);
 
         // Randomize who goes first at game start
@@ -244,6 +246,7 @@ public class TurnManager : MonoBehaviour
             }
 
             if (restartButton != null) restartButton.SetActive(true);
+            if (menuButton != null) menuButton.SetActive(true);
 
             // Freeze the game
             Time.timeScale = 0f;
