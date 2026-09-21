@@ -33,7 +33,7 @@ public class DeathByWater : MonoBehaviour
     // Destroys the Beaver if it is tagged as Beaver, then optionally removes the water object.
     private void HandleBeaverDeath(GameObject other)
     {
-        if (!other.CompareTag("BeaverP1") || !other.CompareTag("BeaverP2"))
+        if (!other.CompareTag("BeaverP1") && !other.CompareTag("BeaverP2"))
             return;
 
         if (destroyBeaverOnTouch)
