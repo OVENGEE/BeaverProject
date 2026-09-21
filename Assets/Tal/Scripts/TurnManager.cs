@@ -17,6 +17,7 @@ public class TurnManager : MonoBehaviour
     [SerializeField] private int cardsPerRound = 3;
     [SerializeField] private TextMeshProUGUI timerText; // Optional timer UI display
     [SerializeField] private TextMeshProUGUI winText;   // Assign a UI Text element for "Player X Wins!"
+    [SerializeField] private TextMeshProUGUI currentPlayerText; // NEW: Text to display whose turn it is
 
     [Header("Turn Settings")]
     [SerializeField] private float turnDuration = 30f;
@@ -43,6 +44,7 @@ public class TurnManager : MonoBehaviour
     private void Start()
     {
         if (winText != null) winText.gameObject.SetActive(false);
+        if (currentPlayerText != null) currentPlayerText.gameObject.SetActive(true);
 
         // Randomize who goes first at game start
         firstPlayerIsP1 = Random.value > 0.5f;
@@ -103,6 +105,15 @@ public class TurnManager : MonoBehaviour
         // Calculate turn order (Interleaved P1 and P2)
         bool isP1Turn = (turnStep % 2 == 0) ? firstPlayerIsP1 : !firstPlayerIsP1;
         int beaverIndex = turnStep / 2; // Maps 0,1 -> Index 0 | 2,3 -> Index 1 | 4,5 -> Index 2
+
+        // NEW: Update the current player UI text
+        if (currentPlayerText != null)
+        {
+            currentPlayerText.text = isP1Turn ? "Player 1's Turn" : "Player 2's Turn";
+
+            // Optional: You can color code the text here if you want!
+            // currentPlayerText.color = isP1Turn ? Color.blue : Color.red; 
+        }
 
         // Deactivate all beavers first
         SetAllBeaversActive(false);
@@ -216,6 +227,9 @@ public class TurnManager : MonoBehaviour
         {
             isGameOver = true;
             isTurnRunning = false;
+
+            // NEW: Hide the turn text when the game ends
+            if (currentPlayerText != null) currentPlayerText.gameObject.SetActive(false);
 
             if (winText != null)
             {
