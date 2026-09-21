@@ -47,16 +47,24 @@ public class CardHandManager : MonoBehaviour
     }
 
     // Called by the CardData script when clicked
+    // Called by the CardData script when clicked
     public void PlayCard(GameObject playedCard, GameObject prefabToSpawn)
     {
         BeaverController activeBeaver = TurnManager.Instance.ActiveBeaver;
 
         if (prefabToSpawn != null && activeBeaver != null)
         {
-            // Spawn the weapon or traversal as a child of the active beaver
+            // 1. Spawn the weapon or traversal as a child of the active beaver
             GameObject spawnedEquipment = Instantiate(prefabToSpawn, activeBeaver.transform);
 
-            // Tell TurnManager to auto-end turn when this item is destroyed
+            // 2. Check for the team swapper and apply the correct sprite
+            if (spawnedEquipment.TryGetComponent<TeamSpriteSwapper>(out var swapper))
+            {
+                bool isPlayerTwo = activeBeaver.gameObject.CompareTag("BeaverP2");
+                swapper.ApplyTeamSprite(isPlayerTwo);
+            }
+
+            // 3. Tell TurnManager to auto-end turn when this item is destroyed
             TurnManager.Instance.RegisterEquipment(spawnedEquipment);
         }
         else

@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 3
   tags:
   - Beaver
+  - BeaverP1
+  - BeaverP2
   layers:
   - Default
   - TransparentFX

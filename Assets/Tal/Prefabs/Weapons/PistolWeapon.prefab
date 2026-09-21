@@ -209,7 +209,7 @@ Transform:
   m_GameObject: {fileID: 6777028346332965335}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.2, y: 1.8, z: 0}
+  m_LocalPosition: {x: 10.366667, y: 1.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -225,6 +225,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2370231752482421701}
   - component: {fileID: 7899423746432398505}
+  - component: {fileID: 8322392796183857679}
   m_Layer: 0
   m_Name: PistolWeapon
   m_TagString: Untagged
@@ -271,3 +272,17 @@ MonoBehaviour:
   firePoint: {fileID: 1074252241767005186}
   bulletSpeed: 18
   maxAmmo: 3
+--- !u!114 &8322392796183857679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8386072857478150995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 205489926b6db8b429887c500fd326c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TeamSpriteSwapper
+  p1Sprite: {fileID: 21300000, guid: be928bbef223a9b408f90c9dbac93a4f, type: 3}
+  p2Sprite: {fileID: 21300000, guid: 1f146a8beaad3fb4ebb5585a2fcf4691, type: 3}

@@ -117,7 +117,7 @@ Transform:
   m_GameObject: {fileID: 4641775308548688409}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.666667, y: 1.8, z: 0}
+  m_LocalPosition: {x: 17.833334, y: 1.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2049335335602526898}
   - component: {fileID: 8315240611783001235}
+  - component: {fileID: -725502159196021233}
   m_Layer: 0
   m_Name: ShotgunWeapon
   m_TagString: Untagged
@@ -180,6 +181,20 @@ MonoBehaviour:
   bulletSpeed: 18
   pelletCount: 3
   spreadAngle: 15
+--- !u!114 &-725502159196021233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6129872034378197629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 205489926b6db8b429887c500fd326c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TeamSpriteSwapper
+  p1Sprite: {fileID: 21300000, guid: 5551bd60aec3cbe4caf8fddae3182a39, type: 3}
+  p2Sprite: {fileID: 21300000, guid: 07f62ae428c2ac24aa247f788763e2e8, type: 3}
 --- !u!1 &7869968951588105009
 GameObject:
   m_ObjectHideFlags: 0
