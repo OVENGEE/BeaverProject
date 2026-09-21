@@ -3,51 +3,51 @@ using UnityEngine;
 public class DeathByWater : MonoBehaviour
 {
     [Header("Water Hazard")]
-    [SerializeField] private bool destroyPlayerOnTouch = true;
-    [SerializeField] private bool destroyWaterAfterPlayerDies = false;
+    [SerializeField] private bool destroyBeaverOnTouch = true;
+    [SerializeField] private bool destroyWaterAfterBeaverDies = false;
 
     // Called when a 3D collider enters the water trigger.
     private void OnTriggerEnter(Collider other)
     {
-        HandlePlayerDeath(other.gameObject);
+        HandleBeaverDeath(other.gameObject);
     }
 
     // Called when a 2D collider enters the water trigger.
     private void OnTriggerEnter2D(Collider2D other)
     {
-        HandlePlayerDeath(other.gameObject);
+        HandleBeaverDeath(other.gameObject);
     }
 
     // Called when a 3D object collides with the water volume.
     private void OnCollisionEnter(Collision collision)
     {
-        HandlePlayerDeath(collision.gameObject);
+        HandleBeaverDeath(collision.gameObject);
     }
 
     // Called when a 2D object collides with the water volume.
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        HandlePlayerDeath(collision.gameObject);
+        HandleBeaverDeath(collision.gameObject);
     }
 
-    // Destroys the player if it is tagged as Player, then optionally removes the water object.
-    private void HandlePlayerDeath(GameObject other)
+    // Destroys the Beaver if it is tagged as Beaver, then optionally removes the water object.
+    private void HandleBeaverDeath(GameObject other)
     {
-        if (!other.CompareTag("Player"))
+        if (!other.CompareTag("Beaver"))
             return;
 
-        if (destroyPlayerOnTouch)
+        if (destroyBeaverOnTouch)
         {
             Destroy(other.gameObject);
         }
         else
         {
-            // Add custom player death logic here if you do not want to destroy the object immediately.
+            // Add custom Beaver death logic here if you do not want to destroy the object immediately.
             // Example:
-            // other.GetComponent<PlayerHealth>()?.Die();
+            // other.GetComponent<BeaverHealth>()?.Die();
         }
 
-        if (destroyWaterAfterPlayerDies)
+        if (destroyWaterAfterBeaverDies)
         {
             Destroy(gameObject);
         }

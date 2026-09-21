@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 55793842127956467}
   - component: {fileID: 6797765654008210115}
   - component: {fileID: 1203632489417979339}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ChunkTilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
