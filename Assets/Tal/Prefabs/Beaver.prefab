@@ -134,9 +134,10 @@ GameObject:
   - component: {fileID: 3939704848383703688}
   - component: {fileID: 795054155200313332}
   - component: {fileID: 7112297318905339230}
-  - component: {fileID: 5898523465919600655}
   - component: {fileID: 5808147357924598367}
   - component: {fileID: 6051573992592959912}
+  - component: {fileID: 338174936184474341}
+  - component: {fileID: 4951485403399852571}
   m_Layer: 0
   m_Name: Beaver
   m_TagString: Beaver
@@ -249,7 +250,49 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &5898523465919600655
+--- !u!114 &5808147357924598367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5218687232972958827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6168c618cd7110498c8b09601108882, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BeaverController
+  moveSpeed: 1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  groundCheck: {fileID: 3295576774071619468}
+  groundCheckRadius: 0.58
+  animator: {fileID: 4951485403399852571}
+  forwardJump: {x: 3, y: 5}
+  backwardJump: {x: 3, y: 5}
+  verticalJump: {x: 0, y: 6}
+  backflip: {x: 1, y: 7}
+  smallBackflip: {x: 1, y: 4}
+  comboWindow: 0.25
+--- !u!114 &6051573992592959912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5218687232972958827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 655e3f5fd9b70c548be14846a6c1040a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BeaverHealth
+  maxHealth: 100
+  healthText: {fileID: 8928686550570387741}
+  logPrefab: {fileID: 3081273515572071885, guid: 4a9670160685e3c4db931c5d07228590, type: 3}
+  animator: {fileID: 4951485403399852571}
+  deathDelay: 1.2
+--- !u!61 &338174936184474341
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -295,45 +338,28 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &5808147357924598367
-MonoBehaviour:
+--- !u!95 &4951485403399852571
+Animator:
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5218687232972958827}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6168c618cd7110498c8b09601108882, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BeaverController
-  moveSpeed: 1
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  groundCheck: {fileID: 3295576774071619468}
-  groundCheckRadius: 0.44
-  forwardJump: {x: 3, y: 5}
-  backwardJump: {x: 3, y: 5}
-  verticalJump: {x: 0, y: 6}
-  backflip: {x: 1, y: 7}
-  smallBackflip: {x: 1, y: 4}
-  comboWindow: 0.25
---- !u!114 &6051573992592959912
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5218687232972958827}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 655e3f5fd9b70c548be14846a6c1040a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BeaverHealth
-  maxHealth: 100
-  healthText: {fileID: 8928686550570387741}
-  logPrefab: {fileID: 3081273515572071885, guid: 4a9670160685e3c4db931c5d07228590, type: 3}
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 99d1f2f26601e9b4d944152805eba7a5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8505378513716723686
 GameObject:
   m_ObjectHideFlags: 0

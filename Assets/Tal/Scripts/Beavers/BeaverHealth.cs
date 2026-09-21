@@ -8,17 +8,22 @@ public class BeaverHealth : MonoBehaviour
     [SerializeField] private TextMeshPro healthText; // Use 3D TextMeshPro placed above the head
     [SerializeField] private GameObject logPrefab; // Spawned when beaver dies
 
+    [Header("Animation Settings")]
+    [SerializeField] private Animator animator;
+    [SerializeField] private float deathDelay = 1.2f; // Time to allow the death animation to play
+
     private int currentHealth;
+    private bool isDead = false;
 
     private void Awake()
     {
         currentHealth = maxHealth;
+        if (animator == null) animator = GetComponentInChildren<Animator>();
         UpdateHealthUI();
     }
 
     private void LateUpdate()
     {
-        // Counteract beaver scale flips so the text never renders backward
         if (healthText != null)
         {
             float parentFacing = Mathf.Sign(transform.localScale.x);
@@ -28,7 +33,7 @@ public class BeaverHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (currentHealth <= 0) return;
+        if (isDead || currentHealth <= 0) return;
 
         currentHealth -= damage;
         currentHealth = Mathf.Max(0, currentHealth);
@@ -50,11 +55,23 @@ public class BeaverHealth : MonoBehaviour
 
     private void Die()
     {
+        isDead = true;
+
+        if (animator != null)
+        {
+            animator.SetTrigger("Dead");
+        }
+
         if (logPrefab != null)
         {
             Instantiate(logPrefab, transform.position, Quaternion.identity);
         }
 
-        Destroy(gameObject);
+        // Disable physics and colliders so the beaver doesn't move while dying
+        if (TryGetComponent<Collider2D>(out var col)) col.enabled = false;
+        if (TryGetComponent<Rigidbody2D>(out var rb)) rb.simulated = false;
+        if (healthText != null) healthText.gameObject.SetActive(false);
+
+        Destroy(gameObject, deathDelay);
     }
 }

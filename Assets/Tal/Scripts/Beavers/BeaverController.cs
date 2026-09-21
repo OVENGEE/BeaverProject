@@ -13,6 +13,9 @@ public class BeaverController : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundCheckRadius = 0.2f;
 
+    [Header("Animation Settings")]
+    [SerializeField] private Animator animator;
+
     [Header("Jump Velocities (X = Horizontal, Y = Vertical)")]
     [SerializeField] private Vector2 forwardJump = new Vector2(4f, 6f);
     [SerializeField] private Vector2 backwardJump = new Vector2(5f, 7f);
@@ -46,6 +49,8 @@ public class BeaverController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        if (animator == null) animator = GetComponentInChildren<Animator>();
+
         inputActions = new BeaverInputActions();
 
         inputActions.Player.Move.performed += ctx => moveInput = ctx.ReadValue<float>();
@@ -64,6 +69,7 @@ public class BeaverController : MonoBehaviour
     private void Update()
     {
         if (!isMyTurn) return;
+
         // Prevent ground check instantly re-triggering during takeoff
         if (groundCheckCooldown > 0f)
         {
@@ -81,6 +87,8 @@ public class BeaverController : MonoBehaviour
             facingDirection = Mathf.Sign(moveInput);
             transform.localScale = new Vector3(facingDirection, 1, 1);
         }
+
+        UpdateAnimatorStates();
     }
 
     private void FixedUpdate()
@@ -92,14 +100,33 @@ public class BeaverController : MonoBehaviour
         }
     }
 
+    private void UpdateAnimatorStates()
+    {
+        if (animator == null) return;
+
+        // IsWalking is true when grounded and moving horizontally
+        bool isWalking = isGrounded && Mathf.Abs(moveInput) > 0.01f;
+        animator.SetBool("IsWalking", isWalking);
+
+        // IsFalling is true when airborne and moving downward
+        bool isFalling = !isGrounded && rb.linearVelocity.y < -0.1f;
+        animator.SetBool("IsFalling", isFalling);
+    }
+
+    public void SetAiming(bool isAiming)
+    {
+        if (animator != null)
+        {
+            animator.SetBool("IsAiming", isAiming);
+        }
+    }
+
     private void OnEnterPressed()
     {
-        // Ignore all jump inputs if in mid-air
         if (!isMyTurn || !isGrounded) return;
 
         if (!isBuffering)
         {
-            // First input received: open the window to listen for a potential combo
             firstKey = JumpKey.Enter;
             bufferCoroutine = StartCoroutine(BufferRoutine());
         }
@@ -107,24 +134,22 @@ public class BeaverController : MonoBehaviour
         {
             // Enter -> Enter combo (Backward Jump)
             StopCoroutine(bufferCoroutine);
-            ExecuteJump(backwardJump, backward: true);
+            ExecuteJump(backwardJump, backward: true, isBackflip: false);
         }
         else if (firstKey == JumpKey.Backspace)
         {
             // Backspace -> Enter combo (Small Backflip)
             StopCoroutine(bufferCoroutine);
-            ExecuteJump(smallBackflip, backward: true);
+            ExecuteJump(smallBackflip, backward: true, isBackflip: true);
         }
     }
 
     private void OnBackspacePressed()
     {
-        // Ignore all jump inputs if in mid-air
         if (!isMyTurn || !isGrounded) return;
 
         if (!isBuffering)
         {
-            // First input received: open the window to listen for a potential combo
             firstKey = JumpKey.Backspace;
             bufferCoroutine = StartCoroutine(BufferRoutine());
         }
@@ -132,13 +157,13 @@ public class BeaverController : MonoBehaviour
         {
             // Backspace -> Backspace combo (Backflip)
             StopCoroutine(bufferCoroutine);
-            ExecuteJump(backflip, backward: true);
+            ExecuteJump(backflip, backward: true, isBackflip: true);
         }
         else if (firstKey == JumpKey.Enter)
         {
-            // Enter -> Backspace (Undefined combo, defaults to completing single Forward Jump immediately)
+            // Enter -> Backspace (Forward Jump)
             StopCoroutine(bufferCoroutine);
-            ExecuteJump(forwardJump, backward: false);
+            ExecuteJump(forwardJump, backward: false, isBackflip: false);
         }
     }
 
@@ -147,35 +172,43 @@ public class BeaverController : MonoBehaviour
         isBuffering = true;
         yield return new WaitForSeconds(comboWindow);
 
-        // Window expired with no second input: trigger corresponding single jump
         if (firstKey == JumpKey.Enter)
         {
-            ExecuteJump(forwardJump, backward: false);
+            ExecuteJump(forwardJump, backward: false, isBackflip: false);
         }
         else if (firstKey == JumpKey.Backspace)
         {
-            ExecuteJump(verticalJump, backward: false);
+            ExecuteJump(verticalJump, backward: false, isBackflip: false);
         }
     }
 
-    private void ExecuteJump(Vector2 jumpVelocity, bool backward)
+    private void ExecuteJump(Vector2 jumpVelocity, bool backward, bool isBackflip)
     {
         ResetBuffer();
 
-        // Calculate jump direction according to current facing side
         float xDirection = backward ? -facingDirection : facingDirection;
         rb.linearVelocity = new Vector2(xDirection * jumpVelocity.x, jumpVelocity.y);
 
-        // Lock out grounded checks and inputs while airborne
         isGrounded = false;
         groundCheckCooldown = 0.15f;
+
+        if (animator != null)
+        {
+            if (isBackflip)
+            {
+                animator.SetTrigger("Backflip");
+            }
+            else
+            {
+                animator.SetTrigger("Jump");
+            }
+        }
     }
 
     public void ExecuteMidAirJump(Vector2 newVelocity)
     {
         rb.linearVelocity = newVelocity;
 
-        // Ensure ground check doesn't accidentally trigger immediately
         isGrounded = false;
         groundCheckCooldown = 0.15f;
     }
@@ -184,10 +217,14 @@ public class BeaverController : MonoBehaviour
     {
         isMyTurn = active;
 
-        // Stop residual horizontal movement when turn ends
         if (!active)
         {
             rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+            if (animator != null)
+            {
+                animator.SetBool("IsWalking", false);
+                animator.SetBool("IsAiming", false);
+            }
         }
     }
 
