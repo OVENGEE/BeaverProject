@@ -13,6 +13,7 @@ public class DashTraversal : MonoBehaviour
     [Header("Damage Settings")]
     [SerializeField] private int dashDamage = 25;
     [SerializeField] private float hitRadius = 0.8f;
+    [SerializeField] private float terrainDestructionRadius = 1f;
 
     private BeaverController beaver;
     private BeaverInputActions inputActions;
@@ -84,16 +85,25 @@ public class DashTraversal : MonoBehaviour
         Collider2D[] hits = Physics2D.OverlapCircleAll(beaver.transform.position, hitRadius);
         foreach (var hit in hits)
         {
-            // Use GetComponentInParent in case the collider is on a child object
             BeaverHealth targetHealth = hit.GetComponentInParent<BeaverHealth>();
 
-            // Ensure we hit a beaver, and ensure it is NOT the one performing the dash
+            // If we hit an enemy beaver
             if (targetHealth != null && targetHealth.gameObject != beaver.gameObject)
             {
                 if (!hitBeavers.Contains(targetHealth))
                 {
                     hitBeavers.Add(targetHealth);
                     targetHealth.TakeDamage(dashDamage);
+                }
+            }
+            // If we hit terrain
+            else
+            {
+                DestructibleTerrain terrain = hit.GetComponentInParent<DestructibleTerrain>();
+                if (terrain != null)
+                {
+                    // Carve a square at the beaver's position as it dashes (True = Rectangle[cite: 2])
+                    terrain.RemoveTerrainAt(beaver.transform.position, terrainDestructionRadius, true); //[cite: 2]
                 }
             }
         }

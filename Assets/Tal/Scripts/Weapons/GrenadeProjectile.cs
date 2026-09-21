@@ -8,6 +8,9 @@ public class GrenadeProjectile : MonoBehaviour
     [SerializeField] private int damage = 45;
     [SerializeField] private GameObject explosionEffectPrefab;
 
+    [Header("Terrain Destruction")]
+    [SerializeField] private float terrainDestructionRadius = 2f;
+
     private void Start()
     {
         Invoke(nameof(Explode), fuseTime);
@@ -20,7 +23,7 @@ public class GrenadeProjectile : MonoBehaviour
             Instantiate(explosionEffectPrefab, transform.position, Quaternion.identity);
         }
 
-        // Detect all colliders within explosion range
+        // 1. Deal Damage
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
         foreach (var hit in hitColliders)
         {
@@ -30,12 +33,13 @@ public class GrenadeProjectile : MonoBehaviour
             }
         }
 
-        Destroy(gameObject);
-    }
+        // 2. Destroy Terrain (False = Circle cut[cite: 2])
+        DestructibleTerrain terrain = FindAnyObjectByType<DestructibleTerrain>();
+        if (terrain != null)
+        {
+            terrain.RemoveTerrainAt(transform.position, terrainDestructionRadius, false); //[cite: 2]
+        }
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, explosionRadius);
+        Destroy(gameObject);
     }
 }

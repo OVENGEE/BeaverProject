@@ -13,6 +13,7 @@ public class StompTraversal : MonoBehaviour
     [Header("Damage Settings")]
     [SerializeField] private int stompDamage = 40;
     [SerializeField] private float hitRadius = 1.2f;
+    [SerializeField] private float terrainDestructionRadius = 1.2f;
 
     private BeaverController beaver;
     private BeaverInputActions inputActions;
@@ -90,13 +91,23 @@ public class StompTraversal : MonoBehaviour
         Collider2D[] hits = Physics2D.OverlapCircleAll(beaver.transform.position, hitRadius);
         foreach (var hit in hits)
         {
-            // Ignore the beaver performing the stomp
-            if (hit.gameObject != beaver.gameObject && hit.TryGetComponent<BeaverHealth>(out var targetHealth))
+            BeaverHealth targetHealth = hit.GetComponentInParent<BeaverHealth>();
+
+            if (targetHealth != null && targetHealth.gameObject != beaver.gameObject)
             {
                 if (!hitBeavers.Contains(targetHealth))
                 {
                     hitBeavers.Add(targetHealth);
                     targetHealth.TakeDamage(stompDamage);
+                }
+            }
+            else
+            {
+                DestructibleTerrain terrain = hit.GetComponentInParent<DestructibleTerrain>();
+                if (terrain != null)
+                {
+                    // Carve a square as the beaver plunges downward (True = Rectangle[cite: 2])
+                    terrain.RemoveTerrainAt(beaver.transform.position, terrainDestructionRadius, true); //[cite: 2]
                 }
             }
         }
