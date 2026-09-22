@@ -35,6 +35,7 @@ public class TurnManager : MonoBehaviour
     private bool isTurnRunning = false;
     private bool isGameOver = false;
     private GameObject activeEquipment;
+    private Coroutine equipmentCoroutine;
 
     private void Awake()
     {
@@ -155,6 +156,13 @@ public class TurnManager : MonoBehaviour
 
         isTurnRunning = false;
 
+        // NEW: Stop the coroutine immediately so it doesn't affect the next player
+        if (equipmentCoroutine != null)
+        {
+            StopCoroutine(equipmentCoroutine);
+            equipmentCoroutine = null;
+        }
+
         // Clean up active equipment if turn ended due to timer
         if (activeEquipment != null)
         {
@@ -182,7 +190,15 @@ public class TurnManager : MonoBehaviour
     public void RegisterEquipment(GameObject equipment)
     {
         activeEquipment = equipment;
-        StartCoroutine(WaitForEquipmentDestroyed(equipment));
+
+        // Stop any previous coroutine just to be safe
+        if (equipmentCoroutine != null)
+        {
+            StopCoroutine(equipmentCoroutine);
+        }
+
+        // Store the new coroutine so we can cancel it later if needed
+        equipmentCoroutine = StartCoroutine(WaitForEquipmentDestroyed(equipment));
     }
 
     private IEnumerator WaitForEquipmentDestroyed(GameObject equipment)

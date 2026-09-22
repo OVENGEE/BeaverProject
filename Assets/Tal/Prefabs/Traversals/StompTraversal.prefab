@@ -50,6 +50,7 @@ MonoBehaviour:
   stompImpactPrefab: {fileID: 0}
   stompDamage: 40
   hitRadius: 1.2
+  terrainDestructionRadius: 0.7
 --- !u!1 &8891762728987466229
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,7 +130,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: -728570239653142012, guid: 8bbc52c506807a648bfd31d79d242e2b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
