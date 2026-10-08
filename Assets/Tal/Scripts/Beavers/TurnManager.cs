@@ -12,16 +12,20 @@ public class TurnManager : MonoBehaviour
     [SerializeField] private List<BeaverController> player1Beavers;
     [SerializeField] private List<BeaverController> player2Beavers;
 
-    [Header("UI & HUD")]
+    [Header("HUD")]
     [SerializeField] private CardHandManager player1Hand;
     [SerializeField] private CardHandManager player2Hand;
     [SerializeField] private int cardsPerRound = 3;
-    [SerializeField] private TextMeshProUGUI timerText;         // Optional timer UI display
+
+    [Header("Game UI")]
+    [SerializeField] private TextMeshProUGUI timerText;
+    [SerializeField] private TextMeshProUGUI currentPlayerText;   // Text to display whose turn it is
+    [SerializeField] private TextMeshProUGUI roundText;         // NEW: Text display for current round
+
+    [Header("Win Screen")]
     [SerializeField] private TextMeshProUGUI winText;           // Assign a UI Text element for "Player X Wins!"
     [SerializeField] private GameObject restartButton;
     [SerializeField] private GameObject menuButton;
-    [SerializeField] private TextMeshProUGUI currentPlayerText;   // Text to display whose turn it is
-    [SerializeField] private TextMeshProUGUI roundText;         // NEW: Text display for current round
 
     [Header("Turn Settings")]
     [SerializeField] private float turnDuration = 30f;
