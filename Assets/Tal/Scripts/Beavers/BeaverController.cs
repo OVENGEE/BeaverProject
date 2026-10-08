@@ -78,7 +78,7 @@ public class BeaverController : MonoBehaviour
         }
         else
         {
-            isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+            isGrounded = CheckIsGrounded();
         }
 
         // Turning / direction locking is only evaluated on the ground
@@ -98,6 +98,31 @@ public class BeaverController : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
         }
+    }
+
+    private bool CheckIsGrounded()
+    {
+        if (groundCheck == null) return false;
+
+        // Check all colliders in the ground check radius
+        Collider2D[] hits = Physics2D.OverlapCircleAll(groundCheck.position, groundCheckRadius);
+
+        foreach (var hit in hits)
+        {
+            // Ignore this beaver's own colliders and child objects
+            if (hit.gameObject == gameObject || hit.transform.IsChildOf(transform)) continue;
+
+            // Valid ground if it's on the terrain ground layer OR tagged as another beaver
+            bool isGroundLayer = ((1 << hit.gameObject.layer) & groundLayer.value) != 0;
+            bool isBeaverTag = hit.CompareTag("BeaverP1") || hit.CompareTag("BeaverP2");
+
+            if (isGroundLayer || isBeaverTag)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private void UpdateAnimatorStates()
