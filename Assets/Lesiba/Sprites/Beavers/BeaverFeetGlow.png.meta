@@ -1,0 +1,739 @@
+fileFormatVersion: 2
+guid: 782ebc37a98d2194084b76fd4e2e9012
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4919296038280264139
+    second: BeaverFeetGlow_0
+  - first:
+      213: 3045127881092011227
+    second: BeaverFeetGlow_1
+  - first:
+      213: 5461508812658308249
+    second: BeaverFeetGlow_2
+  - first:
+      213: 7304953055729609302
+    second: BeaverFeetGlow_3
+  - first:
+      213: -3097625199453198544
+    second: BeaverFeetGlow_4
+  - first:
+      213: 6727360827374513524
+    second: BeaverFeetGlow_5
+  - first:
+      213: -8551627303296452862
+    second: BeaverFeetGlow_6
+  - first:
+      213: -6363810195925725157
+    second: BeaverFeetGlow_7
+  - first:
+      213: 2604431439490248826
+    second: BeaverFeetGlow_8
+  - first:
+      213: 7649570744687616226
+    second: BeaverFeetGlow_9
+  - first:
+      213: 5382569598315099717
+    second: BeaverFeetGlow_10
+  - first:
+      213: 7342559774854248460
+    second: BeaverFeetGlow_11
+  - first:
+      213: 755571492606872446
+    second: BeaverFeetGlow_12
+  - first:
+      213: -8067764875968706155
+    second: BeaverFeetGlow_13
+  - first:
+      213: 7276293449510552296
+    second: BeaverFeetGlow_14
+  - first:
+      213: 6622590939662297728
+    second: BeaverFeetGlow_15
+  - first:
+      213: 832384662999764004
+    second: BeaverFeetGlow_16
+  - first:
+      213: -3613154627864224311
+    second: BeaverFeetGlow_17
+  - first:
+      213: 1786997252151885250
+    second: BeaverFeetGlow_18
+  - first:
+      213: 6127605105803623791
+    second: BeaverFeetGlow_19
+  - first:
+      213: -3498093270567560234
+    second: BeaverFeetGlow_20
+  - first:
+      213: -5856384041231703230
+    second: BeaverFeetGlow_21
+  - first:
+      213: -1034084162035695986
+    second: BeaverFeetGlow_22
+  - first:
+      213: -4849535763899673088
+    second: BeaverFeetGlow_23
+  - first:
+      213: -7135279904808788428
+    second: BeaverFeetGlow_24
+  - first:
+      213: -5536009372598594208
+    second: BeaverFeetGlow_25
+  - first:
+      213: 3731951420909117798
+    second: BeaverFeetGlow_26
+  - first:
+      213: -171537892154678326
+    second: BeaverFeetGlow_27
+  - first:
+      213: 4288541285723785116
+    second: BeaverFeetGlow_28
+  - first:
+      213: 4447285309648733536
+    second: BeaverFeetGlow_29
+  - first:
+      213: 7871181607369231386
+    second: BeaverFeetGlow_30
+  - first:
+      213: 6137960645036361502
+    second: BeaverFeetGlow_31
+  - first:
+      213: -2752181337253415520
+    second: BeaverFeetGlow_32
+  - first:
+      213: -4846522202623363221
+    second: BeaverFeetGlow_33
+  - first:
+      213: -506426855975287803
+    second: BeaverFeetGlow_34
+  - first:
+      213: 5740811132536962193
+    second: BeaverFeetGlow_35
+  - first:
+      213: -8492100923216995854
+    second: BeaverFeetGlow_36
+  - first:
+      213: 6438051521692014477
+    second: BeaverFeetGlow_37
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 38
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BeaverFeetGlow_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc97eaaeea9d44440800000000000000
+      internalID: 4919296038280264139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeaverFeetGlow_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd490209ca7724a20800000000000000
+      internalID: 3045127881092011227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeaverFeetGlow_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 994f92c245d2bcb40800000000000000
+      internalID: 5461508812658308249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeaverFeetGlow_3
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65aeaa3d918606560800000000000000
+      internalID: 7304953055729609302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeaverFeetGlow_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0372b430b460305d0800000000000000
+      internalID: -3097625199453198544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeaverFeetGlow_5
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47d298787036c5d50800000000000000
+      internalID: 6727360827374513524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeaverFeetGlow_6
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 207bb7fa644825980800000000000000
+      internalID: -8551627303296452862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeaverFeetGlow_7
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1096ddf7543fa7a0800000000000000
+      internalID: -6363810195925725157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeaverFeetGlow_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a70fca8689cc42420800000000000000
+      internalID: 2604431439490248826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeaverFeetGlow_9
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e06359201cb82a60800000000000000
+      internalID: 7649570744687616226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeaverFeetGlow_10
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5467366188ab2ba40800000000000000
+      internalID: 5382569598315099717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeaverFeetGlow_11
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c087242763306e560800000000000000
+      internalID: 7342559774854248460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeaverFeetGlow_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e7b8e33f4445c7a00800000000000000
+      internalID: 755571492606872446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeaverFeetGlow_13
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5990384179a890090800000000000000
+      internalID: -8067764875968706155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeaverFeetGlow_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e2049347569af460800000000000000
+      internalID: 7276293449510552296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeaverFeetGlow_15
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08aaa432f5b28eb50800000000000000
+      internalID: 6622590939662297728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeaverFeetGlow_16
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 42c859ad0793d8b00800000000000000
+      internalID: 832384662999764004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeaverFeetGlow_17
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9cd189f520f7bddc0800000000000000
+      internalID: -3613154627864224311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeaverFeetGlow_18
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2cdbc1d6880bcc810800000000000000
+      internalID: 1786997252151885250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeaverFeetGlow_19
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6d7b47d060a90550800000000000000
+      internalID: 6127605105803623791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeaverFeetGlow_20
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6dbd2a044b6447fc0800000000000000
+      internalID: -3498093270567560234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeaverFeetGlow_21
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2432e123eb1f9bea0800000000000000
+      internalID: -5856384041231703230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 066cccf6007dbe7418582b68642f384f
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      BeaverFeetGlow_0: 4919296038280264139
+      BeaverFeetGlow_1: 3045127881092011227
+      BeaverFeetGlow_10: 5382569598315099717
+      BeaverFeetGlow_11: 7342559774854248460
+      BeaverFeetGlow_12: 755571492606872446
+      BeaverFeetGlow_13: -8067764875968706155
+      BeaverFeetGlow_14: 7276293449510552296
+      BeaverFeetGlow_15: 6622590939662297728
+      BeaverFeetGlow_16: 832384662999764004
+      BeaverFeetGlow_17: -3613154627864224311
+      BeaverFeetGlow_18: 1786997252151885250
+      BeaverFeetGlow_19: 6127605105803623791
+      BeaverFeetGlow_2: 5461508812658308249
+      BeaverFeetGlow_20: -3498093270567560234
+      BeaverFeetGlow_21: -5856384041231703230
+      BeaverFeetGlow_3: 7304953055729609302
+      BeaverFeetGlow_4: -3097625199453198544
+      BeaverFeetGlow_5: 6727360827374513524
+      BeaverFeetGlow_6: -8551627303296452862
+      BeaverFeetGlow_7: -6363810195925725157
+      BeaverFeetGlow_8: 2604431439490248826
+      BeaverFeetGlow_9: 7649570744687616226
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

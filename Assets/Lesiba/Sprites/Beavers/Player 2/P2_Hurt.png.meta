@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: a535625818fc1554997e5504c069c444
+guid: db888aa0fdb34054d8cdeba9d2df2015
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3665065761382908982
-    second: P1_Log_0
+      213: 9044006842211703513
+    second: P2_Hurt_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -100,23 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: P1_Log_0
+      name: P2_Hurt_0
       rect:
         serializedVersion: 2
-        x: 17
-        y: 11
-        width: 30
-        height: 42
+        x: 0
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: acb335ebb12132dc0800000000000000
-      internalID: -3665065761382908982
+      spriteID: 9da1b384e44c28d70800000000000000
+      internalID: 9044006842211703513
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 09db1830ff54d174f8146324cd9feaf4
     internalID: 0
     vertices: []
     indices: 
@@ -133,9 +133,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      P1_Log_0: -3665065761382908982
+      P2_Hurt_0: 9044006842211703513
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

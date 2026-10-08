@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: a535625818fc1554997e5504c069c444
+guid: b4091587502998c4b8d8b7217eb24911
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3665065761382908982
-    second: P1_Log_0
+      213: 1339082987193138618
+    second: DrillBit_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: P1_Log_0
+      name: DrillBit_0
       rect:
         serializedVersion: 2
-        x: 17
-        y: 11
-        width: 30
-        height: 42
+        x: 25
+        y: 8
+        width: 33
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: acb335ebb12132dc0800000000000000
-      internalID: -3665065761382908982
+      spriteID: abd7a60d1e0659210800000000000000
+      internalID: 1339082987193138618
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      P1_Log_0: -3665065761382908982
+      DrillBit_0: 1339082987193138618
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
