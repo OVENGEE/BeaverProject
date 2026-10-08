@@ -132,7 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2049335335602526898}
-  - component: {fileID: 8315240611783001235}
+  - component: {fileID: 4064804569276460517}
   - component: {fileID: -725502159196021233}
   m_Layer: 0
   m_Name: RocketLauncherWeapon
@@ -159,7 +159,7 @@ Transform:
   - {fileID: 4477596781145924843}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8315240611783001235
+--- !u!114 &4064804569276460517
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,19 +168,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 6129872034378197629}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0d0eaa95b429bb4991242e5b58e74db, type: 3}
+  m_Script: {fileID: 11500000, guid: 04456d380c769974ab5a15800515f6a7, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ShotgunWeapon
+  m_EditorClassIdentifier: Assembly-CSharp::RocketLauncherWeapon
   reticle: {fileID: 6242718050142473830}
   orbitRadius: 1.5
   aimSpeed: 90
   minAngle: -75
   maxAngle: 75
-  bulletPrefab: {fileID: 6316416685968727145, guid: 07ad13ccce03bd74197e94e07f8005e5, type: 3}
+  rocketPrefab: {fileID: 6127544384383562109, guid: 9c370be322501d441b89c7cc7b6fc65a, type: 3}
   firePoint: {fileID: 8005309158425727266}
-  bulletSpeed: 18
-  pelletCount: 3
-  spreadAngle: 15
+  rocketSpeed: 18
+  maxAmmo: 1
 --- !u!114 &-725502159196021233
 MonoBehaviour:
   m_ObjectHideFlags: 0

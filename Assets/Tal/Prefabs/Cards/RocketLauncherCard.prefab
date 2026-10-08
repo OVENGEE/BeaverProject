@@ -180,5 +180,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 694f3e84b2d26464fa92e14c3a116c34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  weaponPrefab: {fileID: 0}
-  traversalPrefab: {fileID: 0}
+  weaponPrefab: {fileID: 6129872034378197629, guid: 6953c1497e285304fa18047f307804b1, type: 3}
+  traversalPrefab: {fileID: 1416224005996415951, guid: e82a0e1cda720064ebe71c28fd11dfdf, type: 3}
