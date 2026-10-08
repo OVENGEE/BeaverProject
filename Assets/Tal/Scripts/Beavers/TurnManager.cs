@@ -20,10 +20,15 @@ public class TurnManager : MonoBehaviour
     [Header("Game UI")]
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private TextMeshProUGUI currentPlayerText;   // Text to display whose turn it is
-    [SerializeField] private TextMeshProUGUI roundText;         // NEW: Text display for current round
+    [SerializeField] private TextMeshProUGUI roundText;           // Text display for current round
+
+    [Header("Timer FX")]
+    [SerializeField] private Color warningTimerColor = Color.red;  // Color when <= 5s
+    [SerializeField] private float pulseSpeed = 10f;              // Speed of scale pulsation
+    [SerializeField] private float pulseAmount = 0.25f;           // Max scale increase percentage
 
     [Header("Win Screen")]
-    [SerializeField] private TextMeshProUGUI winText;           // Assign a UI Text element for "Player X Wins!"
+    [SerializeField] private TextMeshProUGUI winText;             // Assign a UI Text element for "Player X Wins!"
     [SerializeField] private GameObject restartButton;
     [SerializeField] private GameObject menuButton;
 
@@ -42,6 +47,10 @@ public class TurnManager : MonoBehaviour
     private GameObject activeEquipment;
     private Coroutine equipmentCoroutine;
 
+    // Cache default visual state for timer text
+    private Color defaultTimerColor;
+    private Vector3 defaultTimerScale;
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -56,6 +65,13 @@ public class TurnManager : MonoBehaviour
         if (restartButton != null) restartButton.SetActive(false);
         if (menuButton != null) menuButton.SetActive(false);
         if (currentPlayerText != null) currentPlayerText.gameObject.SetActive(true);
+
+        // Save original timer styling so we can reset it each turn
+        if (timerText != null)
+        {
+            defaultTimerColor = timerText.color;
+            defaultTimerScale = timerText.transform.localScale;
+        }
 
         // Randomize who goes first at game start
         firstPlayerIsP1 = Random.value > 0.5f;
@@ -81,6 +97,21 @@ public class TurnManager : MonoBehaviour
         if (timerText != null)
         {
             timerText.text = Mathf.CeilToInt(timeRemaining).ToString();
+
+            // Check if timer is 5 seconds or lower
+            if (timeRemaining <= 5f)
+            {
+                // Turn red
+                timerText.color = warningTimerColor;
+
+                // Rhythmically pulse size up and down
+                float pulse = 1f + Mathf.Abs(Mathf.Sin(Time.time * pulseSpeed)) * pulseAmount;
+                timerText.transform.localScale = defaultTimerScale * pulse;
+            }
+            else
+            {
+                ResetTimerVisuals();
+            }
         }
 
         if (timeRemaining <= 0f)
@@ -96,7 +127,7 @@ public class TurnManager : MonoBehaviour
         currentRound++;
         turnStep = 0;
 
-        // NEW: Update round text in HUD
+        // Update round text in HUD
         if (roundText != null)
         {
             roundText.text = $"Round {currentRound}";
@@ -118,6 +149,9 @@ public class TurnManager : MonoBehaviour
     private void StartTurn()
     {
         if (CheckWinCondition()) return;
+
+        // Reset timer text back to standard size and color for the new turn
+        ResetTimerVisuals();
 
         // Calculate turn order (Interleaved P1 and P2)
         bool isP1Turn = (turnStep % 2 == 0) ? firstPlayerIsP1 : !firstPlayerIsP1;
@@ -163,6 +197,8 @@ public class TurnManager : MonoBehaviour
         if (!isTurnRunning) return;
 
         isTurnRunning = false;
+
+        ResetTimerVisuals();
 
         // Stop the coroutine immediately so it doesn't affect the next player
         if (equipmentCoroutine != null)
@@ -240,6 +276,15 @@ public class TurnManager : MonoBehaviour
         foreach (var b in player2Beavers) if (b != null) b.SetTurnActive(active);
     }
 
+    private void ResetTimerVisuals()
+    {
+        if (timerText != null)
+        {
+            timerText.color = defaultTimerColor;
+            timerText.transform.localScale = defaultTimerScale;
+        }
+    }
+
     private bool CheckWinCondition()
     {
         if (isGameOver) return true;
@@ -256,6 +301,8 @@ public class TurnManager : MonoBehaviour
         {
             isGameOver = true;
             isTurnRunning = false;
+
+            ResetTimerVisuals();
 
             // Hide the turn text when the game ends
             if (currentPlayerText != null) currentPlayerText.gameObject.SetActive(false);
