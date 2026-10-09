@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2200268238793800167}
+  - component: {fileID: 8272904724131300929}
   m_Layer: 0
   m_Name: LowGravityTraversal
   m_TagString: Untagged
@@ -32,6 +33,21 @@ Transform:
   - {fileID: 4383155027115395872}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8272904724131300929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1416224005996415951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4db8bb6d999162f4cae404ddeae69d59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LowGravityTraversal
+  lowGravityScale: 0.5
+  duration: 8
+  activationEffectPrefab: {fileID: 0}
 --- !u!1 &8891762728987466229
 GameObject:
   m_ObjectHideFlags: 0
