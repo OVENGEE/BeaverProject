@@ -117,7 +117,7 @@ Transform:
   m_GameObject: {fileID: 4641775308548688409}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.833334, y: 1.8, z: 0}
+  m_LocalPosition: {x: 13.666667, y: 1.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2049335335602526898}
   - component: {fileID: -725502159196021233}
+  - component: {fileID: 5984458756645331744}
   m_Layer: 0
   m_Name: DrillGunWeapon
   m_TagString: Untagged
@@ -172,6 +173,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TeamSpriteSwapper
   p1Sprite: {fileID: 21300000, guid: 1db94e445a16c314d913984e2f889633, type: 3}
   p2Sprite: {fileID: 21300000, guid: d3c5f9890f8cd52468aaf47f6f87b99d, type: 3}
+--- !u!114 &5984458756645331744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6129872034378197629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9bd22955c2dead428e6da8e4c623b77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DrillGunWeapon
+  reticle: {fileID: 6242718050142473830}
+  orbitRadius: 1.5
+  aimSpeed: 90
+  minAngle: -75
+  maxAngle: 75
+  drillPrefab: {fileID: 6316416685968727145, guid: f01e09f7774f7d441a2beeeade83b73f, type: 3}
+  firePoint: {fileID: 8005309158425727266}
+  drillSpeed: 18
+  maxAmmo: 1
 --- !u!1 &7869968951588105009
 GameObject:
   m_ObjectHideFlags: 0
