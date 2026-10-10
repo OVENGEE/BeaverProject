@@ -45,6 +45,17 @@ public class BeaverHealth : MonoBehaviour
         }
     }
 
+    public void Heal(int healthIncrease)
+    {
+        // Don't heal if dead or already at/above max health
+        if (isDead || currentHealth <= 0 || currentHealth >= maxHealth) return;
+
+        // Increase health and clamp it so it never exceeds maxHealth
+        currentHealth = Mathf.Min(currentHealth + healthIncrease, maxHealth);
+
+        UpdateHealthUI();
+    }
+
     private void UpdateHealthUI()
     {
         if (healthText != null)

@@ -9,6 +9,7 @@ public class CameraFollow : MonoBehaviour
 
     private bool isPanning = false;
     private BeaverInputActions inputActions;
+    private BeaverController lastActiveBeaver; // Track the active beaver to detect turn switches
 
     private void Awake()
     {
@@ -24,6 +25,7 @@ public class CameraFollow : MonoBehaviour
 
     private void LateUpdate()
     {
+        CheckActiveBeaverChanged();
         HandlePanning();
         CheckForOtherActions();
 
@@ -31,6 +33,18 @@ public class CameraFollow : MonoBehaviour
         if (!isPanning)
         {
             FollowActiveBeaver();
+        }
+    }
+
+    private void CheckActiveBeaverChanged()
+    {
+        BeaverController currentActive = TurnManager.Instance != null ? TurnManager.Instance.ActiveBeaver : null;
+
+        // Reset panning whenever the turn shifts to a new beaver or when a beaver is cleared
+        if (currentActive != lastActiveBeaver)
+        {
+            lastActiveBeaver = currentActive;
+            SnapToActiveBeaver();
         }
     }
 
