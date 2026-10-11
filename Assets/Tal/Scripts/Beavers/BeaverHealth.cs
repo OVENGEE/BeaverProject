@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using TMPro;
 
@@ -73,16 +74,26 @@ public class BeaverHealth : MonoBehaviour
             animator.SetTrigger("Dead");
         }
 
-        if (logPrefab != null)
-        {
-            Instantiate(logPrefab, transform.position, Quaternion.identity);
-        }
-
         // Disable physics and colliders so the beaver doesn't move while dying
         if (TryGetComponent<Collider2D>(out var col)) col.enabled = false;
         if (TryGetComponent<Rigidbody2D>(out var rb)) rb.simulated = false;
         if (healthText != null) healthText.gameObject.SetActive(false);
 
-        Destroy(gameObject, deathDelay);
+        StartCoroutine(DieRoutine());
+    }
+
+    private IEnumerator DieRoutine()
+    {
+        // Wait for the death animation to finish playing
+        yield return new WaitForSeconds(deathDelay);
+
+        // Spawn the log prefab at the beaver's final position
+        if (logPrefab != null)
+        {
+            Instantiate(logPrefab, transform.position, Quaternion.identity);
+        }
+
+        // Destroy the beaver game object
+        Destroy(gameObject);
     }
 }
