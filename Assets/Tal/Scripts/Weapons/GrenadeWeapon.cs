@@ -15,8 +15,9 @@ public class GrenadeWeapon : MonoBehaviour
     [SerializeField] private Transform firePoint;
     [SerializeField] private float minThrowForce = 5f;
     [SerializeField] private float maxThrowForce = 25f;
+    [Tooltip("Time in seconds to cycle from 0% power to 100% power before cycling back down.")]
     [SerializeField] private float maxChargeTime = 1.5f;
-    [Tooltip("Optional: A sprite or UI element that scales horizontally as you charge")]
+    [Tooltip("Assign your ChargeMeter child transform here")]
     [SerializeField] private Transform chargeMeterTransform;
 
     private BeaverInputActions inputActions;
@@ -26,7 +27,8 @@ public class GrenadeWeapon : MonoBehaviour
     private float aimInput;
 
     private bool isCharging = false;
-    private float currentChargeTime = 0f;
+    private float chargeTimer = 0f;       // Total time held
+    private float currentChargeRatio = 0f; // Current 0 to 1 value from PingPong
 
     private void Awake()
     {
@@ -64,7 +66,7 @@ public class GrenadeWeapon : MonoBehaviour
         currentAngle += aimInput * aimSpeed * Time.deltaTime;
         currentAngle = Mathf.Clamp(currentAngle, minAngle, maxAngle);
 
-        // Local rotation handles flipping perfectly based on beaver scale
+        // Local rotation handles flipping based on beaver scale
         transform.localRotation = Quaternion.Euler(0, 0, currentAngle);
 
         float facingDirection = beaverTransform != null ? Mathf.Sign(beaverTransform.localScale.x) : 1f;
@@ -82,22 +84,24 @@ public class GrenadeWeapon : MonoBehaviour
     {
         if (!isCharging) return;
 
-        currentChargeTime += Time.deltaTime;
-        currentChargeTime = Mathf.Clamp(currentChargeTime, 0f, maxChargeTime);
+        chargeTimer += Time.deltaTime;
 
-        // Update visual meter if assigned
+        // PingPong cycles between 0 and maxChargeTime continuously (0 -> 1.5 -> 0 -> 1.5...)
+        float pingPongTime = Mathf.PingPong(chargeTimer, maxChargeTime);
+        currentChargeRatio = pingPongTime / maxChargeTime;
+
+        // Dynamically scale the ChargeMeter child along the X axis
         if (chargeMeterTransform != null)
         {
-            float chargeRatio = currentChargeTime / maxChargeTime;
-            // Scales the meter from 0 to 1 on the X axis
-            chargeMeterTransform.localScale = new Vector3(chargeRatio, 1, 1);
+            chargeMeterTransform.localScale = new Vector3(currentChargeRatio, 1f, 1f);
         }
     }
 
     private void StartCharging()
     {
         isCharging = true;
-        currentChargeTime = 0f;
+        chargeTimer = 0f;
+        currentChargeRatio = 0f;
     }
 
     private void ThrowGrenade()
@@ -106,9 +110,8 @@ public class GrenadeWeapon : MonoBehaviour
 
         isCharging = false;
 
-        // Calculate force based on how long Space was held
-        float chargeRatio = currentChargeTime / maxChargeTime;
-        float throwForce = Mathf.Lerp(minThrowForce, maxThrowForce, chargeRatio);
+        // Calculate final force based on the current ping-pong ratio upon release
+        float throwForce = Mathf.Lerp(minThrowForce, maxThrowForce, currentChargeRatio);
 
         // Calculate world direction from firePoint to reticle
         Vector2 throwDirection = (reticle.position - firePoint.position).normalized;
@@ -121,7 +124,7 @@ public class GrenadeWeapon : MonoBehaviour
             // Apply velocity
             rb.linearVelocity = throwDirection * throwForce;
 
-            // Add some random spin to make it look like a thrown grenade
+            // Add random spin
             rb.angularVelocity = Random.Range(-360f, 360f);
         }
 
