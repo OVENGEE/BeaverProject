@@ -19,6 +19,8 @@ public class GrenadeWeapon : MonoBehaviour
     [SerializeField] private float maxChargeTime = 1.5f;
     [Tooltip("Assign your ChargeMeter child transform here")]
     [SerializeField] private Transform chargeMeterTransform;
+    [Tooltip("Assign your Terrain/Ground layer here to prevent firePoint terrain clipping.")]
+    [SerializeField] private LayerMask groundLayer;
 
     private BeaverInputActions inputActions;
     private Transform beaverTransform;
@@ -110,14 +112,21 @@ public class GrenadeWeapon : MonoBehaviour
 
         isCharging = false;
 
+        Vector2 beaverOrigin = beaverTransform != null ? (Vector2)beaverTransform.position : (Vector2)transform.position;
+        Vector2 intendedSpawnPos = firePoint.position;
+
+        // Linecast check to detect if firePoint is penetrating terrain geometry
+        RaycastHit2D hit = Physics2D.Linecast(beaverOrigin, intendedSpawnPos, groundLayer);
+        Vector2 safeSpawnPos = (hit.collider != null) ? hit.point : intendedSpawnPos;
+
         // Calculate final force based on the current ping-pong ratio upon release
         float throwForce = Mathf.Lerp(minThrowForce, maxThrowForce, currentChargeRatio);
 
-        // Calculate world direction from firePoint to reticle
-        Vector2 throwDirection = (reticle.position - firePoint.position).normalized;
+        // Calculate world direction from safe spawn point to reticle
+        Vector2 throwDirection = ((Vector2)reticle.position - safeSpawnPos).normalized;
 
-        // Spawn grenade
-        GameObject grenade = Instantiate(grenadePrefab, firePoint.position, Quaternion.identity);
+        // Spawn grenade at safe surface point
+        GameObject grenade = Instantiate(grenadePrefab, safeSpawnPos, Quaternion.identity);
 
         if (grenade.TryGetComponent<Rigidbody2D>(out var rb))
         {

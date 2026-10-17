@@ -180,6 +180,9 @@ MonoBehaviour:
   firePoint: {fileID: 8005309158425727266}
   rocketSpeed: 18
   maxAmmo: 1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!114 &-725502159196021233
 MonoBehaviour:
   m_ObjectHideFlags: 0

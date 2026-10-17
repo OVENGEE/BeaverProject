@@ -194,6 +194,9 @@ MonoBehaviour:
   firePoint: {fileID: 8005309158425727266}
   drillSpeed: 18
   maxAmmo: 1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &7869968951588105009
 GameObject:
   m_ObjectHideFlags: 0
