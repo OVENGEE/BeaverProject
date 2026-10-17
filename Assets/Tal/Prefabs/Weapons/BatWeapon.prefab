@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2049335335602526898}
   - component: {fileID: -725502159196021233}
+  - component: {fileID: 3858382957924379578}
   m_Layer: 0
   m_Name: BatWeapon
   m_TagString: Untagged
@@ -172,6 +173,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TeamSpriteSwapper
   p1Sprite: {fileID: 0}
   p2Sprite: {fileID: 0}
+--- !u!114 &3858382957924379578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6129872034378197629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5831005043a10a4e9f5c8b7cfe4fbfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BatWeapon
+  hitPoint: {fileID: 8005309158425727266}
+  hitRadius: 1.2
+  damage: 30
+  targetLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  knockbackForce: 18
+  launchUpwardAngle: 30
+  hitImpactDelay: 0.25
+  totalSwingDuration: 0.8
 --- !u!1 &7869968951588105009
 GameObject:
   m_ObjectHideFlags: 0
