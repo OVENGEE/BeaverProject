@@ -44,6 +44,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: BeaverVFX
+    uniqueID: 2630718931
+    locked: 0
   m_RenderingLayers:
   - Default
   m_MigratedRenderPipelines: []
