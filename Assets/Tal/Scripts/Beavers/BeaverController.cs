@@ -268,4 +268,22 @@ public class BeaverController : MonoBehaviour
             Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!collision.CompareTag("Card")) return;
+
+        GameObject cardObject = collision.gameObject;
+        if (collision.transform.parent != null)
+        {
+            cardObject = collision.transform.parent.gameObject;
+        }
+
+        TurnManager.Instance?.AwardCardToBeaver(this);
+
+        if (cardObject != null)
+        {
+            Destroy(cardObject);
+        }
+    }
 }

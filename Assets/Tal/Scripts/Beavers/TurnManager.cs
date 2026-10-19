@@ -12,6 +12,9 @@ public class TurnManager : MonoBehaviour
     [SerializeField] private List<BeaverController> player1Beavers;
     [SerializeField] private List<BeaverController> player2Beavers;
 
+    [Header("Card Drop System")]
+    [SerializeField] private CardDrops cardDropSpawner;
+
     [Header("HUD")]
     [SerializeField] private CardHandManager player1Hand;
     [SerializeField] private CardHandManager player2Hand;
@@ -143,6 +146,11 @@ public class TurnManager : MonoBehaviour
             if (player2Hand != null) player2Hand.AddCard();
         }
 
+        if (cardDropSpawner != null)
+        {
+            cardDropSpawner.SpawnDrop();
+        }
+
         StartTurn();
     }
 
@@ -190,6 +198,20 @@ public class TurnManager : MonoBehaviour
         // Reset Timer
         timeRemaining = turnDuration;
         isTurnRunning = true;
+    }
+
+    public void AwardCardToBeaver(BeaverController beaver)
+    {
+        if (beaver == null) return;
+
+        if (beaver.CompareTag("BeaverP1") && player1Hand != null)
+        {
+            player1Hand.AddCard();
+        }
+        else if (beaver.CompareTag("BeaverP2") && player2Hand != null)
+        {
+            player2Hand.AddCard();
+        }
     }
 
     public void EndTurn()
