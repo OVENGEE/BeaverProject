@@ -24,6 +24,9 @@ public class TurnManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private TextMeshProUGUI currentPlayerText;   // Text to display whose turn it is
     [SerializeField] private TextMeshProUGUI roundText;           // Text display for current round
+    [SerializeField] private Image currentPlayerBackgroundImage;
+    [SerializeField] private Color player1TurnBackgroundColor = new Color(1f, 0.55f, 0.1f, 1f);
+    [SerializeField] private Color player2TurnBackgroundColor = new Color(0.1f, 0.72f, 0.95f, 1f);
     private BeaverRosterHUD beaverRosterHUD;
 
     [Header("Timer FX")]
@@ -197,6 +200,18 @@ public class TurnManager : MonoBehaviour
         if (currentPlayerText != null)
         {
             currentPlayerText.text = isP1Turn ? "Player 1's Turn" : "Player 2's Turn";
+        }
+
+        if (currentPlayerBackgroundImage == null && currentPlayerText != null)
+        {
+            currentPlayerBackgroundImage = currentPlayerText.GetComponent<Image>();
+        }
+
+        if (currentPlayerBackgroundImage != null)
+        {
+            currentPlayerBackgroundImage.color = isP1Turn
+                ? player1TurnBackgroundColor
+                : player2TurnBackgroundColor;
         }
 
         // Deactivate all beavers first

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,7 @@ public class TopBeaverHUD : MonoBehaviour
     private class BeaverSlot
     {
         [SerializeField] private Slider healthSlider;
+        [SerializeField] private TMP_Text healthText;
         [SerializeField] private Image activeRing;
         [SerializeField] private GameObject deathX;
 
@@ -16,6 +18,7 @@ public class TopBeaverHUD : MonoBehaviour
         private bool missingHealthWarningLogged;
         private bool missingFillWarningLogged;
         private int cachedMaxHealth = -1;
+        private int cachedHealthTextValue = int.MinValue;
 
         public void Refresh(BeaverController beaver, BeaverController activeBeaver, Color green, Color yellow, Color red)
         {
@@ -40,6 +43,8 @@ public class TopBeaverHUD : MonoBehaviour
                     healthSlider.SetValueWithoutNotify(currentHealth);
                     UpdateHealthColor(currentHealth / (float)maxHealth, green, yellow, red);
                 }
+
+                UpdateHealthText(currentHealth);
             }
             else
             {
@@ -54,6 +59,8 @@ public class TopBeaverHUD : MonoBehaviour
                     healthSlider.SetValueWithoutNotify(0f);
                     UpdateHealthColor(0f, green, yellow, red);
                 }
+
+                UpdateHealthText(0);
             }
 
             if (activeRing != null)
@@ -65,6 +72,14 @@ public class TopBeaverHUD : MonoBehaviour
             {
                 deathX.SetActive(isDead);
             }
+        }
+
+        private void UpdateHealthText(int currentHealth)
+        {
+            if (healthText == null || cachedHealthTextValue == currentHealth) return;
+
+            healthText.text = currentHealth.ToString();
+            cachedHealthTextValue = currentHealth;
         }
 
         private void UpdateHealthColor(float healthRatio, Color green, Color yellow, Color red)

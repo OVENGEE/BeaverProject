@@ -7,6 +7,7 @@ public class BeaverHealth : MonoBehaviour
     [Header("Health Settings")]
     [SerializeField] private int maxHealth = 100;
     [SerializeField] private TextMeshPro healthText; // Use 3D TextMeshPro placed above the head
+    [SerializeField] private TMP_Text[] additionalHealthTexts;
     [SerializeField] private GameObject logPrefab; // Spawned when beaver dies
 
     [Header("Animation Settings")]
@@ -33,6 +34,19 @@ public class BeaverHealth : MonoBehaviour
         {
             float parentFacing = Mathf.Sign(transform.localScale.x);
             healthText.transform.localScale = new Vector3(parentFacing, 1f, 1f);
+        }
+
+        if (additionalHealthTexts == null) return;
+
+        float facing = Mathf.Sign(transform.localScale.x);
+        foreach (TMP_Text additionalText in additionalHealthTexts)
+        {
+            if (additionalText != null)
+            {
+                Vector3 textScale = additionalText.transform.localScale;
+                textScale.x = Mathf.Abs(textScale.x) * facing;
+                additionalText.transform.localScale = textScale;
+            }
         }
     }
 
@@ -67,6 +81,16 @@ public class BeaverHealth : MonoBehaviour
         {
             healthText.text = currentHealth.ToString();
         }
+
+        if (additionalHealthTexts == null) return;
+
+        foreach (TMP_Text additionalText in additionalHealthTexts)
+        {
+            if (additionalText != null)
+            {
+                additionalText.text = currentHealth.ToString();
+            }
+        }
     }
 
     private void Die()
@@ -82,6 +106,13 @@ public class BeaverHealth : MonoBehaviour
         if (TryGetComponent<Collider2D>(out var col)) col.enabled = false;
         if (TryGetComponent<Rigidbody2D>(out var rb)) rb.simulated = false;
         if (healthText != null) healthText.gameObject.SetActive(false);
+        if (additionalHealthTexts != null)
+        {
+            foreach (TMP_Text additionalText in additionalHealthTexts)
+            {
+                if (additionalText != null) additionalText.gameObject.SetActive(false);
+            }
+        }
 
         StartCoroutine(DieRoutine());
     }
