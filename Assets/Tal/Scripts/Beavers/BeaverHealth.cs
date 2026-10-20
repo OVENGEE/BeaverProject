@@ -17,6 +17,7 @@ public class BeaverHealth : MonoBehaviour
     private bool isDead = false;
 
     public int CurrentHealth => currentHealth;
+    public int MaxHealth => maxHealth;
     public bool IsDead => isDead;
 
     private void Awake()

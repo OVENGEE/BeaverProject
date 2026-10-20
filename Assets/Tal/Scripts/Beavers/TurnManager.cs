@@ -40,6 +40,8 @@ public class TurnManager : MonoBehaviour
     [SerializeField] private float turnDuration = 30f;
 
     public BeaverController ActiveBeaver { get; private set; }
+    public List<BeaverController> Player1Beavers => player1Beavers;
+    public List<BeaverController> Player2Beavers => player2Beavers;
 
     private int currentRound = 0;
     private int turnStep = 0; // 0 to 5 (6 total beaver turns per round)
