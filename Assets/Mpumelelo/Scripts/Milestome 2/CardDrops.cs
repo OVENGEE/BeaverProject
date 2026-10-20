@@ -1,3 +1,5 @@
+using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class CardDrops : MonoBehaviour
@@ -6,12 +8,26 @@ public class CardDrops : MonoBehaviour
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private GameObject[] cardPrefab;
     [SerializeField] private float dropHeight = 6f;
+    [SerializeField] private float dropDelay = 5f;
+
+    [Header("Drop Message")]
+    [SerializeField] private TextMeshProUGUI dropMessage;
+    [SerializeField] private string dropMessageText = "A card has dropped!";
+    [SerializeField] private float messageVisibleDuration = 1f;
+    [SerializeField] private float messageFadeDuration = 1f;
 
     private GameObject currentDrop;
+    private Coroutine messageCoroutine;
+    private Coroutine dropCoroutine;
 
-    private void Start()
+    private void Awake()
     {
-        
+        if (dropMessage == null) return;
+
+        Color color = dropMessage.color;
+        color.a = 0f;
+        dropMessage.color = color;
+        dropMessage.gameObject.SetActive(false);
     }
 
     public void SpawnDrop()
@@ -22,11 +38,29 @@ public class CardDrops : MonoBehaviour
             return;
         }
 
+        if (dropCoroutine != null)
+        {
+            StopCoroutine(dropCoroutine);
+        }
+
         if (currentDrop != null)
         {
             Destroy(currentDrop);
+            currentDrop = null;
         }
 
+        dropCoroutine = StartCoroutine(SpawnAfterDelay());
+    }
+
+    private IEnumerator SpawnAfterDelay()
+    {
+        yield return new WaitForSeconds(dropDelay);
+        dropCoroutine = null;
+        SpawnDropNow();
+    }
+
+    private void SpawnDropNow()
+    {
         float minX = -25f;
         float maxX = 25f;
 
@@ -65,7 +99,7 @@ public class CardDrops : MonoBehaviour
             mainCollider.isTrigger = false;
         }
 
-        BeaverController[] beavers = FindObjectsByType<BeaverController>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        BeaverController[] beavers = FindObjectsByType<BeaverController>(FindObjectsInactive.Include);
         foreach (BeaverController beaver in beavers)
         {
             Collider2D[] beaverColliders = beaver.GetComponentsInChildren<Collider2D>();
@@ -84,6 +118,44 @@ public class CardDrops : MonoBehaviour
         triggerCollider.isTrigger = true;
         triggerCollider.size = new Vector2(0.8f, 0.8f);
 
+        ShowDropMessage();
         Debug.Log("Card dropped from sky.");
+    }
+
+    private void ShowDropMessage()
+    {
+        if (dropMessage == null) return;
+
+        if (messageCoroutine != null)
+        {
+            StopCoroutine(messageCoroutine);
+        }
+
+        dropMessage.text = dropMessageText;
+        Color color = dropMessage.color;
+        color.a = 1f;
+        dropMessage.color = color;
+        dropMessage.gameObject.SetActive(true);
+        messageCoroutine = StartCoroutine(FadeDropMessage());
+    }
+
+    private IEnumerator FadeDropMessage()
+    {
+        yield return new WaitForSecondsRealtime(messageVisibleDuration);
+
+        float elapsed = 0f;
+        Color color = dropMessage.color;
+        while (elapsed < messageFadeDuration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            color.a = Mathf.Lerp(1f, 0f, elapsed / messageFadeDuration);
+            dropMessage.color = color;
+            yield return null;
+        }
+
+        color.a = 0f;
+        dropMessage.color = color;
+        dropMessage.gameObject.SetActive(false);
+        messageCoroutine = null;
     }
 }
