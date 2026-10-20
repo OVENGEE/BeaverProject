@@ -24,6 +24,7 @@ public class TurnManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private TextMeshProUGUI currentPlayerText;   // Text to display whose turn it is
     [SerializeField] private TextMeshProUGUI roundText;           // Text display for current round
+    private BeaverRosterHUD beaverRosterHUD;
 
     [Header("Timer FX")]
     [SerializeField] private Color warningTimerColor = Color.red;  // Color when <= 5s
@@ -76,6 +77,8 @@ public class TurnManager : MonoBehaviour
             defaultTimerScale = timerText.transform.localScale;
         }
 
+        //InitializeBeaverRosterHUD();
+
         // Randomize who goes first at game start
         firstPlayerIsP1 = Random.value > 0.5f;
         StartNewRound();
@@ -83,6 +86,11 @@ public class TurnManager : MonoBehaviour
 
     private void Update()
     {
+        if (beaverRosterHUD != null)
+        {
+            beaverRosterHUD.Refresh(player1Beavers, player2Beavers, ActiveBeaver);
+        }
+
         if (isGameOver || !isTurnRunning) return;
 
         // Check if any team has been wiped out
@@ -122,6 +130,24 @@ public class TurnManager : MonoBehaviour
             EndTurn();
         }
     }
+
+    /*private void InitializeBeaverRosterHUD()
+    {
+        if (timerText == null || timerText.canvas == null)
+        {
+            Debug.LogWarning("TurnManager cannot create the beaver roster because its timer is not assigned to a Canvas.");
+            return;
+        }
+
+        Canvas gameCanvas = timerText.canvas;
+        beaverRosterHUD = gameCanvas.GetComponent<BeaverRosterHUD>();
+        if (beaverRosterHUD == null)
+        {
+            beaverRosterHUD = gameCanvas.gameObject.AddComponent<BeaverRosterHUD>();
+        }
+
+        beaverRosterHUD.Initialize(player1Beavers, player2Beavers, timerText.font);
+    }*/
 
     public void StartNewRound()
     {

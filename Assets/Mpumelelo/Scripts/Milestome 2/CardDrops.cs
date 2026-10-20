@@ -78,6 +78,12 @@ public class CardDrops : MonoBehaviour
         currentDrop.name = "DroppedCard";
         currentDrop.tag = "Card";
 
+        CardDropItem dropItem = currentDrop.GetComponentInChildren<CardDropItem>();
+        if (dropItem != null)
+        {
+            dropItem.Initialize(this);
+        }
+
         Rigidbody2D rb = currentDrop.GetComponent<Rigidbody2D>();
         if (rb == null)
         {
@@ -122,7 +128,21 @@ public class CardDrops : MonoBehaviour
         Debug.Log("Card dropped from sky.");
     }
 
+    public void ShowPickupMessage(BeaverController beaver)
+    {
+        if (beaver == null) return;
+
+        string playerName = beaver.CompareTag("BeaverP1") ? "Player 1" :
+            beaver.CompareTag("BeaverP2") ? "Player 2" : beaver.name;
+        ShowMessage($"{playerName} picked up a card!");
+    }
+
     private void ShowDropMessage()
+    {
+        ShowMessage(dropMessageText);
+    }
+
+    private void ShowMessage(string message)
     {
         if (dropMessage == null) return;
 
@@ -131,7 +151,7 @@ public class CardDrops : MonoBehaviour
             StopCoroutine(messageCoroutine);
         }
 
-        dropMessage.text = dropMessageText;
+        dropMessage.text = message;
         Color color = dropMessage.color;
         color.a = 1f;
         dropMessage.color = color;

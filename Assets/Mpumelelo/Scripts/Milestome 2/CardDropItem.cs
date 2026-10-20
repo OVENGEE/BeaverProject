@@ -4,6 +4,12 @@ public class CardDropItem : MonoBehaviour
 {
     [SerializeField] private GameObject handCardPrefab;
     private bool collected;
+    private CardDrops dropSpawner;
+
+    public void Initialize(CardDrops spawner)
+    {
+        dropSpawner = spawner;
+    }
 
     public void Collect(BeaverController beaver)
     {
@@ -12,6 +18,7 @@ public class CardDropItem : MonoBehaviour
 
         collected = true;
         TurnManager.Instance.AwardCardToBeaver(beaver, handCardPrefab);
+        dropSpawner?.ShowPickupMessage(beaver);
         Destroy(gameObject);
     }
 }
