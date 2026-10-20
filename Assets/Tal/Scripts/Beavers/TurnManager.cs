@@ -200,18 +200,14 @@ public class TurnManager : MonoBehaviour
         isTurnRunning = true;
     }
 
-    public void AwardCardToBeaver(BeaverController beaver)
+    public void AwardCardToBeaver(BeaverController beaver, GameObject handCardPrefab)
     {
-        if (beaver == null) return;
+        if (beaver == null || handCardPrefab == null) return;
 
         if (beaver.CompareTag("BeaverP1") && player1Hand != null)
-        {
-            player1Hand.AddCard();
-        }
+            player1Hand.AddCard(handCardPrefab);
         else if (beaver.CompareTag("BeaverP2") && player2Hand != null)
-        {
-            player2Hand.AddCard();
-        }
+            player2Hand.AddCard(handCardPrefab);
     }
 
     public void EndTurn()

@@ -11,7 +11,7 @@ public class CardDrops : MonoBehaviour
 
     private void Start()
     {
-        SpawnDrop();
+        
     }
 
     public void SpawnDrop()
@@ -27,11 +27,15 @@ public class CardDrops : MonoBehaviour
             Destroy(currentDrop);
         }
 
-        Vector3 spawnPosition = transform.position;
-        if (spawnPoint != null)
-        {
-            spawnPosition = spawnPoint.position;
-        }
+        float minX = -25f;
+        float maxX = 25f;
+
+        float randomX = Random.Range(minX, maxX);
+        Vector3 spawnPosition = new Vector3(
+            randomX,
+            transform.position.y,
+            transform.position.z
+        );
 
         spawnPosition += Vector3.up * dropHeight;
 
@@ -59,6 +63,16 @@ public class CardDrops : MonoBehaviour
         if (mainCollider.isTrigger)
         {
             mainCollider.isTrigger = false;
+        }
+
+        BeaverController[] beavers = FindObjectsByType<BeaverController>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        foreach (BeaverController beaver in beavers)
+        {
+            Collider2D[] beaverColliders = beaver.GetComponentsInChildren<Collider2D>();
+            foreach (Collider2D beaverCollider in beaverColliders)
+            {
+                Physics2D.IgnoreCollision(mainCollider, beaverCollider);
+            }
         }
 
         GameObject pickupTrigger = new GameObject("CardPickupTrigger");

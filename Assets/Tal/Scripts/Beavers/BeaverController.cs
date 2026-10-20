@@ -269,21 +269,12 @@ public class BeaverController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!collision.CompareTag("Card")) return;
+        if (!other.CompareTag("Card")) return;
 
-        GameObject cardObject = collision.gameObject;
-        if (collision.transform.parent != null)
-        {
-            cardObject = collision.transform.parent.gameObject;
-        }
-
-        TurnManager.Instance?.AwardCardToBeaver(this);
-
-        if (cardObject != null)
-        {
-            Destroy(cardObject);
-        }
+        CardDropItem drop = other.GetComponentInParent<CardDropItem>();
+        if (drop != null)
+            drop.Collect(this);
     }
 }
