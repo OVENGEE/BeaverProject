@@ -272,6 +272,9 @@ MonoBehaviour:
   firePoint: {fileID: 1074252241767005186}
   bulletSpeed: 18
   maxAmmo: 3
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!114 &8322392796183857679
 MonoBehaviour:
   m_ObjectHideFlags: 0

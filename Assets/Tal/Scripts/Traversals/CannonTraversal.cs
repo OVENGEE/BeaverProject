@@ -23,6 +23,8 @@ public class CannonTraversal : MonoBehaviour
     [SerializeField] private float minLaunchForce = 10f;
     [SerializeField] private float maxLaunchForce = 35f;
     [SerializeField] private float maxChargeTime = 1.5f;
+    [Tooltip("Assign your Terrain/Ground layer here to prevent firePoint terrain clipping.")]
+    [SerializeField] private LayerMask groundLayer;
 
     [Header("Charge Meter Settings")]
     [SerializeField] private Transform chargeMeterTransform;
@@ -205,7 +207,7 @@ public class CannonTraversal : MonoBehaviour
         float pingPongTime = Mathf.PingPong(chargeTimer, maxChargeTime);
         currentChargeRatio = pingPongTime / maxChargeTime;
 
-        // Scale X relative to original Inspector size (preserving original Y height and Z depth)
+        // Scale X relative to original Inspector size
         if (chargeMeterTransform != null)
         {
             chargeMeterTransform.localScale = new Vector3(
@@ -222,12 +224,20 @@ public class CannonTraversal : MonoBehaviour
 
         isCharging = false;
 
-        Vector3 launchPosition = firePoint != null ? firePoint.position : transform.position;
-        Vector2 launchDirection = reticle != null ? ((Vector2)reticle.position - (Vector2)launchPosition).normalized : transform.right;
+        // Origin at cannon base / beaver position
+        Vector2 cannonOrigin = wheelBaseTransform != null ? (Vector2)wheelBaseTransform.position : (Vector2)transform.position;
+        Vector2 intendedLaunchPos = firePoint != null ? (Vector2)firePoint.position : (Vector2)transform.position;
+
+        // Perform linecast to verify firePoint hasn't clipped into terrain
+        RaycastHit2D hit = Physics2D.Linecast(cannonOrigin, intendedLaunchPos, groundLayer);
+        Vector2 safeLaunchPosition = (hit.collider != null) ? hit.point : intendedLaunchPos;
+
+        // Calculate launch direction from safe exit point to reticle
+        Vector2 launchDirection = reticle != null ? ((Vector2)reticle.position - safeLaunchPosition).normalized : transform.right;
         float launchForce = Mathf.Lerp(minLaunchForce, maxLaunchForce, currentChargeRatio);
 
-        // Move beaver to fire point
-        beaver.transform.position = launchPosition;
+        // Move beaver to safe muzzle exit on the surface of terrain
+        beaver.transform.position = safeLaunchPosition;
 
         // Restore beaver graphics & colliders
         RestoreBeaver();

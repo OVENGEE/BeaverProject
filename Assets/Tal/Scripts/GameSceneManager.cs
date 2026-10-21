@@ -8,7 +8,7 @@ public class GameSceneManager : MonoBehaviour
 
     public void LoadGameplay()
     {
-        SceneManager.LoadScene("Gameplay");
+        SceneManager.LoadScene("Gameplay M2");
     }
 
     public void LoadMainMenu()

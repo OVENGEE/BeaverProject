@@ -12,6 +12,9 @@ public class TurnManager : MonoBehaviour
     [SerializeField] private List<BeaverController> player1Beavers;
     [SerializeField] private List<BeaverController> player2Beavers;
 
+    [Header("Card Drop System")]
+    [SerializeField] private CardDrops cardDropSpawner;
+
     [Header("HUD")]
     [SerializeField] private CardHandManager player1Hand;
     [SerializeField] private CardHandManager player2Hand;
@@ -21,6 +24,10 @@ public class TurnManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private TextMeshProUGUI currentPlayerText;   // Text to display whose turn it is
     [SerializeField] private TextMeshProUGUI roundText;           // Text display for current round
+    [SerializeField] private Image currentPlayerBackgroundImage;
+    [SerializeField] private Color player1TurnBackgroundColor = new Color(1f, 0.55f, 0.1f, 1f);
+    [SerializeField] private Color player2TurnBackgroundColor = new Color(0.1f, 0.72f, 0.95f, 1f);
+    private BeaverRosterHUD beaverRosterHUD;
 
     [Header("Timer FX")]
     [SerializeField] private Color warningTimerColor = Color.red;  // Color when <= 5s
@@ -36,6 +43,8 @@ public class TurnManager : MonoBehaviour
     [SerializeField] private float turnDuration = 30f;
 
     public BeaverController ActiveBeaver { get; private set; }
+    public List<BeaverController> Player1Beavers => player1Beavers;
+    public List<BeaverController> Player2Beavers => player2Beavers;
 
     private int currentRound = 0;
     private int turnStep = 0; // 0 to 5 (6 total beaver turns per round)
@@ -73,6 +82,8 @@ public class TurnManager : MonoBehaviour
             defaultTimerScale = timerText.transform.localScale;
         }
 
+        //InitializeBeaverRosterHUD();
+
         // Randomize who goes first at game start
         firstPlayerIsP1 = Random.value > 0.5f;
         StartNewRound();
@@ -80,6 +91,11 @@ public class TurnManager : MonoBehaviour
 
     private void Update()
     {
+        if (beaverRosterHUD != null)
+        {
+            beaverRosterHUD.Refresh(player1Beavers, player2Beavers, ActiveBeaver);
+        }
+
         if (isGameOver || !isTurnRunning) return;
 
         // Check if any team has been wiped out
@@ -120,6 +136,24 @@ public class TurnManager : MonoBehaviour
         }
     }
 
+    /*private void InitializeBeaverRosterHUD()
+    {
+        if (timerText == null || timerText.canvas == null)
+        {
+            Debug.LogWarning("TurnManager cannot create the beaver roster because its timer is not assigned to a Canvas.");
+            return;
+        }
+
+        Canvas gameCanvas = timerText.canvas;
+        beaverRosterHUD = gameCanvas.GetComponent<BeaverRosterHUD>();
+        if (beaverRosterHUD == null)
+        {
+            beaverRosterHUD = gameCanvas.gameObject.AddComponent<BeaverRosterHUD>();
+        }
+
+        beaverRosterHUD.Initialize(player1Beavers, player2Beavers, timerText.font);
+    }*/
+
     public void StartNewRound()
     {
         if (CheckWinCondition()) return;
@@ -143,6 +177,11 @@ public class TurnManager : MonoBehaviour
             if (player2Hand != null) player2Hand.AddCard();
         }
 
+        if (cardDropSpawner != null)
+        {
+            cardDropSpawner.SpawnDrop();
+        }
+
         StartTurn();
     }
 
@@ -161,6 +200,18 @@ public class TurnManager : MonoBehaviour
         if (currentPlayerText != null)
         {
             currentPlayerText.text = isP1Turn ? "Player 1's Turn" : "Player 2's Turn";
+        }
+
+        if (currentPlayerBackgroundImage == null && currentPlayerText != null)
+        {
+            currentPlayerBackgroundImage = currentPlayerText.GetComponent<Image>();
+        }
+
+        if (currentPlayerBackgroundImage != null)
+        {
+            currentPlayerBackgroundImage.color = isP1Turn
+                ? player1TurnBackgroundColor
+                : player2TurnBackgroundColor;
         }
 
         // Deactivate all beavers first
@@ -190,6 +241,16 @@ public class TurnManager : MonoBehaviour
         // Reset Timer
         timeRemaining = turnDuration;
         isTurnRunning = true;
+    }
+
+    public void AwardCardToBeaver(BeaverController beaver, GameObject handCardPrefab)
+    {
+        if (beaver == null || handCardPrefab == null) return;
+
+        if (beaver.CompareTag("BeaverP1") && player1Hand != null)
+            player1Hand.AddCard(handCardPrefab);
+        else if (beaver.CompareTag("BeaverP2") && player2Hand != null)
+            player2Hand.AddCard(handCardPrefab);
     }
 
     public void EndTurn()

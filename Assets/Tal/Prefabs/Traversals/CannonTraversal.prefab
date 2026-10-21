@@ -58,6 +58,9 @@ MonoBehaviour:
   minLaunchForce: 10
   maxLaunchForce: 35
   maxChargeTime: 1.5
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
   chargeMeterTransform: {fileID: 9087904225797056}
 --- !u!114 &2558784426192241208
 MonoBehaviour:

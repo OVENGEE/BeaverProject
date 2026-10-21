@@ -7,6 +7,7 @@ TagManager:
   - Beaver
   - BeaverP1
   - BeaverP2
+  - Card
   layers:
   - Default
   - TransparentFX

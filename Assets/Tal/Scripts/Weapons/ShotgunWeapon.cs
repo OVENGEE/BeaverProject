@@ -18,6 +18,8 @@ public class ShotgunWeapon : MonoBehaviour
     [SerializeField] private int pelletCount = 5;
     [Tooltip("The total angle (in degrees) of the firing cone")]
     [SerializeField] private float spreadAngle = 30f;
+    [Tooltip("Assign your Terrain/Ground layer here to prevent firePoint terrain clipping.")]
+    [SerializeField] private LayerMask groundLayer;
 
     private BeaverInputActions inputActions;
     private Transform beaverTransform;
@@ -75,38 +77,45 @@ public class ShotgunWeapon : MonoBehaviour
     {
         if (bulletPrefab == null || firePoint == null) return;
 
-        // Base direction towards the reticle
-        Vector2 centerDirection = (reticle.position - firePoint.position).normalized;
+        Vector2 beaverOrigin = beaverTransform != null ? (Vector2)beaverTransform.position : (Vector2)transform.position;
+        Vector2 intendedSpawnPos = firePoint.position;
 
-        // Convert the center direction to an angle in degrees
+        // Perform linecast to check if firePoint has clipped inside or past terrain
+        RaycastHit2D hit = Physics2D.Linecast(beaverOrigin, intendedSpawnPos, groundLayer);
+        Vector2 safeSpawnPos = (hit.collider != null) ? hit.point : intendedSpawnPos;
+
+        // Base direction towards the reticle relative to safe spawn point
+        Vector2 centerDirection = ((Vector2)reticle.position - safeSpawnPos).normalized;
+
+        // Convert center direction to angle in degrees
         float centerAngle = Mathf.Atan2(centerDirection.y, centerDirection.x) * Mathf.Rad2Deg;
 
-        // Calculate the starting angle (half the spread angle to the 'left' of center)
+        // Calculate starting angle
         float startAngle = centerAngle - (spreadAngle / 2f);
 
-        // The angle step between each pellet
+        // Angle step between each pellet
         float angleStep = pelletCount > 1 ? spreadAngle / (pelletCount - 1) : 0f;
 
         for (int i = 0; i < pelletCount; i++)
         {
-            // Calculate exact angle for this specific pellet
+            // Calculate exact angle for this pellet
             float pelletAngle = startAngle + (angleStep * i);
 
-            // Convert angle back to a directional vector
+            // Convert angle back to directional vector
             Vector2 pelletDirection = new Vector2(
                 Mathf.Cos(pelletAngle * Mathf.Deg2Rad),
                 Mathf.Sin(pelletAngle * Mathf.Deg2Rad)
             );
 
-            // Instantiate and fire
-            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+            // Instantiate pellet at safe outer wall position
+            GameObject bullet = Instantiate(bulletPrefab, safeSpawnPos, Quaternion.identity);
 
             if (bullet.TryGetComponent<Rigidbody2D>(out var rb))
             {
                 rb.linearVelocity = pelletDirection * bulletSpeed;
             }
 
-            // Rotate bullet sprite to match its specific trajectory
+            // Rotate bullet sprite to match pellet trajectory
             bullet.transform.rotation = Quaternion.Euler(0, 0, pelletAngle);
         }
 

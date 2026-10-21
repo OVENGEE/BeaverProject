@@ -15,6 +15,8 @@ public class PistolWeapon : MonoBehaviour
     [SerializeField] private Transform firePoint;
     [SerializeField] private float bulletSpeed = 18f;
     [SerializeField] private int maxAmmo = 3;
+    [Tooltip("Assign your Terrain/Ground layer here to prevent firePoint terrain clipping.")]
+    [SerializeField] private LayerMask groundLayer;
 
     private BeaverInputActions inputActions;
     private Transform beaverTransform;
@@ -60,8 +62,7 @@ public class PistolWeapon : MonoBehaviour
         currentAngle += aimInput * aimSpeed * Time.deltaTime;
         currentAngle = Mathf.Clamp(currentAngle, minAngle, maxAngle);
 
-        // 1. Rotate the pistol using LOCAL rotation. 
-        // Because the parent beaver flips its X scale, this automatically aims correctly on both sides without going upside down.
+        // 1. Rotate the pistol using LOCAL rotation.
         transform.localRotation = Quaternion.Euler(0, 0, currentAngle);
 
         // Determine facing direction from beaver scale (1 = Right, -1 = Left)
@@ -81,11 +82,18 @@ public class PistolWeapon : MonoBehaviour
     {
         if (currentAmmo <= 0 || bulletPrefab == null || firePoint == null) return;
 
-        // Calculate direct vector from Fire Point to Reticle
-        Vector2 shootDirection = (reticle.position - firePoint.position).normalized;
+        Vector2 beaverOrigin = beaverTransform != null ? (Vector2)beaverTransform.position : (Vector2)transform.position;
+        Vector2 intendedSpawnPos = firePoint.position;
 
-        // Instantiate and propel the bullet
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+        // Perform linecast to detect if firePoint is clipping inside or past terrain
+        RaycastHit2D hit = Physics2D.Linecast(beaverOrigin, intendedSpawnPos, groundLayer);
+        Vector2 safeSpawnPos = (hit.collider != null) ? hit.point : intendedSpawnPos;
+
+        // Calculate direct vector from safe spawn point to reticle
+        Vector2 shootDirection = ((Vector2)reticle.position - safeSpawnPos).normalized;
+
+        // Instantiate bullet at safe surface point
+        GameObject bullet = Instantiate(bulletPrefab, safeSpawnPos, Quaternion.identity);
 
         if (bullet.TryGetComponent<Rigidbody2D>(out var rb))
         {

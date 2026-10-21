@@ -15,6 +15,8 @@ public class RocketLauncherWeapon : MonoBehaviour
     [SerializeField] private Transform firePoint;
     [SerializeField] private float rocketSpeed = 18f;
     [SerializeField] private int maxAmmo = 1;
+    [Tooltip("Assign your Terrain/Ground layer here to prevent firePoint terrain clipping.")]
+    [SerializeField] private LayerMask groundLayer;
 
     private BeaverInputActions inputActions;
     private Transform beaverTransform;
@@ -37,7 +39,6 @@ public class RocketLauncherWeapon : MonoBehaviour
     {
         currentAmmo = maxAmmo;
 
-        // Find the parent beaver (assuming rocket is attached to the beaver or its hand)
         beaverTransform = GetComponentInParent<BeaverController>()?.transform ?? transform.parent;
 
         if (reticle != null)
@@ -56,18 +57,13 @@ public class RocketLauncherWeapon : MonoBehaviour
 
     private void UpdateAiming()
     {
-        // Adjust angle based on Up/Down input
         currentAngle += aimInput * aimSpeed * Time.deltaTime;
         currentAngle = Mathf.Clamp(currentAngle, minAngle, maxAngle);
 
-        // 1. Rotate the rocket using LOCAL rotation. 
-        // Because the parent beaver flips its X scale, this automatically aims correctly on both sides without going upside down.
         transform.localRotation = Quaternion.Euler(0, 0, currentAngle);
 
-        // Determine facing direction from beaver scale (1 = Right, -1 = Left)
         float facingDirection = beaverTransform != null ? Mathf.Sign(beaverTransform.localScale.x) : 1f;
 
-        // 2. Position the reticle in world space
         float rad = currentAngle * Mathf.Deg2Rad;
         Vector2 dir = new Vector2(Mathf.Cos(rad) * facingDirection, Mathf.Sin(rad));
 
@@ -81,11 +77,18 @@ public class RocketLauncherWeapon : MonoBehaviour
     {
         if (currentAmmo <= 0 || rocketPrefab == null || firePoint == null) return;
 
-        // Calculate direct vector from Fire Point to Reticle
-        Vector2 shootDirection = (reticle.position - firePoint.position).normalized;
+        Vector2 beaverOrigin = beaverTransform != null ? (Vector2)beaverTransform.position : (Vector2)transform.position;
+        Vector2 intendedSpawnPos = firePoint.position;
 
-        // Instantiate and propel the rocket
-        GameObject rocket = Instantiate(rocketPrefab, firePoint.position, Quaternion.identity);
+        // Perform linecast to detect if firePoint is clipping inside or past terrain
+        RaycastHit2D hit = Physics2D.Linecast(beaverOrigin, intendedSpawnPos, groundLayer);
+        Vector2 safeSpawnPos = (hit.collider != null) ? hit.point : intendedSpawnPos;
+
+        // Calculate direct vector from safe spawn point to reticle
+        Vector2 shootDirection = ((Vector2)reticle.position - safeSpawnPos).normalized;
+
+        // Instantiate rocket at safe surface point
+        GameObject rocket = Instantiate(rocketPrefab, safeSpawnPos, Quaternion.identity);
 
         if (rocket.TryGetComponent<Rigidbody2D>(out var rb))
         {
@@ -116,7 +119,6 @@ public class RocketLauncherWeapon : MonoBehaviour
 
     private void OnDestroy()
     {
-        // Cleanup reticle if object is destroyed externally
         if (reticle != null)
         {
             Destroy(reticle.gameObject);

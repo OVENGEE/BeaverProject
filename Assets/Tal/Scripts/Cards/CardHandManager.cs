@@ -29,19 +29,24 @@ public class CardHandManager : MonoBehaviour
         int randomIndex = Random.Range(0, cardPrefabs.Count);
         GameObject selectedPrefab = cardPrefabs[randomIndex];
 
+        AddCard(selectedPrefab);
+    }
+
+    public void AddCard(GameObject selectedPrefab)
+    {
+        if (selectedPrefab == null) return;
+
         GameObject newCard = Instantiate(selectedPrefab, transform);
-
-        // Pass a reference of this manager to the card so it can call PlayCard()
         CardData cardData = newCard.GetComponent<CardData>();
-        if (cardData != null)
+
+        if (cardData == null)
         {
-            cardData.Initialize(this);
-        }
-        else
-        {
-            Debug.LogWarning("Card prefab is missing the CardData script!");
+            Debug.LogWarning("The hand card prefab is missing CardData.");
+            Destroy(newCard);
+            return;
         }
 
+        cardData.Initialize(this);
         cardsInHand.Add(newCard);
         ArrangeCards();
     }
