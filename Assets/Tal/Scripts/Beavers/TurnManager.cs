@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class TurnManager : MonoBehaviour
 {
     public static TurnManager Instance { get; private set; }
+    public static event System.Action<int> RoundStarted;
 
     [Header("Players & Beavers")]
     [SerializeField] private List<BeaverController> player1Beavers;
@@ -159,6 +160,7 @@ public class TurnManager : MonoBehaviour
         if (CheckWinCondition()) return;
 
         currentRound++;
+        RoundStarted?.Invoke(currentRound);
         turnStep = 0;
 
         // Update round text in HUD

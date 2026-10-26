@@ -2,9 +2,50 @@ using UnityEngine;
 
 public class DeathByWater : MonoBehaviour
 {
+    private enum WaterRiseSchedule
+    {
+        EveryNRounds,
+        EveryRoundFromSelectedRound
+    }
+
     [Header("Water Hazard")]
     [SerializeField] private bool destroyBeaverOnTouch = true;
     [SerializeField] private bool destroyWaterAfterBeaverDies = false;
+
+    [Header("Water Rising")]
+    [SerializeField] private bool enableWaterRise;
+    [SerializeField, Min(0f)] private float waterRiseDistance = 1f;
+    [SerializeField] private WaterRiseSchedule waterRiseSchedule = WaterRiseSchedule.EveryNRounds;
+    [SerializeField, Min(1)] private int roundsBetweenRises = 3;
+    [SerializeField, Min(1)] private int firstConsecutiveRiseRound = 5;
+
+    private void OnEnable()
+    {
+        TurnManager.RoundStarted += HandleRoundStarted;
+    }
+
+    private void OnDisable()
+    {
+        TurnManager.RoundStarted -= HandleRoundStarted;
+    }
+
+    private void HandleRoundStarted(int round)
+    {
+        if (!enableWaterRise || waterRiseDistance <= 0f)
+            return;
+
+        bool shouldRise = waterRiseSchedule switch
+        {
+            WaterRiseSchedule.EveryNRounds =>
+                round % Mathf.Max(1, roundsBetweenRises) == 0,
+            WaterRiseSchedule.EveryRoundFromSelectedRound =>
+                round >= Mathf.Max(1, firstConsecutiveRiseRound),
+            _ => false
+        };
+
+        if (shouldRise)
+            transform.position += Vector3.up * waterRiseDistance;
+    }
 
     // Called when a 3D collider enters the water trigger.
     private void OnTriggerEnter(Collider other)
@@ -53,4 +94,3 @@ public class DeathByWater : MonoBehaviour
         }
     }
 }
-
