@@ -48,7 +48,7 @@ MonoBehaviour:
   stompSpeed: 25
   hangTime: 0.1
   stompImpactPrefab: {fileID: 0}
-  stompDamage: 40
+  stompDamage: 25
   hitRadius: 1.2
   terrainDestructionRadius: 0.7
 --- !u!1 &8891762728987466229

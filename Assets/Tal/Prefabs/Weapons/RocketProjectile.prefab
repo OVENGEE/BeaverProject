@@ -213,7 +213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RocketProjectile
   explosionRadius: 2.5
-  damage: 45
+  damage: 30
   explosionEffectPrefab: {fileID: 8995632390482937528, guid: 177af1c0a20461a44ad0ab7715a2c4de, type: 3}
   terrainDestructionRadius: 2
   groundLayer:

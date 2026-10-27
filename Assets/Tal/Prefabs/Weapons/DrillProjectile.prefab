@@ -275,7 +275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DrillProjectile
   speed: 12
   lifetime: 2.5
-  drillRadius: 1.2
+  drillRadius: 0.8
   destructionInterval: 0.04
-  damagePerTick: 10
-  damageInterval: 0.15
+  damagePerTick: 5
+  damageInterval: 0.1
