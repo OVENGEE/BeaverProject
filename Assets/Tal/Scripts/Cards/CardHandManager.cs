@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class CardHandManager : MonoBehaviour
 {
-    [Header("Player Setup")]
-
-    [Header("Card Setup")]
-    [SerializeField] private List<GameObject> cardPrefabs;
+    [Header("Card Rarity Pools")]
+    [SerializeField] private List<GameObject> commonCardPrefabs = new List<GameObject>();
+    [SerializeField] private List<GameObject> rareCardPrefabs = new List<GameObject>();
+    [SerializeField] private List<GameObject> epicCardPrefabs = new List<GameObject>();
 
     [Header("Curve Points (RectTransforms)")]
     [SerializeField] private RectTransform startPoint;
@@ -20,16 +20,42 @@ public class CardHandManager : MonoBehaviour
 
     public void AddCard()
     {
-        if (cardPrefabs == null || cardPrefabs.Count == 0)
+        // Roll a value between 0 and 100
+        float roll = Random.Range(0f, 100f);
+        List<GameObject> selectedPool = null;
+
+        if (roll < 60f) // 60% Chance: Common
         {
-            Debug.LogWarning("No card prefabs assigned in the inspector!");
+            selectedPool = GetValidPool(commonCardPrefabs, rareCardPrefabs, epicCardPrefabs);
+        }
+        else if (roll < 90f) // 30% Chance: Rare (60 to 90)
+        {
+            selectedPool = GetValidPool(rareCardPrefabs, commonCardPrefabs, epicCardPrefabs);
+        }
+        else // 10% Chance: Epic (90 to 100)
+        {
+            selectedPool = GetValidPool(epicCardPrefabs, rareCardPrefabs, commonCardPrefabs);
+        }
+
+        if (selectedPool == null || selectedPool.Count == 0)
+        {
+            Debug.LogWarning("No card prefabs assigned in any rarity pool!");
             return;
         }
 
-        int randomIndex = Random.Range(0, cardPrefabs.Count);
-        GameObject selectedPrefab = cardPrefabs[randomIndex];
+        int randomIndex = Random.Range(0, selectedPool.Count);
+        GameObject selectedPrefab = selectedPool[randomIndex];
 
         AddCard(selectedPrefab);
+    }
+
+    // Helper method to fall back to other pools if the preferred rarity pool is empty
+    private List<GameObject> GetValidPool(List<GameObject> primary, List<GameObject> fallback1, List<GameObject> fallback2)
+    {
+        if (primary != null && primary.Count > 0) return primary;
+        if (fallback1 != null && fallback1.Count > 0) return fallback1;
+        if (fallback2 != null && fallback2.Count > 0) return fallback2;
+        return null;
     }
 
     public void AddCard(GameObject selectedPrefab)
@@ -52,10 +78,9 @@ public class CardHandManager : MonoBehaviour
     }
 
     // Called by the CardData script when clicked
-    // Called by the CardData script when clicked
     public void PlayCard(GameObject playedCard, GameObject prefabToSpawn)
     {
-        BeaverController activeBeaver = TurnManager.Instance.ActiveBeaver;
+        BeaverController activeBeaver = TurnManager.Instance != null ? TurnManager.Instance.ActiveBeaver : null;
 
         if (prefabToSpawn != null && activeBeaver != null)
         {
