@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class CardDrops : MonoBehaviour
 {
+    [Header("Drop Rarity Pools")]
+    [SerializeField] private GameObject[] commonDropPrefabs;
+    [SerializeField] private GameObject[] rareDropPrefabs;
+    [SerializeField] private GameObject[] epicDropPrefabs;
+
     [Header("Drop Spawn")]
     [SerializeField] private Transform spawnPoint;
-    [SerializeField] private GameObject[] cardPrefab;
     [SerializeField] private float dropHeight = 6f;
     [SerializeField] private float dropDelay = 5f;
 
@@ -32,12 +36,6 @@ public class CardDrops : MonoBehaviour
 
     public void SpawnDrop()
     {
-        if (cardPrefab == null || cardPrefab.Length == 0)
-        {
-            Debug.LogWarning("No card prefabs assigned to CardDrops.");
-            return;
-        }
-
         if (dropCoroutine != null)
         {
             StopCoroutine(dropCoroutine);
@@ -61,6 +59,32 @@ public class CardDrops : MonoBehaviour
 
     private void SpawnDropNow()
     {
+        // 1. Roll for drop rarity (60% Common, 30% Rare, 10% Epic)
+        float roll = Random.Range(0f, 100f);
+        GameObject[] selectedPool = null;
+
+        if (roll < 60f) // 60% Chance: Common
+        {
+            selectedPool = GetValidPool(commonDropPrefabs, rareDropPrefabs, epicDropPrefabs);
+        }
+        else if (roll < 90f) // 30% Chance: Rare (60 to 90)
+        {
+            selectedPool = GetValidPool(rareDropPrefabs, commonDropPrefabs, epicDropPrefabs);
+        }
+        else // 10% Chance: Epic (90 to 100)
+        {
+            selectedPool = GetValidPool(epicDropPrefabs, rareDropPrefabs, commonDropPrefabs);
+        }
+
+        if (selectedPool == null || selectedPool.Length == 0)
+        {
+            Debug.LogWarning("No drop prefabs assigned in any rarity pool on CardDrops!");
+            return;
+        }
+
+        // 2. Select a drop prefab from the chosen pool
+        GameObject selectedPrefab = selectedPool[Random.Range(0, selectedPool.Length)];
+
         float minX = -25f;
         float maxX = 25f;
 
@@ -73,7 +97,6 @@ public class CardDrops : MonoBehaviour
 
         spawnPosition += Vector3.up * dropHeight;
 
-        GameObject selectedPrefab = cardPrefab[Random.Range(0, cardPrefab.Length)];
         currentDrop = Instantiate(selectedPrefab, spawnPosition, Quaternion.identity);
         currentDrop.name = "DroppedCard";
         currentDrop.tag = "Card";
@@ -126,6 +149,14 @@ public class CardDrops : MonoBehaviour
 
         ShowDropMessage();
         Debug.Log("Card dropped from sky.");
+    }
+
+    private GameObject[] GetValidPool(GameObject[] primary, GameObject[] fallback1, GameObject[] fallback2)
+    {
+        if (primary != null && primary.Length > 0) return primary;
+        if (fallback1 != null && fallback1.Length > 0) return fallback1;
+        if (fallback2 != null && fallback2.Length > 0) return fallback2;
+        return null;
     }
 
     public void ShowPickupMessage(BeaverController beaver)
