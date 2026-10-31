@@ -19,6 +19,12 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private float smoothSpeed = 5f;
     [SerializeField] private float panSpeed = 15f;
 
+    [Header("Camera Pan Bounds")]
+    [Tooltip("Enable to restrict how far WASD manual panning can go.")]
+    [SerializeField] private bool usePanBounds = true;
+    [SerializeField] private Vector2 minPanBounds = new Vector2(-25f, -10f);
+    [SerializeField] private Vector2 maxPanBounds = new Vector2(25f, 15f);
+
     private bool isPanning = false;
 
     public BeaverController TutorialBeaver => tutorialBeaver;
@@ -104,7 +110,18 @@ public class TutorialManager : MonoBehaviour
         if (panInput != Vector2.zero)
         {
             isPanning = true;
-            cameraTransform.position += new Vector3(panInput.x, panInput.y, 0f) * (panSpeed * Time.unscaledDeltaTime);
+
+            // Calculate potential new position
+            Vector3 targetPanPos = cameraTransform.position + new Vector3(panInput.x, panInput.y, 0f) * (panSpeed * Time.unscaledDeltaTime);
+
+            // Clamp camera position within defined bounds
+            if (usePanBounds)
+            {
+                targetPanPos.x = Mathf.Clamp(targetPanPos.x, minPanBounds.x, maxPanBounds.x);
+                targetPanPos.y = Mathf.Clamp(targetPanPos.y, minPanBounds.y, maxPanBounds.y);
+            }
+
+            cameraTransform.position = targetPanPos;
         }
     }
 
