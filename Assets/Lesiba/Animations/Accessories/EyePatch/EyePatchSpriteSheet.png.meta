@@ -123,7 +123,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 38
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -721,6 +721,28 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: EyePatchSpriteSheet_25
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 0
+        width: 62
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f40816561ad5e1b488c2fbcaf5fa9d9c
+      internalID: 1719819221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -755,6 +777,7 @@ TextureImporter:
       EyePatchSpriteSheet_22: 1018703271035420661
       EyePatchSpriteSheet_23: -592563013539050702
       EyePatchSpriteSheet_24: -5276607757841617841
+      EyePatchSpriteSheet_25: 1719819221
       EyePatchSpriteSheet_3: -6331449279812871097
       EyePatchSpriteSheet_4: 4807946043309915544
       EyePatchSpriteSheet_5: 2682910425256253232

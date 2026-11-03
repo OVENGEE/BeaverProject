@@ -114,7 +114,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 38
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -646,6 +646,28 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: TieSpriteSheet_22
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 776131147c2e11f44b3f4e73e9daf084
+      internalID: 925576918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -677,6 +699,7 @@ TextureImporter:
       TieSpriteSheet_2: 1522130779880641009
       TieSpriteSheet_20: 3776546721316387277
       TieSpriteSheet_21: -7088962997691580711
+      TieSpriteSheet_22: 925576918
       TieSpriteSheet_3: -7569227135510964303
       TieSpriteSheet_4: -3833307981320913004
       TieSpriteSheet_5: -8981621827034693379

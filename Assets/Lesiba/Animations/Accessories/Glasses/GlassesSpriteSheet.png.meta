@@ -123,7 +123,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 38
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -721,6 +721,28 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: GlassesSpriteSheet_25
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 1
+        width: 58
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ca97f9f4753a7446853306307540023
+      internalID: 558172756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -755,6 +777,7 @@ TextureImporter:
       GlassesSpriteSheet_22: -5873251214763759784
       GlassesSpriteSheet_23: 2275692206595031215
       GlassesSpriteSheet_24: -6977353600717339151
+      GlassesSpriteSheet_25: 558172756
       GlassesSpriteSheet_3: -1472605634921528627
       GlassesSpriteSheet_4: -581092978027021171
       GlassesSpriteSheet_5: 462925115247059516
