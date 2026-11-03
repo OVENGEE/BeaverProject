@@ -21,6 +21,11 @@ public class TurnManager : MonoBehaviour
     [SerializeField] private CardHandManager player2Hand;
     [SerializeField] private int cardsPerRound = 3;
 
+    [Header("Hand Refresh Message")]
+    [SerializeField] private TextMeshProUGUI handRefreshedText;
+    [SerializeField] private float handRefreshedDisplayDuration = 1.5f;
+    [SerializeField] private float handRefreshedFadeDuration = 0.5f;
+
     [Header("Game UI")]
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private TextMeshProUGUI currentPlayerText;   // Text to display whose turn it is
@@ -32,11 +37,11 @@ public class TurnManager : MonoBehaviour
 
     [Header("Timer FX")]
     [SerializeField] private Color warningTimerColor = Color.red;  // Color when <= 5s
-    [SerializeField] private float pulseSpeed = 10f;              // Speed of scale pulsation
-    [SerializeField] private float pulseAmount = 0.25f;           // Max scale increase percentage
+    [SerializeField] private float pulseSpeed = 10f;               // Speed of scale pulsation
+    [SerializeField] private float pulseAmount = 0.25f;            // Max scale increase percentage
 
     [Header("Win Screen")]
-    [SerializeField] private TextMeshProUGUI winText;             // Assign a UI Text element for "Player X Wins!"
+    [SerializeField] private TextMeshProUGUI winText;              // Assign a UI Text element for "Player X Wins!"
     [SerializeField] private GameObject restartButton;
     [SerializeField] private GameObject menuButton;
 
@@ -56,6 +61,7 @@ public class TurnManager : MonoBehaviour
     private bool isGameOver = false;
     private GameObject activeEquipment;
     private Coroutine equipmentCoroutine;
+    private Coroutine handRefreshedCoroutine;
 
     // Cache default visual state for timer text
     private Color defaultTimerColor;
@@ -76,14 +82,20 @@ public class TurnManager : MonoBehaviour
         if (menuButton != null) menuButton.SetActive(false);
         if (currentPlayerText != null) currentPlayerText.gameObject.SetActive(true);
 
+        if (handRefreshedText != null)
+        {
+            Color c = handRefreshedText.color;
+            c.a = 0f;
+            handRefreshedText.color = c;
+            handRefreshedText.gameObject.SetActive(false);
+        }
+
         // Save original timer styling so we can reset it each turn
         if (timerText != null)
         {
             defaultTimerColor = timerText.color;
             defaultTimerScale = timerText.transform.localScale;
         }
-
-        //InitializeBeaverRosterHUD();
 
         // Randomize who goes first at game start
         firstPlayerIsP1 = Random.value > 0.5f;
@@ -137,24 +149,6 @@ public class TurnManager : MonoBehaviour
         }
     }
 
-    /*private void InitializeBeaverRosterHUD()
-    {
-        if (timerText == null || timerText.canvas == null)
-        {
-            Debug.LogWarning("TurnManager cannot create the beaver roster because its timer is not assigned to a Canvas.");
-            return;
-        }
-
-        Canvas gameCanvas = timerText.canvas;
-        beaverRosterHUD = gameCanvas.GetComponent<BeaverRosterHUD>();
-        if (beaverRosterHUD == null)
-        {
-            beaverRosterHUD = gameCanvas.gameObject.AddComponent<BeaverRosterHUD>();
-        }
-
-        beaverRosterHUD.Initialize(player1Beavers, player2Beavers, timerText.font);
-    }*/
-
     public void StartNewRound()
     {
         if (CheckWinCondition()) return;
@@ -197,6 +191,16 @@ public class TurnManager : MonoBehaviour
         // Calculate turn order (Interleaved P1 and P2)
         bool isP1Turn = (turnStep % 2 == 0) ? firstPlayerIsP1 : !firstPlayerIsP1;
         int beaverIndex = turnStep / 2; // Maps 0,1 -> Index 0 | 2,3 -> Index 1 | 4,5 -> Index 2
+
+        // Trigger hand refreshed notification on Round 2+ for both players' first turns of the round
+        if (currentRound >= 2 && (turnStep == 0 || turnStep == 1))
+        {
+            ShowHandRefreshedMessage();
+        }
+        else
+        {
+            HideHandRefreshedMessage();
+        }
 
         // Update the current player UI text
         if (currentPlayerText != null)
@@ -245,6 +249,59 @@ public class TurnManager : MonoBehaviour
         isTurnRunning = true;
     }
 
+    private void ShowHandRefreshedMessage()
+    {
+        if (handRefreshedText == null) return;
+
+        if (handRefreshedCoroutine != null)
+        {
+            StopCoroutine(handRefreshedCoroutine);
+        }
+
+        handRefreshedCoroutine = StartCoroutine(FadeHandRefreshedMessage());
+    }
+
+    private void HideHandRefreshedMessage()
+    {
+        if (handRefreshedText == null) return;
+
+        if (handRefreshedCoroutine != null)
+        {
+            StopCoroutine(handRefreshedCoroutine);
+            handRefreshedCoroutine = null;
+        }
+
+        Color color = handRefreshedText.color;
+        color.a = 0f;
+        handRefreshedText.color = color;
+        handRefreshedText.gameObject.SetActive(false);
+    }
+
+    private IEnumerator FadeHandRefreshedMessage()
+    {
+        handRefreshedText.text = "New round. Hand Refreshed!";
+        Color color = handRefreshedText.color;
+        color.a = 1f;
+        handRefreshedText.color = color;
+        handRefreshedText.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(handRefreshedDisplayDuration);
+
+        float elapsed = 0f;
+        while (elapsed < handRefreshedFadeDuration)
+        {
+            elapsed += Time.deltaTime;
+            color.a = Mathf.Lerp(1f, 0f, elapsed / handRefreshedFadeDuration);
+            handRefreshedText.color = color;
+            yield return null;
+        }
+
+        color.a = 0f;
+        handRefreshedText.color = color;
+        handRefreshedText.gameObject.SetActive(false);
+        handRefreshedCoroutine = null;
+    }
+
     public void AwardCardToBeaver(BeaverController beaver, GameObject handCardPrefab)
     {
         if (beaver == null || handCardPrefab == null) return;
@@ -262,6 +319,7 @@ public class TurnManager : MonoBehaviour
         isTurnRunning = false;
 
         ResetTimerVisuals();
+        HideHandRefreshedMessage();
 
         // Stop the coroutine immediately so it doesn't affect the next player
         if (equipmentCoroutine != null)
@@ -310,23 +368,18 @@ public class TurnManager : MonoBehaviour
 
     private IEnumerator WaitForEquipmentDestroyed(GameObject equipment)
     {
-        // Determine the time to set based on what component is on the equipment.
-        // Defaults to 5s for weapons and traversals.
         float timeAfterAction = 5f;
 
-        // If it's a grenade, set it to 3s
         if (equipment.GetComponent<GrenadeProjectile>() != null || equipment.GetComponentInChildren<GrenadeProjectile>() != null)
         {
             timeAfterAction = 3f;
         }
 
-        // Wait until the equipped object is destroyed (by usage, depletion, or explosion)
         while (equipment != null)
         {
             yield return null;
         }
 
-        // Set the remaining time for the turn immediately to 5 or 3 seconds
         if (isTurnRunning)
         {
             timeRemaining = timeAfterAction;
@@ -352,22 +405,20 @@ public class TurnManager : MonoBehaviour
     {
         if (isGameOver) return true;
 
-        // Count how many beavers are still alive (not null)
         int p1Alive = 0;
         foreach (var b in player1Beavers) if (b != null) p1Alive++;
 
         int p2Alive = 0;
         foreach (var b in player2Beavers) if (b != null) p2Alive++;
 
-        // If either team has 0 beavers left, trigger Game Over
         if (p1Alive == 0 || p2Alive == 0)
         {
             isGameOver = true;
             isTurnRunning = false;
 
             ResetTimerVisuals();
+            HideHandRefreshedMessage();
 
-            // Hide the turn text when the game ends
             if (currentPlayerText != null) currentPlayerText.gameObject.SetActive(false);
 
             if (winText != null)
@@ -382,7 +433,6 @@ public class TurnManager : MonoBehaviour
             if (restartButton != null) restartButton.SetActive(true);
             if (menuButton != null) menuButton.SetActive(true);
 
-            // Freeze the game
             Time.timeScale = 0f;
             return true;
         }

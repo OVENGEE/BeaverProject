@@ -38,7 +38,8 @@ public class StompTraversal : MonoBehaviour
 
     private void TryStomp()
     {
-        if (beaver == null || isStomping || beaver.IsGrounded) return;
+        // Removed beaver.IsGrounded check so it can be activated on ground or in mid-air
+        if (beaver == null || isStomping) return;
 
         if (aimInput < 0f)
         {
@@ -72,7 +73,7 @@ public class StompTraversal : MonoBehaviour
                 yield return new WaitForFixedUpdate();
             }
 
-            // Final hit check on ground impact
+            // Final hit check on ground impact or when executed directly on ground
             CheckForHits();
 
             rb.gravityScale = originalGravity;
@@ -106,8 +107,8 @@ public class StompTraversal : MonoBehaviour
                 DestructibleTerrain terrain = hit.GetComponentInParent<DestructibleTerrain>();
                 if (terrain != null)
                 {
-                    // Carve a square as the beaver plunges downward (True = Rectangle[cite: 2])
-                    terrain.RemoveTerrainAt(beaver.transform.position, terrainDestructionRadius, true); //[cite: 2]
+                    // Carve terrain at beaver position
+                    terrain.RemoveTerrainAt(beaver.transform.position, terrainDestructionRadius, true);
                 }
             }
         }

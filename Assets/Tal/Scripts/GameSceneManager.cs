@@ -11,6 +11,11 @@ public class GameSceneManager : MonoBehaviour
         SceneManager.LoadScene("Gameplay M2");
     }
 
+    public void LoadTutorial()
+    {
+        SceneManager.LoadScene("Tutorial");
+    }
+
     public void LoadMainMenu()
     {
         SceneManager.LoadScene("MainMenu");
