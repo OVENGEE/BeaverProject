@@ -138,7 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b520b7a2672d6d4885975ba6f0380c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Medkit
-  healAmount: 30
+  healAmount: 20
   plusEffectPrefab: {fileID: 314673162759892889}
   spawnOffset: {x: 0.7, y: 0.95, z: 0}
   plusDisplayDuration: 1.5

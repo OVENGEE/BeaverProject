@@ -3,10 +3,13 @@ using UnityEngine;
 
 public class CardHandManager : MonoBehaviour
 {
-    [Header("Player Setup")]
+    [Header("Hand Settings")]
+    [SerializeField] private int maxHandSize = 5;
 
-    [Header("Card Setup")]
-    [SerializeField] private List<GameObject> cardPrefabs;
+    [Header("Card Rarity Pools")]
+    [SerializeField] private List<GameObject> commonCardPrefabs = new List<GameObject>();
+    [SerializeField] private List<GameObject> rareCardPrefabs = new List<GameObject>();
+    [SerializeField] private List<GameObject> epicCardPrefabs = new List<GameObject>();
 
     [Header("Curve Points (RectTransforms)")]
     [SerializeField] private RectTransform startPoint;
@@ -20,21 +23,61 @@ public class CardHandManager : MonoBehaviour
 
     public void AddCard()
     {
-        if (cardPrefabs == null || cardPrefabs.Count == 0)
+        // Check if hand capacity is reached before rolling
+        if (cardsInHand.Count >= maxHandSize)
         {
-            Debug.LogWarning("No card prefabs assigned in the inspector!");
+            Debug.LogWarning($"Hand is full! Maximum hand size is {maxHandSize}.");
             return;
         }
 
-        int randomIndex = Random.Range(0, cardPrefabs.Count);
-        GameObject selectedPrefab = cardPrefabs[randomIndex];
+        // Roll a value between 0 and 100
+        float roll = Random.Range(0f, 100f);
+        List<GameObject> selectedPool = null;
+
+        if (roll < 60f) // 60% Chance: Common
+        {
+            selectedPool = GetValidPool(commonCardPrefabs, rareCardPrefabs, epicCardPrefabs);
+        }
+        else if (roll < 90f) // 30% Chance: Rare (60 to 90)
+        {
+            selectedPool = GetValidPool(rareCardPrefabs, commonCardPrefabs, epicCardPrefabs);
+        }
+        else // 10% Chance: Epic (90 to 100)
+        {
+            selectedPool = GetValidPool(epicCardPrefabs, rareCardPrefabs, commonCardPrefabs);
+        }
+
+        if (selectedPool == null || selectedPool.Count == 0)
+        {
+            Debug.LogWarning("No card prefabs assigned in any rarity pool!");
+            return;
+        }
+
+        int randomIndex = Random.Range(0, selectedPool.Count);
+        GameObject selectedPrefab = selectedPool[randomIndex];
 
         AddCard(selectedPrefab);
+    }
+
+    // Helper method to fall back to other pools if the preferred rarity pool is empty
+    private List<GameObject> GetValidPool(List<GameObject> primary, List<GameObject> fallback1, List<GameObject> fallback2)
+    {
+        if (primary != null && primary.Count > 0) return primary;
+        if (fallback1 != null && fallback1.Count > 0) return fallback1;
+        if (fallback2 != null && fallback2.Count > 0) return fallback2;
+        return null;
     }
 
     public void AddCard(GameObject selectedPrefab)
     {
         if (selectedPrefab == null) return;
+
+        // Prevent adding cards if the hand is full
+        if (cardsInHand.Count >= maxHandSize)
+        {
+            Debug.LogWarning($"Hand is full! Cannot add card. Maximum hand size is {maxHandSize}.");
+            return;
+        }
 
         GameObject newCard = Instantiate(selectedPrefab, transform);
         CardData cardData = newCard.GetComponent<CardData>();
@@ -52,25 +95,36 @@ public class CardHandManager : MonoBehaviour
     }
 
     // Called by the CardData script when clicked
-    // Called by the CardData script when clicked
     public void PlayCard(GameObject playedCard, GameObject prefabToSpawn)
     {
-        BeaverController activeBeaver = TurnManager.Instance.ActiveBeaver;
+        // 1. Fetch active beaver from TurnManager, or fallback to TutorialManager
+        BeaverController activeBeaver = null;
+        if (TurnManager.Instance != null && TurnManager.Instance.ActiveBeaver != null)
+        {
+            activeBeaver = TurnManager.Instance.ActiveBeaver;
+        }
+        else if (TutorialManager.Instance != null && TutorialManager.Instance.TutorialBeaver != null)
+        {
+            activeBeaver = TutorialManager.Instance.TutorialBeaver;
+        }
 
         if (prefabToSpawn != null && activeBeaver != null)
         {
-            // 1. Spawn the weapon or traversal as a child of the active beaver
+            // 2. Spawn the weapon or traversal as a child of the active beaver
             GameObject spawnedEquipment = Instantiate(prefabToSpawn, activeBeaver.transform);
 
-            // 2. Check for the team swapper and apply the correct sprite
+            // 3. Check for the team swapper and apply the correct sprite
             if (spawnedEquipment.TryGetComponent<TeamSpriteSwapper>(out var swapper))
             {
                 bool isPlayerTwo = activeBeaver.gameObject.CompareTag("BeaverP2");
                 swapper.ApplyTeamSprite(isPlayerTwo);
             }
 
-            // 3. Tell TurnManager to auto-end turn when this item is destroyed
-            TurnManager.Instance.RegisterEquipment(spawnedEquipment);
+            // 4. Tell TurnManager to auto-end turn when this item is destroyed (only if TurnManager exists)
+            if (TurnManager.Instance != null)
+            {
+                TurnManager.Instance.RegisterEquipment(spawnedEquipment);
+            }
         }
         else
         {

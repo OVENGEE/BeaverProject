@@ -274,5 +274,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PistolBullet
   lifetime: 3
-  damage: 15
+  damage: 8
   terrainDestructionRadius: 0.5
