@@ -19,8 +19,6 @@ public class CardDropItem : MonoBehaviour
         collected = true;
         TurnManager.Instance.AwardCardToBeaver(beaver, handCardPrefab);
         dropSpawner?.ShowPickupMessage(beaver);
-
-        // Destroys the root object instantiated by CardDrops
-        Destroy(transform.root.gameObject);
+        Destroy(gameObject);
     }
 }
