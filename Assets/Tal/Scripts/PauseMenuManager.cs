@@ -123,8 +123,6 @@ public class PauseMenuManager : MonoBehaviour
             return;
         }
 
-        ConfigureUnscaledUiAnimations();
-
         Button[] buttons = pauseMenuCanvas.GetComponentsInChildren<Button>(true);
         Button cardGlossaryButton = null;
         Button soundsButton = null;
@@ -191,15 +189,6 @@ public class PauseMenuManager : MonoBehaviour
         else
         {
             CreateSubmenuPanel(existingText);
-        }
-    }
-
-    private void ConfigureUnscaledUiAnimations()
-    {
-        Animator[] animators = pauseMenuCanvas.GetComponentsInChildren<Animator>(true);
-        foreach (Animator animator in animators)
-        {
-            animator.updateMode = AnimatorUpdateMode.UnscaledTime;
         }
     }
 
