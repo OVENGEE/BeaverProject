@@ -27,6 +27,9 @@ public class BeaverController : MonoBehaviour
     [Tooltip("Time window (in seconds) to detect a second keypress before executing a single jump.")]
     [SerializeField] private float comboWindow = 0.15f;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip jumpSound;
+
     private Rigidbody2D rb;
     private BeaverInputActions inputActions;
 
@@ -222,10 +225,12 @@ public class BeaverController : MonoBehaviour
             if (isBackflip)
             {
                 animator.SetTrigger("Backflip");
+                SoundFXManager.instance.PlaySoundFXClip(jumpSound, transform, 1f);
             }
             else
             {
                 animator.SetTrigger("Jump");
+                SoundFXManager.instance.PlaySoundFXClip(jumpSound, transform, 1f);
             }
         }
     }

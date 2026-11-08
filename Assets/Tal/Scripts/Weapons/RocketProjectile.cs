@@ -14,6 +14,7 @@ public class RocketProjectile : MonoBehaviour
     [Header("Impact Settings")]
     [SerializeField] private LayerMask groundLayer;
 
+    [Header("Audio")]
     [SerializeField] private AudioClip explosionSound;
 
     private bool hasExploded = false;
@@ -48,7 +49,6 @@ public class RocketProjectile : MonoBehaviour
     private void Explode()
     {
         hasExploded = true; // Prevents double-explosions if multiple colliders are hit in the same frame
-
         if (explosionEffectPrefab != null)
         {
             Instantiate(explosionEffectPrefab, transform.position, Quaternion.identity);

@@ -207,3 +207,4 @@ MonoBehaviour:
   damage: 35
   explosionEffectPrefab: {fileID: 8995632390482937528, guid: 177af1c0a20461a44ad0ab7715a2c4de, type: 3}
   terrainDestructionRadius: 2
+  explosionSound: {fileID: 8300000, guid: 42769d82b5e14e140a683b46c0d6d1b7, type: 3}

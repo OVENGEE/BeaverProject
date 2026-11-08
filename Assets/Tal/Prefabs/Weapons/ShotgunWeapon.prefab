@@ -184,6 +184,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  shotgunFireSound: {fileID: 8300000, guid: 95abd26faebff434fbbec9921b435406, type: 3}
 --- !u!114 &-725502159196021233
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -11,6 +11,8 @@ public class GrenadeProjectile : MonoBehaviour
     [Header("Terrain Destruction")]
     [SerializeField] private float terrainDestructionRadius = 2f;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip explosionSound;
     private void Start()
     {
         Invoke(nameof(Explode), fuseTime);
@@ -18,6 +20,8 @@ public class GrenadeProjectile : MonoBehaviour
 
     private void Explode()
     {
+        SoundFXManager.instance.PlaySoundFXClip(explosionSound, transform, 1f);
+
         if (explosionEffectPrefab != null)
         {
             Instantiate(explosionEffectPrefab, transform.position, Quaternion.identity);

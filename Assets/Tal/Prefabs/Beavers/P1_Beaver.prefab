@@ -220,6 +220,7 @@ MonoBehaviour:
   backflip: {x: 1, y: 7}
   smallBackflip: {x: 1, y: 4}
   comboWindow: 0.25
+  jumpSound: {fileID: 8300000, guid: ed576f09c83a7e54c93a868437a10edb, type: 3}
 --- !u!114 &6051573992592959912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,6 +239,9 @@ MonoBehaviour:
   logPrefab: {fileID: 3081273515572071885, guid: 4a9670160685e3c4db931c5d07228590, type: 3}
   animator: {fileID: 4951485403399852571}
   deathDelay: 1.2
+  deathSound: {fileID: 8300000, guid: 7bd04c9f22324f84d91066caa91e5fd1, type: 3}
+  beaverDamageSound: {fileID: 8300000, guid: 15d391f2a33aca54fb60ad18bc5e2116, type: 3}
+  healSound: {fileID: 8300000, guid: e3fabf6bb93e26f459ae6dc7b723eff9, type: 3}
 --- !u!95 &4951485403399852571
 Animator:
   serializedVersion: 7

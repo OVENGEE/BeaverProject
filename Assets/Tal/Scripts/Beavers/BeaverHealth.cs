@@ -14,6 +14,11 @@ public class BeaverHealth : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private float deathDelay = 1.2f; // Time to allow the death animation to play
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip deathSound;
+    [SerializeField] private AudioClip beaverDamageSound;
+    [SerializeField] private AudioClip healSound;
+
     private int currentHealth;
     private bool isDead = false;
 
@@ -57,6 +62,7 @@ public class BeaverHealth : MonoBehaviour
         currentHealth -= damage;
         currentHealth = Mathf.Max(0, currentHealth);
         UpdateHealthUI();
+        SoundFXManager.instance.PlaySoundFXClip(beaverDamageSound, transform, 1f);
 
         if (currentHealth <= 0)
         {
@@ -73,6 +79,7 @@ public class BeaverHealth : MonoBehaviour
         currentHealth = Mathf.Min(currentHealth + healthIncrease, maxHealth);
 
         UpdateHealthUI();
+        SoundFXManager.instance.PlaySoundFXClip(healSound, transform, 1f);
     }
 
     private void UpdateHealthUI()
@@ -96,6 +103,8 @@ public class BeaverHealth : MonoBehaviour
     private void Die()
     {
         isDead = true;
+
+        
 
         if (animator != null)
         {
@@ -125,6 +134,7 @@ public class BeaverHealth : MonoBehaviour
         // Spawn the log prefab at the beaver's final position
         if (logPrefab != null)
         {
+            SoundFXManager.instance.PlaySoundFXClip(deathSound, transform, 1f);
             Instantiate(logPrefab, transform.position, Quaternion.identity);
         }
 

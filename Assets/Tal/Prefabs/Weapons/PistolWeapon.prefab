@@ -275,6 +275,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  pistolFireSound: {fileID: 8300000, guid: 57783a506e5c2be4e8806ed1a97cd026, type: 3}
 --- !u!114 &8322392796183857679
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -62,6 +62,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   chargeMeterTransform: {fileID: 9087904225797056}
+  cannonLaunchSound: {fileID: 8300000, guid: 6398b6e520ae9b943a8ceb7ffd94042f, type: 3}
 --- !u!114 &2558784426192241208
 MonoBehaviour:
   m_ObjectHideFlags: 0

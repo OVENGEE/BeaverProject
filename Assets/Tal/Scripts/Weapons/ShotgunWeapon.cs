@@ -21,6 +21,9 @@ public class ShotgunWeapon : MonoBehaviour
     [Tooltip("Assign your Terrain/Ground layer here to prevent firePoint terrain clipping.")]
     [SerializeField] private LayerMask groundLayer;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip shotgunFireSound;
+
     private BeaverInputActions inputActions;
     private Transform beaverTransform;
 
@@ -75,6 +78,8 @@ public class ShotgunWeapon : MonoBehaviour
 
     private void Shoot()
     {
+        SoundFXManager.instance.PlaySoundFXClip(shotgunFireSound, transform, 1f);
+
         if (bulletPrefab == null || firePoint == null) return;
 
         Vector2 beaverOrigin = beaverTransform != null ? (Vector2)beaverTransform.position : (Vector2)transform.position;

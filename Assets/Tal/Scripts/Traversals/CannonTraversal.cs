@@ -29,6 +29,9 @@ public class CannonTraversal : MonoBehaviour
     [Header("Charge Meter Settings")]
     [SerializeField] private Transform chargeMeterTransform;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip cannonLaunchSound;
+
     private BeaverInputActions inputActions;
     private BeaverController beaver;
     private Rigidbody2D beaverRb;
@@ -220,6 +223,7 @@ public class CannonTraversal : MonoBehaviour
 
     private void LaunchBeaver()
     {
+        SoundFXManager.instance.PlaySoundFXClip(cannonLaunchSound, transform, 1f);
         if (beaver == null) return;
 
         isCharging = false;
