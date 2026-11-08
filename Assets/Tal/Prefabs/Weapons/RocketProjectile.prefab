@@ -219,3 +219,4 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  explosionSound: {fileID: 8300000, guid: 42769d82b5e14e140a683b46c0d6d1b7, type: 3}

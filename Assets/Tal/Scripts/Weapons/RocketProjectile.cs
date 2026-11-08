@@ -14,6 +14,8 @@ public class RocketProjectile : MonoBehaviour
     [Header("Impact Settings")]
     [SerializeField] private LayerMask groundLayer;
 
+    [SerializeField] private AudioClip explosionSound;
+
     private bool hasExploded = false;
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -39,6 +41,7 @@ public class RocketProjectile : MonoBehaviour
         if (isGround || isBeaver)
         {
             Explode();
+            SoundFXManager.instance.PlaySoundFXClip(explosionSound, transform, 1f);
         }
     }
 
