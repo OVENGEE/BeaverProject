@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class CardHandManager : MonoBehaviour
 {
+    [Header("Hand Settings")]
+    [SerializeField] private int maxHandSize = 5;
+
     [Header("Card Rarity Pools")]
     [SerializeField] private List<GameObject> commonCardPrefabs = new List<GameObject>();
     [SerializeField] private List<GameObject> rareCardPrefabs = new List<GameObject>();
@@ -20,6 +23,13 @@ public class CardHandManager : MonoBehaviour
 
     public void AddCard()
     {
+        // Check if hand capacity is reached before rolling
+        if (cardsInHand.Count >= maxHandSize)
+        {
+            Debug.LogWarning($"Hand is full! Maximum hand size is {maxHandSize}.");
+            return;
+        }
+
         // Roll a value between 0 and 100
         float roll = Random.Range(0f, 100f);
         List<GameObject> selectedPool = null;
@@ -62,6 +72,13 @@ public class CardHandManager : MonoBehaviour
     {
         if (selectedPrefab == null) return;
 
+        // Prevent adding cards if the hand is full
+        if (cardsInHand.Count >= maxHandSize)
+        {
+            Debug.LogWarning($"Hand is full! Cannot add card. Maximum hand size is {maxHandSize}.");
+            return;
+        }
+
         GameObject newCard = Instantiate(selectedPrefab, transform);
         CardData cardData = newCard.GetComponent<CardData>();
 
@@ -80,22 +97,34 @@ public class CardHandManager : MonoBehaviour
     // Called by the CardData script when clicked
     public void PlayCard(GameObject playedCard, GameObject prefabToSpawn)
     {
-        BeaverController activeBeaver = TurnManager.Instance != null ? TurnManager.Instance.ActiveBeaver : null;
+        // 1. Fetch active beaver from TurnManager, or fallback to TutorialManager
+        BeaverController activeBeaver = null;
+        if (TurnManager.Instance != null && TurnManager.Instance.ActiveBeaver != null)
+        {
+            activeBeaver = TurnManager.Instance.ActiveBeaver;
+        }
+        else if (TutorialManager.Instance != null && TutorialManager.Instance.TutorialBeaver != null)
+        {
+            activeBeaver = TutorialManager.Instance.TutorialBeaver;
+        }
 
         if (prefabToSpawn != null && activeBeaver != null)
         {
-            // 1. Spawn the weapon or traversal as a child of the active beaver
+            // 2. Spawn the weapon or traversal as a child of the active beaver
             GameObject spawnedEquipment = Instantiate(prefabToSpawn, activeBeaver.transform);
 
-            // 2. Check for the team swapper and apply the correct sprite
+            // 3. Check for the team swapper and apply the correct sprite
             if (spawnedEquipment.TryGetComponent<TeamSpriteSwapper>(out var swapper))
             {
                 bool isPlayerTwo = activeBeaver.gameObject.CompareTag("BeaverP2");
                 swapper.ApplyTeamSprite(isPlayerTwo);
             }
 
-            // 3. Tell TurnManager to auto-end turn when this item is destroyed
-            TurnManager.Instance.RegisterEquipment(spawnedEquipment);
+            // 4. Tell TurnManager to auto-end turn when this item is destroyed (only if TurnManager exists)
+            if (TurnManager.Instance != null)
+            {
+                TurnManager.Instance.RegisterEquipment(spawnedEquipment);
+            }
         }
         else
         {
