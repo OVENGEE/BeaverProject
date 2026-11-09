@@ -19,6 +19,10 @@ public class DeathByWater : MonoBehaviour
     [SerializeField, Min(1)] private int roundsBetweenRises = 3;
     [SerializeField, Min(1)] private int firstConsecutiveRiseRound = 5;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip beaverSplashSound;
+    [SerializeField] private AudioClip waterRiseSound;
+
     private void OnEnable()
     {
         TurnManager.RoundStarted += HandleRoundStarted;
@@ -45,6 +49,7 @@ public class DeathByWater : MonoBehaviour
 
         if (shouldRise)
             transform.position += Vector3.up * waterRiseDistance;
+            SoundFXManager.instance.PlaySoundFXClip(waterRiseSound, transform, 1f);
     }
 
     // Called when a 3D collider enters the water trigger.
@@ -80,6 +85,7 @@ public class DeathByWater : MonoBehaviour
         if (destroyBeaverOnTouch)
         {
             Destroy(other.gameObject);
+            SoundFXManager.instance.PlaySoundFXClip(beaverSplashSound, transform, 1f);
         }
         else
         {

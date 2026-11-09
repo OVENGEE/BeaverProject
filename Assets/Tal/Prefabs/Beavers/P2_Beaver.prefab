@@ -313,6 +313,7 @@ MonoBehaviour:
   smallBackflip: {x: 1, y: 4}
   comboWindow: 0.25
   jumpSound: {fileID: 8300000, guid: ed576f09c83a7e54c93a868437a10edb, type: 3}
+  cardDropCollectionSound: {fileID: 8300000, guid: 1dff9e28dc0f07743926695c6dd2c6d9, type: 3}
 --- !u!114 &6051573992592959912
 MonoBehaviour:
   m_ObjectHideFlags: 0

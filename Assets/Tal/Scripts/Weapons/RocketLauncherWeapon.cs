@@ -18,6 +18,9 @@ public class RocketLauncherWeapon : MonoBehaviour
     [Tooltip("Assign your Terrain/Ground layer here to prevent firePoint terrain clipping.")]
     [SerializeField] private LayerMask groundLayer;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip rocketLaunchSound;
+
     private BeaverInputActions inputActions;
     private Transform beaverTransform;
 
@@ -89,6 +92,8 @@ public class RocketLauncherWeapon : MonoBehaviour
 
         // Instantiate rocket at safe surface point
         GameObject rocket = Instantiate(rocketPrefab, safeSpawnPos, Quaternion.identity);
+
+        SoundFXManager.instance.PlaySoundFXClip(rocketLaunchSound, transform, 1f);
 
         if (rocket.TryGetComponent<Rigidbody2D>(out var rb))
         {

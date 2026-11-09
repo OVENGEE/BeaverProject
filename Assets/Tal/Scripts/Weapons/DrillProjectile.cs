@@ -17,6 +17,9 @@ public class DrillProjectile : MonoBehaviour
     [Tooltip("Cooldown between damage ticks so HP isn't instantly depleted in 1 frame.")]
     [SerializeField] private float damageInterval = 0.15f;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip drillSound;
+
     private Rigidbody2D rb;
     private DestructibleTerrain terrain;
     private float destructionTimer;
@@ -29,6 +32,7 @@ public class DrillProjectile : MonoBehaviour
 
     private void Start()
     {
+        SoundFXManager.instance.PlaySoundFXClip(drillSound, transform, 1f);
         // Direct the drill forward based on prefab orientation
         rb.linearVelocity = transform.right * speed;
 

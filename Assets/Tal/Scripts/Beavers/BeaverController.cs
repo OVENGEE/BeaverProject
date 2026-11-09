@@ -29,6 +29,7 @@ public class BeaverController : MonoBehaviour
 
     [Header("Audio")]
     [SerializeField] private AudioClip jumpSound;
+    [SerializeField] private AudioClip cardDropCollectionSound;
 
     private Rigidbody2D rb;
     private BeaverInputActions inputActions;
@@ -281,5 +282,6 @@ public class BeaverController : MonoBehaviour
         CardDropItem drop = other.GetComponentInParent<CardDropItem>();
         if (drop != null)
             drop.Collect(this);
+            SoundFXManager.instance.PlaySoundFXClip(cardDropCollectionSound, transform, 1f);
     }
 }

@@ -279,3 +279,4 @@ MonoBehaviour:
   destructionInterval: 0.04
   damagePerTick: 5
   damageInterval: 0.1
+  drillSound: {fileID: 8300000, guid: 788c5604d2027be4a92f5e821fd18e25, type: 3}

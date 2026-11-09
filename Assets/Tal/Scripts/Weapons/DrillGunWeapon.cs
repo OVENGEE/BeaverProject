@@ -18,6 +18,9 @@ public class DrillGunWeapon : MonoBehaviour
     [Tooltip("Assign your Terrain/Ground layer here to prevent firePoint terrain clipping.")]
     [SerializeField] private LayerMask groundLayer;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip drillLaunchSound;
+
     private BeaverInputActions inputActions;
     private Transform beaverTransform;
 
@@ -76,6 +79,8 @@ public class DrillGunWeapon : MonoBehaviour
     private void Shoot()
     {
         if (currentAmmo <= 0 || drillPrefab == null || firePoint == null) return;
+
+        SoundFXManager.instance.PlaySoundFXClip(drillLaunchSound, transform, 1f);
 
         Vector2 beaverOrigin = beaverTransform != null ? (Vector2)beaverTransform.position : (Vector2)transform.position;
         Vector2 intendedSpawnPos = firePoint.position;

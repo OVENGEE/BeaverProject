@@ -48,6 +48,10 @@ public class TurnManager : MonoBehaviour
     [Header("Turn Settings")]
     [SerializeField] private float turnDuration = 30f;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip newRoundHornSound;
+    [SerializeField] private AudioClip matchWonSound;
+
     public BeaverController ActiveBeaver { get; private set; }
     public List<BeaverController> Player1Beavers => player1Beavers;
     public List<BeaverController> Player2Beavers => player2Beavers;
@@ -153,6 +157,7 @@ public class TurnManager : MonoBehaviour
     {
         if (CheckWinCondition()) return;
 
+        SoundFXManager.instance.PlaySoundFXClip(newRoundHornSound, transform, 1f);
         currentRound++;
         RoundStarted?.Invoke(currentRound);
         turnStep = 0;
@@ -415,6 +420,8 @@ public class TurnManager : MonoBehaviour
         {
             isGameOver = true;
             isTurnRunning = false;
+
+            SoundFXManager.instance.PlaySoundFXClip(matchWonSound, transform, 1f);
 
             ResetTimerVisuals();
             HideHandRefreshedMessage();

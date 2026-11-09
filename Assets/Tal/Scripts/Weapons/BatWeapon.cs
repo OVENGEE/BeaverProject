@@ -22,6 +22,9 @@ public class BatWeapon : MonoBehaviour
     [Tooltip("Total duration of the swing animation before removing the bat")]
     [SerializeField] private float totalSwingDuration = 0.8f;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip batSwingSound;
+
     private BeaverInputActions inputActions;
     private BeaverController beaver;
     private Rigidbody2D beaverRb;
@@ -75,6 +78,8 @@ public class BatWeapon : MonoBehaviour
 
     private void ExecuteSwing()
     {
+        SoundFXManager.instance.PlaySoundFXClip(batSwingSound, transform, 1f);
+
         if (hasSwung) return;
 
         hasSwung = true;

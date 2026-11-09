@@ -195,6 +195,7 @@ MonoBehaviour:
   launchUpwardAngle: 30
   hitImpactDelay: 0.25
   totalSwingDuration: 0.8
+  batSwingSound: {fileID: 8300000, guid: 8e98892abe6826e4f8ae6f2b9c726e17, type: 3}
 --- !u!1 &7869968951588105009
 GameObject:
   m_ObjectHideFlags: 0
