@@ -11,6 +11,9 @@ public class CardData : MonoBehaviour, IPointerClickHandler
     public bool isWeaponDisabled = false;
     public bool isTraversalDisabled = false;
 
+    [Header("Card Info")]
+    [SerializeField] AudioClip cardSelectionSound;
+
     private CardHandManager handManager;
 
     // Called by the Hand Manager when instantiated
@@ -30,6 +33,8 @@ public class CardData : MonoBehaviour, IPointerClickHandler
                 return;
             }
 
+            SoundFXManager.instance.PlaySoundFXClip(cardSelectionSound, transform, 1f);
+
             handManager.PlayCard(this.gameObject, weaponPrefab);
         }
         // Right Click -> Traversal
@@ -40,6 +45,8 @@ public class CardData : MonoBehaviour, IPointerClickHandler
                 Debug.Log("Traversal activation is disabled for this card!");
                 return;
             }
+
+            SoundFXManager.instance.PlaySoundFXClip(cardSelectionSound, transform, 1f);
 
             handManager.PlayCard(this.gameObject, traversalPrefab);
         }

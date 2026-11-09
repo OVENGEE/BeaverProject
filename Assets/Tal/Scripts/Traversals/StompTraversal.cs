@@ -15,6 +15,7 @@ public class StompTraversal : MonoBehaviour
     [SerializeField] private float hitRadius = 1.2f;
     [SerializeField] private float terrainDestructionRadius = 1.2f;
 
+
     private BeaverController beaver;
     private BeaverInputActions inputActions;
     private bool isStomping = false;

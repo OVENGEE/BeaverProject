@@ -83,7 +83,7 @@ public class PistolWeapon : MonoBehaviour
 
     private void Shoot()
     {
-        SoundFXManager.instance.PlaySoundFXClip(pistolFireSound, transform, 1f);
+        SoundFXManager.instance.PlaySoundFXClip(pistolFireSound, transform, 1.5f);
 
         if (currentAmmo <= 0 || bulletPrefab == null || firePoint == null) return;
 

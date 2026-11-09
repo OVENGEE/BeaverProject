@@ -30,6 +30,8 @@ public class BeaverController : MonoBehaviour
     [Header("Audio")]
     [SerializeField] private AudioClip jumpSound;
     [SerializeField] private AudioClip cardDropCollectionSound;
+    [SerializeField] private AudioClip beaverLandSound;
+    [SerializeField] private float landSoundCooldown = 0.2f; // Minimum time (in seconds) between landing sounds
 
     private Rigidbody2D rb;
     private BeaverInputActions inputActions;
@@ -39,8 +41,12 @@ public class BeaverController : MonoBehaviour
     private bool isGrounded;
     private float facingDirection = 1f; // 1 = Right, -1 = Left
     private float groundCheckCooldown;
+    
 
     private bool isMyTurn = false;
+    private bool wasGrounded = true; // Track previous frame's grounded state
+    private float landSoundTimer = 0f;     // Tracks elapsed time
+
 
     // Buffer state variables
     private bool isBuffering = false;
@@ -74,6 +80,15 @@ public class BeaverController : MonoBehaviour
     {
         if (!isMyTurn) return;
 
+        // Store the grounded state from the previous frame before updating it
+        wasGrounded = isGrounded;
+
+        // Count down the land sound cooldown timer
+        if (landSoundTimer > 0f)
+        {
+            landSoundTimer -= Time.deltaTime;
+        }
+
         // Prevent ground check instantly re-triggering during takeoff
         if (groundCheckCooldown > 0f)
         {
@@ -83,6 +98,16 @@ public class BeaverController : MonoBehaviour
         else
         {
             isGrounded = CheckIsGrounded();
+        }
+
+        // Trigger sound when transitioning from airborne to grounded (subject to cooldown)
+        if (!wasGrounded && isGrounded)
+        {
+            if (landSoundTimer <= 0f)
+            {
+                SoundFXManager.instance.PlaySoundFXClip(beaverLandSound, transform, 1f);
+                landSoundTimer = landSoundCooldown; // Reset the timer
+            }
         }
 
         // Turning / direction locking is only evaluated on the ground

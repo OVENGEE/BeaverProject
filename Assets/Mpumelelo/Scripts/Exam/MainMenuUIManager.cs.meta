@@ -1,2 +1,19 @@
 fileFormatVersion: 2
 guid: 6ac896663bb5476b9f4f4bca21fed4d9
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - mainMenuCanvas: {instanceID: 0}
+  - sceneManager: {instanceID: 0}
+  - mapSelectionPanel: {instanceID: 0}
+  - soundsPanel: {instanceID: 0}
+  - startMatchButton: {instanceID: 0}
+  - mapSelectionBackButton: {instanceID: 0}
+  - soundsBackButton: {instanceID: 0}
+  - buttonClickSound: {fileID: 8300000, guid: a7a77ecfb42799840939143d3d5f372b, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

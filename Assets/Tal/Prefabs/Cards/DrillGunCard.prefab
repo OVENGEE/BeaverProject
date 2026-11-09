@@ -182,3 +182,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   weaponPrefab: {fileID: 6129872034378197629, guid: 1a9c772a60c6b9f408ffbb07b60f881a, type: 3}
   traversalPrefab: {fileID: 1416224005996415951, guid: bbd945d8debb3ce4aa08787ba7d91d01, type: 3}
+  isWeaponDisabled: 0
+  isTraversalDisabled: 0
+  cardSelectionSound: {fileID: 8300000, guid: 1dff9e28dc0f07743926695c6dd2c6d9, type: 3}

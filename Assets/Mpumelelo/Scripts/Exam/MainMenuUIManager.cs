@@ -28,6 +28,9 @@ public class MainMenuUIManager : MonoBehaviour
     [SerializeField] private string selectedMapStatusText = "Selected";
     [SerializeField] private string unselectedMapStatusText = "Click to select";
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip buttonClickSound;
+
     private readonly List<GameObject> visibleMainMenuObjects = new List<GameObject>();
     private int selectedMapIndex;
     private bool isSubmenuOpen;
@@ -76,6 +79,8 @@ public class MainMenuUIManager : MonoBehaviour
         Button[] buttons = mainMenuCanvas.GetComponentsInChildren<Button>(true);
         foreach (Button button in buttons)
         {
+            // Automatically add the click sound to every button on the menu
+            button.onClick.AddListener(PlayButtonClick);
             switch (button.gameObject.name)
             {
                 case "StartBTN":
@@ -117,6 +122,14 @@ public class MainMenuUIManager : MonoBehaviour
     private void OpenMapSelection()
     {
         OpenSubmenu(mapSelectionPanel);
+    }
+
+    private void PlayButtonClick()
+    {
+        if (buttonClickSound != null && SoundFXManager.instance != null)
+        {
+            SoundFXManager.instance.PlaySoundFXClip(buttonClickSound, transform, 1f);
+        }
     }
 
     private void OpenSounds()

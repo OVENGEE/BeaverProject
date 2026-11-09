@@ -50,7 +50,8 @@ MonoBehaviour:
   stompImpactPrefab: {fileID: 0}
   stompDamage: 25
   hitRadius: 1.2
-  terrainDestructionRadius: 1.3
+  terrainDestructionRadius: 1
+  stompSound: {fileID: 8300000, guid: 51e271ee36952974185d6c3f19000a10, type: 3}
 --- !u!1 &8891762728987466229
 GameObject:
   m_ObjectHideFlags: 0
