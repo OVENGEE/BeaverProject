@@ -17,6 +17,9 @@ public class PauseMenuManager : MonoBehaviour
     [SerializeField] private GameObject controlsPanel;
     [SerializeField] private Button submenuBackButton;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip buttonClickSound;
+
     private readonly List<GameObject> controlsPanelContent = new List<GameObject>();
     private readonly List<GameObject> activeMenuObjectsBeforeSubmenu = new List<GameObject>();
     private GameObject submenuPanel;
@@ -130,6 +133,14 @@ public class PauseMenuManager : MonoBehaviour
 
         foreach (Button button in buttons)
         {
+            // Automatically add the sound to EVERY button in the pause menu canvas
+            button.onClick.AddListener(() =>
+            {
+                if (SoundFXManager.instance != null && buttonClickSound != null)
+                {
+                    SoundFXManager.instance.PlaySoundFXClip(buttonClickSound, transform, 1f);
+                }
+            });
             switch (button.gameObject.name)
             {
                 case "CardGlossaryButton":

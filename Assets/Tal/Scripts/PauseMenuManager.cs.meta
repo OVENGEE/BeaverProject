@@ -1,2 +1,17 @@
 fileFormatVersion: 2
 guid: 5942492a52d470649b2445ef4ec24089
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - pauseMenuCanvas: {instanceID: 0}
+  - cardGlossaryPanel: {instanceID: 0}
+  - soundsPanel: {instanceID: 0}
+  - controlsPanel: {instanceID: 0}
+  - submenuBackButton: {instanceID: 0}
+  - buttonClickSound: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
