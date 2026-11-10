@@ -49,7 +49,7 @@ public class DeathByWater : MonoBehaviour
 
         if (shouldRise)
             transform.position += Vector3.up * waterRiseDistance;
-            SoundFXManager.instance.PlaySoundFXClip(waterRiseSound, transform, 1f);
+            SoundFXManager.instance.PlaySoundFXClip(waterRiseSound, transform, 0.6f);
     }
 
     // Called when a 3D collider enters the water trigger.
@@ -85,7 +85,7 @@ public class DeathByWater : MonoBehaviour
         if (destroyBeaverOnTouch)
         {
             Destroy(other.gameObject);
-            SoundFXManager.instance.PlaySoundFXClip(beaverSplashSound, transform, 1f);
+            SoundFXManager.instance.PlaySoundFXClip(beaverSplashSound, transform, 0.6f);
         }
         else
         {

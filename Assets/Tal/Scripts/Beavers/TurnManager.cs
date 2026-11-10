@@ -421,7 +421,7 @@ public class TurnManager : MonoBehaviour
             isGameOver = true;
             isTurnRunning = false;
 
-            SoundFXManager.instance.PlaySoundFXClip(matchWonSound, transform, 1f);
+            SoundFXManager.instance.PlaySoundFXClip(matchWonSound, transform, 0.8f);
 
             ResetTimerVisuals();
             HideHandRefreshedMessage();
