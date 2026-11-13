@@ -142,4 +142,4 @@ MonoBehaviour:
   dashEffectPrefab: {fileID: 0}
   dashDamage: 20
   hitRadius: 1.5
-  terrainDestructionRadius: 1.5
+  terrainDestructionRadius: 1

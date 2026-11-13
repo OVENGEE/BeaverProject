@@ -223,7 +223,7 @@ MonoBehaviour:
   jumpSound: {fileID: 8300000, guid: ed576f09c83a7e54c93a868437a10edb, type: 3}
   cardDropCollectionSound: {fileID: 8300000, guid: 1dff9e28dc0f07743926695c6dd2c6d9, type: 3}
   beaverLandSound: {fileID: 8300000, guid: b768778164fb704438abc938fcc6c483, type: 3}
-  landSoundCooldown: 0.2
+  landSoundCooldown: 0.5
 --- !u!114 &6051573992592959912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -421,7 +421,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: 3490803062662786837, guid: 35bd67867f417f5419e357cf42a18b2d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -467,8 +467,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 100
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 35bd67867f417f5419e357cf42a18b2d, type: 2}
+  m_sharedMaterial: {fileID: 3490803062662786837, guid: 35bd67867f417f5419e357cf42a18b2d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

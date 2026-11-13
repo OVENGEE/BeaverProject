@@ -1,3 +1,5 @@
+using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class DeathByWater : MonoBehaviour
@@ -18,10 +20,23 @@ public class DeathByWater : MonoBehaviour
     [SerializeField] private WaterRiseSchedule waterRiseSchedule = WaterRiseSchedule.EveryNRounds;
     [SerializeField, Min(1)] private int roundsBetweenRises = 3;
     [SerializeField, Min(1)] private int firstConsecutiveRiseRound = 5;
+    [SerializeField] private TextMeshProUGUI waterRiseInfoText;
+    [SerializeField, Min(0f)] private float infoDisplayDuration = 2f;
+    [SerializeField, Min(0.1f)] private float fadeDuration = 1.5f;
 
     [Header("Audio")]
     [SerializeField] private AudioClip beaverSplashSound;
     [SerializeField] private AudioClip waterRiseSound;
+
+    private Coroutine hideTextCoroutine;
+
+    private void Start()
+    {
+        if (waterRiseInfoText != null)
+        {
+            waterRiseInfoText.gameObject.SetActive(false);
+        }
+    }
 
     private void OnEnable()
     {
@@ -48,8 +63,51 @@ public class DeathByWater : MonoBehaviour
         };
 
         if (shouldRise)
+        {
             transform.position += Vector3.up * waterRiseDistance;
-            SoundFXManager.instance.PlaySoundFXClip(waterRiseSound, transform, 0.6f);
+
+            if (SoundFXManager.instance != null && waterRiseSound != null)
+            {
+                SoundFXManager.instance.PlaySoundFXClip(waterRiseSound, transform, 0.6f);
+            }
+
+            ShowWaterRiseText();
+        }
+    }
+
+    private void ShowWaterRiseText()
+    {
+        if (waterRiseInfoText == null) return;
+
+        if (hideTextCoroutine != null)
+        {
+            StopCoroutine(hideTextCoroutine);
+        }
+
+        hideTextCoroutine = StartCoroutine(DisplayTextRoutine());
+    }
+
+    private IEnumerator DisplayTextRoutine()
+    {
+        // Reset alpha to full visibility and activate
+        waterRiseInfoText.alpha = 1f;
+        waterRiseInfoText.gameObject.SetActive(true);
+
+        // Hold at full opacity before fading
+        yield return new WaitForSeconds(infoDisplayDuration);
+
+        // Smoothly fade alpha from 1 to 0
+        float elapsed = 0f;
+        while (elapsed < fadeDuration)
+        {
+            elapsed += Time.deltaTime;
+            waterRiseInfoText.alpha = Mathf.Lerp(1f, 0f, elapsed / fadeDuration);
+            yield return null;
+        }
+
+        waterRiseInfoText.alpha = 0f;
+        waterRiseInfoText.gameObject.SetActive(false);
+        hideTextCoroutine = null;
     }
 
     // Called when a 3D collider enters the water trigger.

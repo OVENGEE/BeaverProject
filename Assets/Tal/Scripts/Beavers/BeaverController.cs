@@ -15,6 +15,7 @@ public class BeaverController : MonoBehaviour
 
     [Header("Animation Settings")]
     [SerializeField] private Animator animator;
+    //[SerializeField] private Animator accAnimator;
 
     [Header("Jump Velocities (X = Horizontal, Y = Vertical)")]
     [SerializeField] private Vector2 forwardJump = new Vector2(4f, 6f);
@@ -161,10 +162,11 @@ public class BeaverController : MonoBehaviour
         // IsWalking is true when grounded and moving horizontally
         bool isWalking = isGrounded && Mathf.Abs(moveInput) > 0.01f;
         animator.SetBool("IsWalking", isWalking);
-
+        //accAnimator.SetBool("Acc_IsWalking", isWalking);
         // IsFalling is true when airborne and moving downward
         bool isFalling = !isGrounded && rb.linearVelocity.y < -0.1f;
         animator.SetBool("IsFalling", isFalling);
+        //accAnimator.SetBool("Acc_IsFalling", isFalling);
     }
 
     public void SetAiming(bool isAiming)
@@ -251,11 +253,13 @@ public class BeaverController : MonoBehaviour
             if (isBackflip)
             {
                 animator.SetTrigger("Backflip");
+               // accAnimator.SetTrigger("Acc_Backflip");
                 SoundFXManager.instance.PlaySoundFXClip(jumpSound, transform, 1f);
             }
             else
             {
                 animator.SetTrigger("Jump");
+               // accAnimator.SetTrigger("Acc_Jump");
                 SoundFXManager.instance.PlaySoundFXClip(jumpSound, transform, 1f);
             }
         }
@@ -279,6 +283,7 @@ public class BeaverController : MonoBehaviour
             if (animator != null)
             {
                 animator.SetBool("IsWalking", false);
+                //accAnimator.SetBool("Acc_IsWalking", false);
                 animator.SetBool("IsAiming", false);
             }
         }

@@ -12,6 +12,7 @@ public class BeaverHealth : MonoBehaviour
 
     [Header("Animation Settings")]
     [SerializeField] private Animator animator;
+    //[SerializeField] private Animator accAnimator;
     [SerializeField] private float deathDelay = 1.2f; // Time to allow the death animation to play
 
     [Header("Audio")]
@@ -109,6 +110,7 @@ public class BeaverHealth : MonoBehaviour
         if (animator != null)
         {
             animator.SetTrigger("Dead");
+            //accAnimator.SetTrigger("Acc_Died");
         }
 
         // Disable physics and colliders so the beaver doesn't move while dying
