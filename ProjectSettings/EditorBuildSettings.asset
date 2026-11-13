@@ -24,13 +24,13 @@ EditorBuildSettings:
     path: Assets/Tal/Tutorial.unity
     guid: 439df8b4cc676b24dac12f441b5ee98c
   - enabled: 1
-    path: Assets/Mpumelelo/Scenes/Map 1/GameplayMap 1.unity
+    path: Assets/Mpumelelo/Scenes/Map 3/GameplayMap 3.unity
     guid: 53639ccb1ed084d418f89d0626fe26ea
   - enabled: 1
-    path: Assets/Mpumelelo/Scenes/Map 2/GameplayMap 2.unity
+    path: Assets/Mpumelelo/Scenes/Map 1/GameplayMap 1.unity
     guid: 4240f0414867e2740bd449219d2dde45
   - enabled: 1
-    path: Assets/Mpumelelo/Scenes/Map 3/GameplayMap 3.unity
+    path: Assets/Mpumelelo/Scenes/Map 2/GameplayMap 2.unity
     guid: 5ca0d07544570ac498ffe5a78b2afb57
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: d164e63fe73cd3943b930163728c577c, type: 3}
