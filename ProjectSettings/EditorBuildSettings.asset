@@ -8,29 +8,41 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
-  - enabled: 1
-    path: Assets/MainMenu.unity
-    guid: 2eb1c5f80c8c5a64b90b94e8effcad02
   - enabled: 0
     path: Assets/Gameplay.unity
     guid: 36b399e306c78f84ead71ea4e0ca3e54
   - enabled: 0
     path: Assets/Tal/OtherScenes/Gameplay.unity
     guid: 8d00bdf81871aff4caeece6cdfd658fb
-  - enabled: 1
+  - enabled: 0
     path: Assets/Mpumelelo/Scenes/Gameplay M2.unity
     guid: 9382b59ffb972584d93f5e786a3a3baf
-  - enabled: 1
+  - enabled: 0
     path: Assets/Tal/Tutorial.unity
     guid: 439df8b4cc676b24dac12f441b5ee98c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Mpumelelo/Scenes/Map 3/GameplayMap 3.unity
     guid: 53639ccb1ed084d418f89d0626fe26ea
-  - enabled: 1
+  - enabled: 0
     path: Assets/Mpumelelo/Scenes/Map 1/GameplayMap 1.unity
     guid: 4240f0414867e2740bd449219d2dde45
-  - enabled: 1
+  - enabled: 0
     path: Assets/Mpumelelo/Scenes/Map 2/GameplayMap 2.unity
     guid: 5ca0d07544570ac498ffe5a78b2afb57
+  - enabled: 1
+    path: Assets/FinalBuild/MainMenu.unity
+    guid: 2eb1c5f80c8c5a64b90b94e8effcad02
+  - enabled: 1
+    path: Assets/FinalBuild/Map1.unity
+    guid: 50586ae91e7c0a547aa7aec8fb3ed530
+  - enabled: 1
+    path: Assets/FinalBuild/Map2.unity
+    guid: ce49fde391cc59d49b8ef0f60a691949
+  - enabled: 1
+    path: Assets/FinalBuild/Map3.unity
+    guid: 75316a2600692e94887d97a1c77221fd
+  - enabled: 1
+    path: Assets/FinalBuild/Tutorial.unity
+    guid: d4df1dbbc497a7440822906298ac4b2b
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: d164e63fe73cd3943b930163728c577c, type: 3}

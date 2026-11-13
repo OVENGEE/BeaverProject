@@ -18,17 +18,17 @@ public class GameSceneManager : MonoBehaviour
 
     public void LoadGameplayMap1()
     {
-        SceneManager.LoadScene("GameplayMap 1");
+        SceneManager.LoadScene("Map1");
     }
 
     public void LoadGameplayMap2()
     {
-        SceneManager.LoadScene("GameplayMap 2");
+        SceneManager.LoadScene("Map2");
     }
 
     public void LoadGameplayMap3()
     {
-        SceneManager.LoadScene("GameplayMap 3");
+        SceneManager.LoadScene("Map3");
     }
 
     public void LoadMainMenu()
